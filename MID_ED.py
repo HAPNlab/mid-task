@@ -2,27 +2,27 @@
 """
 MID.py
 
-Monetary incentive delay task. Participants attend a circular cue, and are required to respond to a subsequently presented white rectangle while it is presented.
-Rectanhle presentation times vary based on a stepwise procedure calibrated to reach 63% performance. 
-Circular cues can be of one of two types predicting two possible outcomes - reward (green cues) or no reward (blue cues). 
+Monetary incentive delay task. Participants attend a circle (+$5), diamond (-$5) or hexagon ($0), and are required to respond to a subsequently presented white triangle while it is presented.
+Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance (total of 9 cue types). 
 Responding in time for a reward cues yields a monetary gain; responding in time to a no-reward cue does nothing.
 
-Current version: 45 trials, 30 potentially yielding $1 reward per trial, 15 no reward (no punishment trials). 
+Current version: two tasks (MID1 or MID2) each with 31-32 trials total. Each of the 9 cue types is presented 7 times. 
 WRITTEN FOR fMRI - affects the beginning and the end of the task.
 
 Originally written for PsychoPy v 1.84.2
 (Peirce, JW (2007) PsychoPy - Psychophysics software in Python. J Neurosci Methods, 162(1-2):8-13)
-Oct 13 2020 - Updated for compatibility with Python3 (PsychoPy v 2020.2.4
+Oct 13 2020 - Updated for compatibility with Python3 (PsychoPy v 2020.2.4)
 
 External dependencies:
     a folder (inst_dir parameter) with a txt file containing the instructions (inst_file parameter)
-    a csv file (trials_file parameter) in the root directory (the directory running the code) with N+1 lines, where N is the number of trials. First line in the CSV file should be "CueColor".
+    a csv file (trials_file parameter) in the root directory (the directory running the code) with N+1 lines, where N is the number of trials. First line in the CSV file should be "CueType", "Accuracy".
 
 User-defined variables: see # setting up some user-defined variables
 
-Last updated: October 13 2020
+Adapted from: nivreggev (reggevn@bgu.ac.il)
 
-@author: nivreggev (reggevn@bgu.ac.il)
+Last updated: June 14 2023
+Revised by: edenzdeng
 """
 from __future__ import division
 from psychopy import gui, visual, core, data, event, logging, monitors
@@ -46,9 +46,10 @@ inst_dir = "text" # location of instructions directory
 inst_file = ["instructions_MID.txt"] # name of instructions files (needs to be .txt)
 study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, in seconds: cue, delay (additional random 0-0.5s duration added within trial), target (actualy display shorter; the value here is the total duration for the trial), feedback, lastfixation
 initial_fix_dur = 8 # added time to make sure homogenicity of magnetic field is reached
-closing_fix_dur = 10 # added time to make sure haemodynamic responses of the last trials are properly modeled 
+closing_fix_dur = 4 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
 cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
+accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
 
 # settings for fMRI emulation:
 MR_settings = {
@@ -65,7 +66,7 @@ MR_settings = {
 def initialization(expName):
     """Present initial dialog; initialize some parameters"""
     # Store info about the experiment session
-    expInfo = {u'participant': u'XXX000', u'fMRI? (yes or no)': u'no', u'Task number (1 or 2)': u'1'}
+    expInfo = {u'participant': u'XXX000', u'fMRI? (yes/no)': u'no', u'Task number (1/2/test)': u'test'}
     dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
     if dlg.OK == False:
         core.quit()  # user pressed cancel
@@ -74,11 +75,11 @@ def initialization(expName):
     sn = str(expInfo['participant'])
     
     # Check for various experimental handles
-    if expInfo['fMRI? (yes or no)'].lower() == 'yes':
+    if expInfo['fMRI? (yes/no)'].lower() == 'yes':
         fmri = True
     else:
         fmri = False
-    task = expInfo['Task number (1 or 2)']
+    task = expInfo['Task number (1/2/test)']
     expName = expName + task
     return(expInfo,expName,sn,fmri,task)
 
@@ -112,8 +113,8 @@ def start_datafiles(_thisDir, expName, expInfo, data_dir, sn, fmri):
                 else:
                     core.quit()
                 if over:
-                    sn = int(warndlg.data[1])
-                    fname = expName + '_'  + ['behavioral', 'fmri'][fmri] + '_' + str(sn)
+                    sn = str(warndlg.data[1])
+                    fname = expName + '_'  + ['behavioral', 'fmri'][fmri] + '_' + sn
     filename = _thisDir + os.sep + data_dir + os.sep + fname
     return(filename)
     
@@ -292,14 +293,28 @@ trial_counter = 0
 Tot_Earn = 0
 
 # create the staircase handler to adjust for individual threshold (stairs defined in units of screen frames; actual minimum presentation duration is determined by the min_target_dur parameter, the staircase procedure can only add frame rates to that minimum value)
-trials = data.StairHandler(startVal=10.0,
+high = data.StairHandler(startVal=10.0, name='high',
+    stepType='lin',
+    stepSizes=[6, 3, 3, 2, 2, 1, 1],
+    minVal=0, maxVal=22,
+    nUp=1, nDown=3,  # homes in on 80%
+    nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[0]]), extraInfo=expInfo)
+thisExp.addLoop(high)
+medium = data.StairHandler(startVal=10.0, name='medium',
     stepType='lin',
     stepSizes=[6, 3, 3, 2, 2, 1, 1],  # reduce step size every two reversals
-    minVal=0, maxVal=15,
-    nUp=1, nDown=2,  # will home in on the 65% threshold (nUp=1, nDown=3 homes in on 80%)
-    nTrials=45,extraInfo=expInfo)
-    
-thisExp.addLoop(trials)  # add the loop to the experiment
+    minVal=0, maxVal=22,
+    nUp=1, nDown=2,  # homes in on 63%
+    nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[1]]), extraInfo=expInfo)
+thisExp.addLoop(medium)
+low = data.StairHandler(startVal=10.0, name='low',
+    stepType='lin',
+    stepSizes=[6, 3, 3, 2, 2, 1, 1],
+    minVal=0, maxVal=22,
+    nUp=1, nDown=1,  # homes in on 50%
+    nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[2]]), extraInfo=expInfo)
+thisExp.addLoop(low)
+
 nominalTime = 0 # set up virtual time keeper to align actual with a-priori time allocation
 globalClock.reset() # to align actual time with virtual time keeper
     
@@ -312,9 +327,21 @@ while t < t_start + initial_fix_dur:
     win.flip()              
 nominalTime = t # set up virtual time keeper to align actual with a-priori time allocation
 
-for thisTrial in trials:
-    trials.addOtherData('time.onset', globalClock.getTime()) # add trial onset time to the data file
+while trial_counter < len(stimuli):
+    # Choose the correct staircase handler based on desired accuracy level
+    CueType = stimuli.iloc[trial_counter][0] # get cue type from the externally imported stimuli list, based on trial_counter
+    CueAccuracy = stimuli.iloc[trial_counter][1]
+    if CueAccuracy == accuracies[0]:
+        trials = high
+    elif CueAccuracy == accuracies[1]:
+        trials = medium
+    elif CueAccuracy == accuracies[2]:
+        trials = low
     currentLoop = trials
+    intensity = next(trials)
+
+    trials.addOtherData('time.onset', globalClock.getTime()) # add trial onset time to the data file
+    trials.addOtherData('true_trialN', trial_counter)
         
     # update component parameters for each repeat
     Choice_Resp = event.BuilderKeyResponse()
@@ -472,9 +499,9 @@ for thisTrial in trials:
             event.clearEvents(eventType='keyboard')  
             theseKeys = []
 
-        frameRemainsResp = min_target_dur + frameDur*thisTrial #- win.monitorFramePeriod * 0.75  # most of one frame period left;  range: min_target_dur (160ms) to one frame (~17ms, depends on refresh rate) * 6
+        frameRemainsResp = min_target_dur + frameDur*intensity #- win.monitorFramePeriod * 0.75  # most of one frame period left;  range: min_target_dur (160ms) to one frame (~17ms, depends on refresh rate) * 6
         if Target.status == STARTED and t >= frameRemainsResp:
-            print('thisTrial:',thisTrial) # print for QA purpose
+            print('thisTrial:',intensity) # print for QA purpose
             print('frameDur:',frameDur) # print for QA purpose
             print('frameRemainsResp:',frameRemainsResp) # print for QA purpose
             
