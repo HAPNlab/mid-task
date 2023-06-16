@@ -1,385 +1,384 @@
-4.5498 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
-7.2792 	WARNING 	Monitor specification not found. Creating a temporary one...
-8.4207 	WARNING 	Couldn't measure a consistent frame rate!
+3.8588 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+5.5234 	WARNING 	Monitor specification not found. Creating a temporary one...
+6.6948 	WARNING 	Couldn't measure a consistent frame rate!
   - Is your graphics card set to sync to vertical blank?
   - Are you running other processes on your computer?
 
-8.4217 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0.2, 0.2, 0.2]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fb719cfdac0>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fb72a3276d0>, multiSample=False, name='window1', numSamples=2, pos=[378.0, 245.5], screen=0, size=array([3024, 1964]), stencilBits=0, stereo=False, units='height', useFBO=False, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
-8.4220 	EXP 	window1: mouseVisible = True
-8.4220 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
-8.4221 	EXP 	window1: recordFrameIntervals = False
-8.5009 	EXP 	window1: recordFrameIntervals = True
-9.3435 	WARNING 	Couldn't measure a consistent frame rate!
+6.6965 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0.2, 0.2, 0.2]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fc3799d7ac0>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fc39feec2e0>, multiSample=False, name='window1', numSamples=2, pos=[378.0, 245.5], screen=0, size=array([3024, 1964]), stencilBits=0, stereo=False, units='height', useFBO=False, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+6.6970 	EXP 	window1: mouseVisible = True
+6.6971 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+6.6971 	EXP 	window1: recordFrameIntervals = False
+6.7810 	EXP 	window1: recordFrameIntervals = True
+6.8782 	WARNING 	t of last frame was 20.82ms (=1/48)
+7.6263 	WARNING 	Couldn't measure a consistent frame rate!
   - Is your graphics card set to sync to vertical blank?
   - Are you running other processes on your computer?
 
-9.4014 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([ 0.  , -0.25]), rgb=UNKNOWN, text='Press 4 to continue.', units='height', win=Window(...), wrapWidth=1)
-9.4071 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([ 0.  , -0.25]), rgb=UNKNOWN, text='Press 4 to continue, or 3 to go back.', units='height', win=Window(...), wrapWidth=1)
-9.4103 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.08, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
-9.4178 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0. , 0.1]), rgb=UNKNOWN, text='Hello World', units='height', win=Window(...), wrapWidth=1.0264765784114054)
-9.4304 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1.0264765784114054)
-9.4340 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='The task will begin momentarily. Get ready...', units='height', win=Window(...), wrapWidth=1)
-9.4377 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1.0264765784114054)
-9.4440 	EXP 	Created unnamed Polygon = Polygon(__class__=<class 'psychopy.visual.polygon.Polygon'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=array([0, 0, 0]), lineWidth=1.5, name='unnamed Polygon', opacity=0.5, ori=0.0, pos=array([0., 0.]), size=array([1., 1.]), units='height', vertices=ndarray(...), win=Window(...))
-9.4457 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='Hello World', units='height', win=Window(...), wrapWidth=1)
-9.4467 	EXP 	Created unnamed Polygon = Polygon(__class__=<class 'psychopy.visual.polygon.Polygon'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=array([0, 0, 0]), lineWidth=0, name='unnamed Polygon', opacity=0.5, ori=0.0, pos=array([0., 0.]), size=array([1., 1.]), units='height', vertices=ndarray(...), win=Window(...))
-9.4512 	EXP 	Created Trial_FB = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([ 1.        ,  0.29411765, -1.        ]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.07333333333333333, italic=False, languageStyle='LTR', name='Trial_FB', opacity=1.0, ori=0, pos=array([0.        , 0.16666667]), rgb=UNKNOWN, text='Trial earnings:', units='height', win=Window(...), wrapWidth=1)
-9.4557 	EXP 	Created Exp_FB = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1,  1,  1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.07333333333333333, italic=False, languageStyle='LTR', name='Exp_FB', opacity=1.0, ori=0, pos=array([ 0.  , -0.05]), rgb=UNKNOWN, text='Total earnings:', units='height', win=Window(...), wrapWidth=1)
-9.4568 	EXP 	Created Blank_FB = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='Blank_FB', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.19246436, 0.19246436]), texRes=128, units='height', win=Window(...))
-9.4607 	EXP 	window1: mouseVisible = False
-9.4872 	WARNING 	t of last frame was 143.84ms (=1/6)
-9.4872 	EXP 	unnamed TextStim: height = 0.04
-9.4872 	EXP 	unnamed TextStim: height = 0.04
-9.4872 	EXP 	unnamed TextStim: height = 0.04
-9.4872 	EXP 	unnamed TextStim: text = 'In the next task, you will be able to win money if you are quick enough. Your task is to press a button when you see the white square. On trials where the white square is preceded by a green circle, you will win $1 if you press the key while the white square is on the screen. On trials where the white square is preceded by a blue circle, you are not able to win anything, but we still want you to press any key while the white square is on the screen. The white square will remain on screen for less than 250 milliseconds, so you will need to respond quickly.'
-10.2096 	DATA 	Keypress: 4
-10.2246 	WARNING 	t of last frame was 737.34ms (=1/1)
-10.2246 	EXP 	unnamed TextStim: height = 0.04
-10.2246 	EXP 	unnamed TextStim: height = 0.04
-10.2246 	EXP 	unnamed TextStim: height = 0.04
-10.2246 	EXP 	unnamed TextStim: text = 'Finally, after each trial, you will see the monetary reward earned on the last trial and the total money gained in this task so far. We will add whatever you win in this task to the amount that we pay you today. No practice trials will be presented for this task, and it will include a single session, lasting a few minutes. If you have questions or are unsure about what your task is, please ask the experimenter now.'
-11.3961 	DATA 	Keypress: 4
-11.4060 	WARNING 	t of last frame was 1181.37ms (=1/0)
-12.9943 	DATA 	Keypress: 0
-12.9947 	EXP 	launchScan: vol: 110  TR: 2.000s  skip: 2  sync: 'equal'
-13.0159 	EXP 	window1: mouseVisible = True
-13.0476 	WARNING 	t of last frame was 1641.61ms (=1/0)
-13.0476 	EXP 	unnamed RatingScale: flipVert = False
-13.8943 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
-14.2923 	DATA 	Keypress: return
-14.2970 	EXP 	window1: mouseVisible = False
-18.3292 	DATA 	EmulatedKey: equal
-18.3293 	EXP 	launchScan: start of scan
-20.3292 	DATA 	EmulatedKey: equal
-22.3292 	DATA 	EmulatedKey: equal
-24.3292 	DATA 	EmulatedKey: equal
-26.3292 	DATA 	EmulatedKey: equal
-28.3292 	DATA 	EmulatedKey: equal
-28.4853 	EXP 	unnamed Polygon: edges = 4
-28.4853 	EXP 	unnamed TextStim: height = 0.04
-28.4853 	EXP 	unnamed TextStim: height = 0.04
-28.4853 	EXP 	unnamed TextStim: height = 0.04
-28.4853 	EXP 	unnamed TextStim: text = '-$5\n(20% accuracy)'
-28.4853 	EXP 	unnamed Polygon: autoDraw = True
-28.4853 	EXP 	unnamed TextStim: autoDraw = True
-30.3293 	DATA 	EmulatedKey: equal
-30.4840 	EXP 	unnamed Polygon: autoDraw = False
-30.4840 	EXP 	unnamed TextStim: autoDraw = False
-30.4840 	EXP 	unnamed TextStim: autoDraw = True
-32.3292 	DATA 	EmulatedKey: equal
-32.7461 	EXP 	unnamed TextStim: autoDraw = False
-32.7461 	EXP 	unnamed TextStim: autoDraw = False
-32.7461 	EXP 	unnamed Polygon: autoDraw = True
-33.0342 	DATA 	Keypress: 4
-33.0562 	EXP 	unnamed Polygon: autoDraw = False
-34.3293 	DATA 	EmulatedKey: equal
-34.7625 	EXP 	unnamed Polygon: autoDraw = False
-34.7625 	EXP 	Trial_FB: height = 0.07333333333333333
-34.7625 	EXP 	Trial_FB: height = 0.07333333333333333
-34.7625 	EXP 	Trial_FB: height = 0.07333333333333333
-34.7625 	EXP 	Trial_FB: text = 'Trial earnings: $0'
-34.7625 	EXP 	Exp_FB: height = 0.07333333333333333
-34.7625 	EXP 	Exp_FB: height = 0.07333333333333333
-34.7625 	EXP 	Exp_FB: height = 0.07333333333333333
-34.7625 	EXP 	Exp_FB: text = 'Total earnings: $0'
-34.7625 	EXP 	Trial_FB: autoDraw = True
-34.7625 	EXP 	Exp_FB: autoDraw = True
-36.3292 	DATA 	EmulatedKey: equal
-36.7353 	EXP 	Trial_FB: autoDraw = False
-36.7353 	EXP 	Exp_FB: autoDraw = False
-36.7353 	EXP 	Trial_FB: autoDraw = False
-36.7353 	EXP 	Exp_FB: autoDraw = False
-36.7353 	EXP 	unnamed TextStim: autoDraw = True
-38.3292 	DATA 	EmulatedKey: equal
-38.7438 	EXP 	unnamed TextStim: autoDraw = False
-38.7438 	EXP 	unnamed TextStim: autoDraw = False
-38.7438 	EXP 	unnamed Polygon: edges = 128
-38.7438 	EXP 	unnamed TextStim: height = 0.04
-38.7438 	EXP 	unnamed TextStim: height = 0.04
-38.7438 	EXP 	unnamed TextStim: height = 0.04
-38.7438 	EXP 	unnamed TextStim: text = '+$5\n(50% accuracy)'
-38.7438 	EXP 	unnamed Polygon: autoDraw = True
-38.7438 	EXP 	unnamed TextStim: autoDraw = True
-40.3292 	DATA 	EmulatedKey: equal
-40.7351 	EXP 	unnamed Polygon: autoDraw = False
-40.7546 	EXP 	unnamed Polygon: autoDraw = False
-40.7546 	EXP 	unnamed TextStim: autoDraw = False
-40.7546 	EXP 	unnamed TextStim: autoDraw = True
-42.3292 	DATA 	EmulatedKey: equal
-42.7772 	EXP 	unnamed TextStim: autoDraw = False
-42.7772 	EXP 	unnamed TextStim: autoDraw = False
-42.7772 	EXP 	unnamed Polygon: autoDraw = True
-43.0366 	DATA 	Keypress: 4
-43.0896 	EXP 	unnamed Polygon: autoDraw = False
-44.3292 	DATA 	EmulatedKey: equal
-44.7981 	EXP 	unnamed Polygon: autoDraw = False
-44.7981 	EXP 	Trial_FB: height = 0.07333333333333333
-44.7981 	EXP 	Trial_FB: height = 0.07333333333333333
-44.7981 	EXP 	Trial_FB: height = 0.07333333333333333
-44.7981 	EXP 	Trial_FB: text = 'Trial earnings: +$5'
-44.7981 	EXP 	Exp_FB: height = 0.07333333333333333
-44.7981 	EXP 	Exp_FB: height = 0.07333333333333333
-44.7981 	EXP 	Exp_FB: height = 0.07333333333333333
-44.7981 	EXP 	Exp_FB: text = 'Total earnings: $5'
-44.7981 	EXP 	Trial_FB: autoDraw = True
-44.7981 	EXP 	Exp_FB: autoDraw = True
-46.3292 	DATA 	EmulatedKey: equal
-46.7845 	EXP 	Trial_FB: autoDraw = False
-46.7845 	EXP 	Exp_FB: autoDraw = False
-46.7845 	EXP 	Trial_FB: autoDraw = False
-46.7845 	EXP 	Exp_FB: autoDraw = False
-46.7845 	EXP 	unnamed TextStim: autoDraw = True
-48.3292 	DATA 	EmulatedKey: equal
-48.7638 	EXP 	unnamed TextStim: autoDraw = False
-48.7638 	EXP 	unnamed TextStim: autoDraw = False
-48.7638 	EXP 	unnamed Polygon: edges = 6
-48.7638 	EXP 	unnamed TextStim: height = 0.04
-48.7638 	EXP 	unnamed TextStim: height = 0.04
-48.7638 	EXP 	unnamed TextStim: height = 0.04
-48.7638 	EXP 	unnamed TextStim: text = '$0\n(80% accuracy)'
-48.7638 	EXP 	unnamed Polygon: autoDraw = True
-48.7638 	EXP 	unnamed TextStim: autoDraw = True
-50.3292 	DATA 	EmulatedKey: equal
-50.7595 	EXP 	unnamed Polygon: autoDraw = False
-50.7776 	EXP 	unnamed Polygon: autoDraw = False
-50.7776 	EXP 	unnamed TextStim: autoDraw = False
-50.7776 	EXP 	unnamed TextStim: autoDraw = True
-52.3292 	DATA 	EmulatedKey: equal
-52.8831 	EXP 	unnamed TextStim: autoDraw = False
-52.8831 	EXP 	unnamed TextStim: autoDraw = False
-52.8831 	EXP 	unnamed Polygon: autoDraw = True
-53.1040 	DATA 	Keypress: 4
-53.1933 	EXP 	unnamed Polygon: autoDraw = False
-54.3292 	DATA 	EmulatedKey: equal
-54.8898 	EXP 	unnamed Polygon: autoDraw = False
-54.8898 	EXP 	Trial_FB: height = 0.07333333333333333
-54.8898 	EXP 	Trial_FB: height = 0.07333333333333333
-54.8898 	EXP 	Trial_FB: height = 0.07333333333333333
-54.8898 	EXP 	Trial_FB: text = 'Trial earnings: $0'
-54.8898 	EXP 	Exp_FB: text = 'Total earnings: $5'
-54.8898 	EXP 	Trial_FB: autoDraw = True
-54.8898 	EXP 	Exp_FB: autoDraw = True
-56.3292 	DATA 	EmulatedKey: equal
-56.8770 	EXP 	Trial_FB: autoDraw = False
-56.8770 	EXP 	Exp_FB: autoDraw = False
-56.8770 	EXP 	Trial_FB: autoDraw = False
-56.8770 	EXP 	Exp_FB: autoDraw = False
-56.8770 	EXP 	unnamed TextStim: autoDraw = True
-58.3292 	DATA 	EmulatedKey: equal
-58.8773 	EXP 	unnamed TextStim: autoDraw = False
-58.8773 	EXP 	unnamed TextStim: autoDraw = False
-58.8773 	EXP 	unnamed Polygon: edges = 128
-58.8773 	EXP 	unnamed TextStim: height = 0.04
-58.8773 	EXP 	unnamed TextStim: height = 0.04
-58.8773 	EXP 	unnamed TextStim: height = 0.04
-58.8773 	EXP 	unnamed TextStim: text = '+$5\n(80% accuracy)'
-58.8773 	EXP 	unnamed Polygon: autoDraw = True
-58.8773 	EXP 	unnamed TextStim: autoDraw = True
-60.3292 	DATA 	EmulatedKey: equal
-60.8700 	EXP 	unnamed Polygon: autoDraw = False
-60.8885 	EXP 	unnamed Polygon: autoDraw = False
-60.8885 	EXP 	unnamed TextStim: autoDraw = False
-60.8885 	EXP 	unnamed TextStim: autoDraw = True
-62.3292 	DATA 	EmulatedKey: equal
-62.8791 	EXP 	unnamed TextStim: autoDraw = False
-62.8791 	EXP 	unnamed TextStim: autoDraw = False
-62.8791 	EXP 	unnamed Polygon: autoDraw = True
-63.0746 	EXP 	unnamed Polygon: autoDraw = False
-63.1229 	DATA 	Keypress: 4
-64.3292 	DATA 	EmulatedKey: equal
-64.8724 	EXP 	unnamed Polygon: autoDraw = False
-64.8724 	EXP 	Trial_FB: text = 'Trial earnings: $0'
-64.8724 	EXP 	Exp_FB: text = 'Total earnings: $5'
-64.8724 	EXP 	Trial_FB: autoDraw = True
-64.8724 	EXP 	Exp_FB: autoDraw = True
-66.3292 	DATA 	EmulatedKey: equal
-66.8695 	EXP 	Trial_FB: autoDraw = False
-66.8695 	EXP 	Exp_FB: autoDraw = False
-66.8695 	EXP 	Trial_FB: autoDraw = False
-66.8695 	EXP 	Exp_FB: autoDraw = False
-66.8695 	EXP 	unnamed TextStim: autoDraw = True
-68.3292 	DATA 	EmulatedKey: equal
-68.8885 	EXP 	unnamed TextStim: autoDraw = False
-68.8885 	EXP 	unnamed TextStim: autoDraw = False
-68.8885 	EXP 	unnamed Polygon: edges = 4
-68.8885 	EXP 	unnamed TextStim: height = 0.04
-68.8885 	EXP 	unnamed TextStim: height = 0.04
-68.8885 	EXP 	unnamed TextStim: height = 0.04
-68.8885 	EXP 	unnamed TextStim: text = '-$5\n(80% accuracy)'
-68.8885 	EXP 	unnamed Polygon: autoDraw = True
-68.8885 	EXP 	unnamed TextStim: autoDraw = True
-70.3292 	DATA 	EmulatedKey: equal
-70.8824 	EXP 	unnamed Polygon: autoDraw = False
-70.9006 	EXP 	unnamed Polygon: autoDraw = False
-70.9006 	EXP 	unnamed TextStim: autoDraw = False
-70.9006 	EXP 	unnamed TextStim: autoDraw = True
-72.3292 	DATA 	EmulatedKey: equal
-73.2454 	EXP 	unnamed TextStim: autoDraw = False
-73.2454 	EXP 	unnamed Polygon: autoDraw = True
-73.4954 	EXP 	unnamed Polygon: autoDraw = False
-73.5162 	DATA 	Keypress: 4
-74.3292 	DATA 	EmulatedKey: equal
-75.2662 	EXP 	unnamed Polygon: autoDraw = False
-75.2662 	EXP 	Trial_FB: height = 0.07333333333333333
-75.2662 	EXP 	Trial_FB: height = 0.07333333333333333
-75.2662 	EXP 	Trial_FB: height = 0.07333333333333333
-75.2662 	EXP 	Trial_FB: text = 'Trial loss: -$5'
-75.2662 	EXP 	Exp_FB: height = 0.07333333333333333
-75.2662 	EXP 	Exp_FB: height = 0.07333333333333333
-75.2662 	EXP 	Exp_FB: height = 0.07333333333333333
-75.2662 	EXP 	Exp_FB: text = 'Total earnings: $0'
-75.2662 	EXP 	Trial_FB: autoDraw = True
-75.2662 	EXP 	Exp_FB: autoDraw = True
-76.3292 	DATA 	EmulatedKey: equal
-77.2462 	EXP 	Trial_FB: autoDraw = False
-77.2462 	EXP 	Exp_FB: autoDraw = False
-77.2462 	EXP 	Trial_FB: autoDraw = False
-77.2462 	EXP 	Exp_FB: autoDraw = False
-77.2462 	EXP 	unnamed TextStim: autoDraw = True
-78.3292 	DATA 	EmulatedKey: equal
-79.2287 	EXP 	unnamed TextStim: autoDraw = False
-79.2287 	EXP 	unnamed Polygon: edges = 128
-79.2287 	EXP 	unnamed TextStim: height = 0.04
-79.2287 	EXP 	unnamed TextStim: height = 0.04
-79.2287 	EXP 	unnamed TextStim: height = 0.04
-79.2287 	EXP 	unnamed TextStim: text = '+$5\n(20% accuracy)'
-79.2287 	EXP 	unnamed Polygon: autoDraw = True
-79.2287 	EXP 	unnamed TextStim: autoDraw = True
-80.3292 	DATA 	EmulatedKey: equal
-81.2246 	EXP 	unnamed Polygon: autoDraw = False
-81.2430 	EXP 	unnamed Polygon: autoDraw = False
-81.2430 	EXP 	unnamed TextStim: autoDraw = False
-81.2430 	EXP 	unnamed TextStim: autoDraw = True
-82.3292 	DATA 	EmulatedKey: equal
-83.6360 	EXP 	unnamed TextStim: autoDraw = False
-83.6360 	EXP 	unnamed Polygon: autoDraw = True
-83.8435 	DATA 	Keypress: 4
-83.8455 	EXP 	unnamed Polygon: autoDraw = False
-84.3292 	DATA 	EmulatedKey: equal
-85.6544 	EXP 	unnamed Polygon: autoDraw = False
-85.6544 	EXP 	Trial_FB: height = 0.07333333333333333
-85.6544 	EXP 	Trial_FB: height = 0.07333333333333333
-85.6544 	EXP 	Trial_FB: height = 0.07333333333333333
-85.6544 	EXP 	Trial_FB: text = 'Trial earnings: +$5'
-85.6544 	EXP 	Exp_FB: height = 0.07333333333333333
-85.6544 	EXP 	Exp_FB: height = 0.07333333333333333
-85.6544 	EXP 	Exp_FB: height = 0.07333333333333333
-85.6544 	EXP 	Exp_FB: text = 'Total earnings: $5'
-85.6544 	EXP 	Trial_FB: autoDraw = True
-85.6544 	EXP 	Exp_FB: autoDraw = True
-86.3292 	DATA 	EmulatedKey: equal
-87.6442 	EXP 	Trial_FB: autoDraw = False
-87.6442 	EXP 	Exp_FB: autoDraw = False
-87.6442 	EXP 	Trial_FB: autoDraw = False
-87.6442 	EXP 	Exp_FB: autoDraw = False
-87.6442 	EXP 	unnamed TextStim: autoDraw = True
-88.3292 	DATA 	EmulatedKey: equal
-89.6247 	EXP 	unnamed TextStim: autoDraw = False
-89.6247 	EXP 	unnamed TextStim: autoDraw = False
-89.6247 	EXP 	unnamed Polygon: edges = 6
-89.6247 	EXP 	unnamed TextStim: height = 0.04
-89.6247 	EXP 	unnamed TextStim: height = 0.04
-89.6247 	EXP 	unnamed TextStim: height = 0.04
-89.6247 	EXP 	unnamed TextStim: text = '$0\n(50% accuracy)'
-89.6247 	EXP 	unnamed Polygon: autoDraw = True
-89.6247 	EXP 	unnamed TextStim: autoDraw = True
-90.3292 	DATA 	EmulatedKey: equal
-91.6127 	EXP 	unnamed Polygon: autoDraw = False
-91.6420 	EXP 	unnamed Polygon: autoDraw = False
-91.6420 	EXP 	unnamed TextStim: autoDraw = False
-91.6420 	EXP 	unnamed TextStim: autoDraw = True
-92.3292 	DATA 	EmulatedKey: equal
-93.9295 	EXP 	unnamed TextStim: autoDraw = False
-93.9295 	EXP 	unnamed TextStim: autoDraw = False
-93.9295 	EXP 	unnamed Polygon: autoDraw = True
-94.1377 	EXP 	unnamed Polygon: autoDraw = False
-94.1816 	DATA 	Keypress: 4
-94.3292 	DATA 	EmulatedKey: equal
-95.9434 	EXP 	unnamed Polygon: autoDraw = False
-95.9434 	EXP 	Trial_FB: height = 0.07333333333333333
-95.9434 	EXP 	Trial_FB: height = 0.07333333333333333
-95.9434 	EXP 	Trial_FB: height = 0.07333333333333333
-95.9434 	EXP 	Trial_FB: text = 'Trial earnings: $0'
-95.9434 	EXP 	Exp_FB: text = 'Total earnings: $5'
-95.9434 	EXP 	Trial_FB: autoDraw = True
-95.9434 	EXP 	Exp_FB: autoDraw = True
-96.3292 	DATA 	EmulatedKey: equal
-97.9366 	EXP 	Trial_FB: autoDraw = False
-97.9366 	EXP 	Exp_FB: autoDraw = False
-97.9366 	EXP 	Trial_FB: autoDraw = False
-97.9366 	EXP 	Exp_FB: autoDraw = False
-97.9366 	EXP 	unnamed TextStim: autoDraw = True
-98.3292 	DATA 	EmulatedKey: equal
-99.9122 	EXP 	unnamed TextStim: autoDraw = False
-99.9122 	EXP 	unnamed TextStim: autoDraw = False
-99.9122 	EXP 	unnamed Polygon: edges = 4
-99.9122 	EXP 	unnamed TextStim: height = 0.04
-99.9122 	EXP 	unnamed TextStim: height = 0.04
-99.9122 	EXP 	unnamed TextStim: height = 0.04
-99.9122 	EXP 	unnamed TextStim: text = '-$5\n(50% accuracy)'
-99.9122 	EXP 	unnamed Polygon: autoDraw = True
-99.9122 	EXP 	unnamed TextStim: autoDraw = True
-100.3292 	DATA 	EmulatedKey: equal
-101.8998 	EXP 	unnamed Polygon: autoDraw = False
-101.9159 	EXP 	unnamed Polygon: autoDraw = False
-101.9159 	EXP 	unnamed TextStim: autoDraw = False
-101.9159 	EXP 	unnamed TextStim: autoDraw = True
-102.3292 	DATA 	EmulatedKey: equal
-104.3292 	DATA 	EmulatedKey: equal
-104.3293 	EXP 	unnamed TextStim: autoDraw = False
-104.3293 	EXP 	unnamed TextStim: autoDraw = False
-104.3293 	EXP 	unnamed Polygon: autoDraw = True
-104.5347 	DATA 	Keypress: 4
-104.5420 	EXP 	unnamed Polygon: autoDraw = False
-106.3292 	DATA 	EmulatedKey: equal
-106.3293 	EXP 	unnamed Polygon: autoDraw = False
-106.3293 	EXP 	Trial_FB: text = 'Trial earnings: $0'
-106.3293 	EXP 	Exp_FB: text = 'Total earnings: $5'
-106.3293 	EXP 	Trial_FB: autoDraw = True
-106.3293 	EXP 	Exp_FB: autoDraw = True
-108.2857 	EXP 	Trial_FB: autoDraw = False
-108.2857 	EXP 	Exp_FB: autoDraw = False
-108.2857 	EXP 	Trial_FB: autoDraw = False
-108.2857 	EXP 	Exp_FB: autoDraw = False
-108.2857 	EXP 	unnamed TextStim: autoDraw = True
-108.3292 	DATA 	EmulatedKey: equal
-110.3292 	DATA 	EmulatedKey: equal
-110.3302 	EXP 	unnamed TextStim: autoDraw = False
-110.3302 	EXP 	unnamed TextStim: autoDraw = False
-110.3302 	EXP 	unnamed Polygon: edges = 6
-110.3302 	EXP 	unnamed TextStim: height = 0.04
-110.3302 	EXP 	unnamed TextStim: height = 0.04
-110.3302 	EXP 	unnamed TextStim: height = 0.04
-110.3302 	EXP 	unnamed TextStim: text = '$0\n(20% accuracy)'
-110.3302 	EXP 	unnamed Polygon: autoDraw = True
-110.3302 	EXP 	unnamed TextStim: autoDraw = True
-112.2948 	EXP 	unnamed Polygon: autoDraw = False
-112.3292 	DATA 	EmulatedKey: equal
-112.3303 	EXP 	unnamed Polygon: autoDraw = False
-112.3303 	EXP 	unnamed TextStim: autoDraw = False
-112.3303 	EXP 	unnamed TextStim: autoDraw = True
-114.3292 	DATA 	EmulatedKey: equal
-114.3346 	EXP 	unnamed TextStim: autoDraw = False
-114.3346 	EXP 	unnamed Polygon: autoDraw = True
-114.4668 	EXP 	unnamed Polygon: autoDraw = False
-116.3292 	DATA 	EmulatedKey: equal
-116.3364 	EXP 	unnamed Polygon: autoDraw = False
-116.3364 	EXP 	Trial_FB: text = 'Trial earnings: $0'
-116.3364 	EXP 	Exp_FB: text = 'Total earnings: $5'
-116.3364 	EXP 	Trial_FB: autoDraw = True
-116.3364 	EXP 	Exp_FB: autoDraw = True
-118.3292 	DATA 	EmulatedKey: equal
-118.3334 	EXP 	Trial_FB: autoDraw = False
-118.3334 	EXP 	Exp_FB: autoDraw = False
-118.3334 	EXP 	Trial_FB: autoDraw = False
-118.3334 	EXP 	Exp_FB: autoDraw = False
-118.3334 	EXP 	unnamed TextStim: autoDraw = True
-120.3292 	DATA 	EmulatedKey: equal
-120.3346 	EXP 	unnamed TextStim: autoDraw = False
-122.3292 	DATA 	EmulatedKey: equal
-124.3292 	DATA 	EmulatedKey: equal
-126.3292 	DATA 	EmulatedKey: equal
-128.3292 	DATA 	EmulatedKey: equal
-130.1833 	DATA 	Keypress: 0
-130.1976 	EXP 	window1: mouseVisible = True
-130.3295 	DATA 	EmulatedKey: equal
+7.6889 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([ 0.  , -0.25]), rgb=UNKNOWN, text='Press 4 to continue.', units='height', win=Window(...), wrapWidth=1)
+7.6948 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([ 0.  , -0.25]), rgb=UNKNOWN, text='Press 4 to continue, or 3 to go back.', units='height', win=Window(...), wrapWidth=1)
+7.6981 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.08, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+7.7059 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0. , 0.1]), rgb=UNKNOWN, text='Hello World', units='height', win=Window(...), wrapWidth=1.0264765784114054)
+7.7188 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1.0264765784114054)
+7.7236 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='The task will begin momentarily. Get ready...', units='height', win=Window(...), wrapWidth=1)
+7.7273 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1.0264765784114054)
+7.7315 	EXP 	Created unnamed Polygon = Polygon(__class__=<class 'psychopy.visual.polygon.Polygon'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=array([0, 0, 0]), lineWidth=1.5, name='unnamed Polygon', opacity=0.5, ori=0.0, pos=array([0., 0.]), size=array([1., 1.]), units='height', vertices=ndarray(...), win=Window(...))
+7.7331 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='Hello World', units='height', win=Window(...), wrapWidth=1)
+7.7340 	EXP 	Created unnamed Polygon = Polygon(__class__=<class 'psychopy.visual.polygon.Polygon'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=array([0, 0, 0]), lineWidth=0, name='unnamed Polygon', opacity=0.5, ori=0.0, pos=array([0., 0.]), size=array([1., 1.]), units='height', vertices=ndarray(...), win=Window(...))
+7.7387 	EXP 	Created Trial_FB = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([ 1.        ,  0.29411765, -1.        ]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.07333333333333333, italic=False, languageStyle='LTR', name='Trial_FB', opacity=1.0, ori=0, pos=array([0.        , 0.16666667]), rgb=UNKNOWN, text='Trial earnings:', units='height', win=Window(...), wrapWidth=1)
+7.7431 	EXP 	Created Exp_FB = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1,  1,  1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.07333333333333333, italic=False, languageStyle='LTR', name='Exp_FB', opacity=1.0, ori=0, pos=array([ 0.  , -0.05]), rgb=UNKNOWN, text='Total earnings:', units='height', win=Window(...), wrapWidth=1)
+7.7443 	EXP 	Created Blank_FB = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='Blank_FB', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.19246436, 0.19246436]), texRes=128, units='height', win=Window(...))
+7.7482 	EXP 	window1: mouseVisible = False
+7.7737 	WARNING 	t of last frame was 147.60ms (=1/6)
+7.7737 	EXP 	unnamed TextStim: height = 0.04
+7.7737 	EXP 	unnamed TextStim: height = 0.04
+7.7737 	EXP 	unnamed TextStim: height = 0.04
+7.7737 	EXP 	unnamed TextStim: text = 'In the next task, you will be able to win money if you are quick enough. Your task is to press a button when you see the white square. On trials where the white square is preceded by a green circle, you will win $1 if you press the key while the white square is on the screen. On trials where the white square is preceded by a blue circle, you are not able to win anything, but we still want you to press any key while the white square is on the screen. The white square will remain on screen for less than 250 milliseconds, so you will need to respond quickly.'
+8.4276 	DATA 	Keypress: 4
+8.4421 	WARNING 	t of last frame was 668.41ms (=1/1)
+8.4421 	EXP 	unnamed TextStim: height = 0.04
+8.4421 	EXP 	unnamed TextStim: height = 0.04
+8.4421 	EXP 	unnamed TextStim: height = 0.04
+8.4421 	EXP 	unnamed TextStim: text = 'Finally, after each trial, you will see the monetary reward earned on the last trial and the total money gained in this task so far. We will add whatever you win in this task to the amount that we pay you today. No practice trials will be presented for this task, and it will include a single session, lasting a few minutes. If you have questions or are unsure about what your task is, please ask the experimenter now.'
+8.9506 	DATA 	Keypress: 4
+8.9555 	WARNING 	t of last frame was 513.34ms (=1/1)
+10.1267 	DATA 	Keypress: 0
+10.1272 	EXP 	launchScan: vol: 110  TR: 2.000s  skip: 2  sync: 'equal'
+10.1528 	EXP 	window1: mouseVisible = True
+10.1829 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+10.1829 	EXP 	unnamed RatingScale: flipVert = False
+11.2178 	DATA 	Keypress: return
+11.2317 	EXP 	window1: mouseVisible = False
+15.2662 	DATA 	EmulatedKey: equal
+15.2663 	EXP 	launchScan: start of scan
+17.2662 	DATA 	EmulatedKey: equal
+19.2662 	DATA 	EmulatedKey: equal
+21.2662 	DATA 	EmulatedKey: equal
+23.2662 	DATA 	EmulatedKey: equal
+25.2662 	DATA 	EmulatedKey: equal
+25.4191 	EXP 	unnamed Polygon: edges = 4
+25.4191 	EXP 	unnamed TextStim: height = 0.04
+25.4191 	EXP 	unnamed TextStim: height = 0.04
+25.4191 	EXP 	unnamed TextStim: height = 0.04
+25.4191 	EXP 	unnamed TextStim: text = '-$5\n(20% accuracy)'
+25.4191 	EXP 	unnamed Polygon: autoDraw = True
+25.4191 	EXP 	unnamed TextStim: autoDraw = True
+27.2662 	DATA 	EmulatedKey: equal
+27.4189 	EXP 	unnamed Polygon: autoDraw = False
+27.4189 	EXP 	unnamed TextStim: autoDraw = False
+27.4189 	EXP 	unnamed Polygon: autoDraw = False
+27.4189 	EXP 	unnamed TextStim: autoDraw = False
+27.4189 	EXP 	unnamed TextStim: autoDraw = True
+29.2662 	DATA 	EmulatedKey: equal
+29.4026 	EXP 	unnamed TextStim: autoDraw = False
+29.4026 	EXP 	unnamed TextStim: autoDraw = False
+29.4430 	EXP 	unnamed Polygon: autoDraw = True
+29.6863 	EXP 	unnamed Polygon: autoDraw = False
+29.6892 	DATA 	Keypress: 4
+31.2662 	DATA 	EmulatedKey: equal
+31.4193 	EXP 	unnamed Polygon: autoDraw = False
+31.4193 	EXP 	Trial_FB: height = 0.07333333333333333
+31.4193 	EXP 	Trial_FB: height = 0.07333333333333333
+31.4193 	EXP 	Trial_FB: height = 0.07333333333333333
+31.4193 	EXP 	Trial_FB: text = 'Trial loss: -$5'
+31.4193 	EXP 	Exp_FB: height = 0.07333333333333333
+31.4193 	EXP 	Exp_FB: height = 0.07333333333333333
+31.4193 	EXP 	Exp_FB: height = 0.07333333333333333
+31.4193 	EXP 	Exp_FB: text = 'Total earnings: $-5'
+31.4193 	EXP 	Trial_FB: autoDraw = True
+31.4193 	EXP 	Exp_FB: autoDraw = True
+33.2662 	DATA 	EmulatedKey: equal
+33.3985 	EXP 	Trial_FB: autoDraw = False
+33.3985 	EXP 	Exp_FB: autoDraw = False
+33.3985 	EXP 	Trial_FB: autoDraw = False
+33.3985 	EXP 	Exp_FB: autoDraw = False
+33.3985 	EXP 	unnamed TextStim: autoDraw = True
+35.2662 	DATA 	EmulatedKey: equal
+35.4104 	EXP 	unnamed TextStim: autoDraw = False
+35.4104 	EXP 	unnamed TextStim: autoDraw = False
+35.4104 	EXP 	unnamed Polygon: edges = 128
+35.4104 	EXP 	unnamed TextStim: height = 0.04
+35.4104 	EXP 	unnamed TextStim: height = 0.04
+35.4104 	EXP 	unnamed TextStim: height = 0.04
+35.4104 	EXP 	unnamed TextStim: text = '+$5\n(50% accuracy)'
+35.4104 	EXP 	unnamed Polygon: autoDraw = True
+35.4104 	EXP 	unnamed TextStim: autoDraw = True
+37.2662 	DATA 	EmulatedKey: equal
+37.3987 	EXP 	unnamed Polygon: autoDraw = False
+37.3987 	EXP 	unnamed TextStim: autoDraw = False
+37.3987 	EXP 	unnamed Polygon: autoDraw = False
+37.3987 	EXP 	unnamed TextStim: autoDraw = False
+37.3987 	EXP 	unnamed TextStim: autoDraw = True
+39.2662 	DATA 	EmulatedKey: equal
+39.3989 	EXP 	unnamed TextStim: autoDraw = False
+39.3989 	EXP 	unnamed TextStim: autoDraw = False
+39.4172 	EXP 	unnamed Polygon: autoDraw = True
+39.6546 	DATA 	Keypress: 4
+39.6794 	EXP 	unnamed Polygon: autoDraw = False
+41.2662 	DATA 	EmulatedKey: equal
+41.4043 	EXP 	unnamed Polygon: autoDraw = False
+41.4043 	EXP 	Trial_FB: height = 0.07333333333333333
+41.4043 	EXP 	Trial_FB: height = 0.07333333333333333
+41.4043 	EXP 	Trial_FB: height = 0.07333333333333333
+41.4043 	EXP 	Trial_FB: text = 'Trial earnings: +$5'
+41.4043 	EXP 	Exp_FB: height = 0.07333333333333333
+41.4043 	EXP 	Exp_FB: height = 0.07333333333333333
+41.4043 	EXP 	Exp_FB: height = 0.07333333333333333
+41.4043 	EXP 	Exp_FB: text = 'Total earnings: $0'
+41.4043 	EXP 	Trial_FB: autoDraw = True
+41.4043 	EXP 	Exp_FB: autoDraw = True
+43.2662 	DATA 	EmulatedKey: equal
+43.4006 	EXP 	Trial_FB: autoDraw = False
+43.4006 	EXP 	Exp_FB: autoDraw = False
+43.4006 	EXP 	Trial_FB: autoDraw = False
+43.4006 	EXP 	Exp_FB: autoDraw = False
+43.4006 	EXP 	unnamed TextStim: autoDraw = True
+45.2662 	DATA 	EmulatedKey: equal
+45.4106 	EXP 	unnamed TextStim: autoDraw = False
+45.4106 	EXP 	unnamed Polygon: edges = 6
+45.4106 	EXP 	unnamed TextStim: height = 0.04
+45.4106 	EXP 	unnamed TextStim: height = 0.04
+45.4106 	EXP 	unnamed TextStim: height = 0.04
+45.4106 	EXP 	unnamed TextStim: text = '$0\n(80% accuracy)'
+45.4106 	EXP 	unnamed Polygon: autoDraw = True
+45.4106 	EXP 	unnamed TextStim: autoDraw = True
+47.2662 	DATA 	EmulatedKey: equal
+47.4015 	EXP 	unnamed Polygon: autoDraw = False
+47.4015 	EXP 	unnamed TextStim: autoDraw = False
+47.4015 	EXP 	unnamed Polygon: autoDraw = False
+47.4015 	EXP 	unnamed TextStim: autoDraw = False
+47.4015 	EXP 	unnamed TextStim: autoDraw = True
+49.2662 	DATA 	EmulatedKey: equal
+49.4037 	EXP 	unnamed TextStim: autoDraw = False
+49.4249 	EXP 	unnamed Polygon: autoDraw = True
+49.6329 	DATA 	Keypress: 4
+49.6731 	EXP 	unnamed Polygon: autoDraw = False
+51.2662 	DATA 	EmulatedKey: equal
+51.4103 	EXP 	unnamed Polygon: autoDraw = False
+51.4103 	EXP 	Trial_FB: height = 0.07333333333333333
+51.4103 	EXP 	Trial_FB: height = 0.07333333333333333
+51.4103 	EXP 	Trial_FB: height = 0.07333333333333333
+51.4103 	EXP 	Trial_FB: text = 'Trial earnings: $0'
+51.4103 	EXP 	Exp_FB: text = 'Total earnings: $0'
+51.4103 	EXP 	Trial_FB: autoDraw = True
+51.4103 	EXP 	Exp_FB: autoDraw = True
+53.2662 	DATA 	EmulatedKey: equal
+53.4051 	EXP 	Trial_FB: autoDraw = False
+53.4051 	EXP 	Exp_FB: autoDraw = False
+53.4051 	EXP 	Trial_FB: autoDraw = False
+53.4051 	EXP 	Exp_FB: autoDraw = False
+53.4051 	EXP 	unnamed TextStim: autoDraw = True
+55.2662 	DATA 	EmulatedKey: equal
+55.4128 	EXP 	unnamed TextStim: autoDraw = False
+55.4128 	EXP 	unnamed Polygon: edges = 128
+55.4128 	EXP 	unnamed TextStim: height = 0.04
+55.4128 	EXP 	unnamed TextStim: height = 0.04
+55.4128 	EXP 	unnamed TextStim: height = 0.04
+55.4128 	EXP 	unnamed TextStim: text = '+$5\n(80% accuracy)'
+55.4128 	EXP 	unnamed Polygon: autoDraw = True
+55.4128 	EXP 	unnamed TextStim: autoDraw = True
+57.2662 	DATA 	EmulatedKey: equal
+57.4032 	EXP 	unnamed Polygon: autoDraw = False
+57.4032 	EXP 	unnamed TextStim: autoDraw = False
+57.4032 	EXP 	unnamed Polygon: autoDraw = False
+57.4032 	EXP 	unnamed TextStim: autoDraw = False
+57.4032 	EXP 	unnamed TextStim: autoDraw = True
+59.2662 	DATA 	EmulatedKey: equal
+59.4026 	EXP 	unnamed TextStim: autoDraw = False
+59.4026 	EXP 	unnamed TextStim: autoDraw = False
+59.4063 	EXP 	unnamed Polygon: autoDraw = True
+59.5664 	DATA 	Keypress: 4
+59.6594 	EXP 	unnamed Polygon: autoDraw = False
+61.2662 	DATA 	EmulatedKey: equal
+61.4083 	EXP 	unnamed Polygon: autoDraw = False
+61.4083 	EXP 	Trial_FB: height = 0.07333333333333333
+61.4083 	EXP 	Trial_FB: height = 0.07333333333333333
+61.4083 	EXP 	Trial_FB: height = 0.07333333333333333
+61.4083 	EXP 	Trial_FB: text = 'Trial earnings: +$5'
+61.4083 	EXP 	Exp_FB: height = 0.07333333333333333
+61.4083 	EXP 	Exp_FB: height = 0.07333333333333333
+61.4083 	EXP 	Exp_FB: height = 0.07333333333333333
+61.4083 	EXP 	Exp_FB: text = 'Total earnings: $5'
+61.4083 	EXP 	Trial_FB: autoDraw = True
+61.4083 	EXP 	Exp_FB: autoDraw = True
+63.2662 	DATA 	EmulatedKey: equal
+63.4039 	EXP 	Trial_FB: autoDraw = False
+63.4039 	EXP 	Exp_FB: autoDraw = False
+63.4039 	EXP 	unnamed TextStim: autoDraw = True
+65.2662 	DATA 	EmulatedKey: equal
+65.4081 	EXP 	unnamed TextStim: autoDraw = False
+65.4081 	EXP 	unnamed TextStim: autoDraw = False
+65.4081 	EXP 	unnamed Polygon: edges = 4
+65.4081 	EXP 	unnamed TextStim: height = 0.04
+65.4081 	EXP 	unnamed TextStim: height = 0.04
+65.4081 	EXP 	unnamed TextStim: height = 0.04
+65.4081 	EXP 	unnamed TextStim: text = '-$5\n(80% accuracy)'
+65.4081 	EXP 	unnamed Polygon: autoDraw = True
+65.4081 	EXP 	unnamed TextStim: autoDraw = True
+67.2662 	DATA 	EmulatedKey: equal
+67.4032 	EXP 	unnamed Polygon: autoDraw = False
+67.4032 	EXP 	unnamed TextStim: autoDraw = False
+67.4032 	EXP 	unnamed Polygon: autoDraw = False
+67.4032 	EXP 	unnamed TextStim: autoDraw = False
+67.4032 	EXP 	unnamed TextStim: autoDraw = True
+69.2662 	DATA 	EmulatedKey: equal
+69.4027 	EXP 	unnamed TextStim: autoDraw = False
+69.4027 	EXP 	unnamed TextStim: autoDraw = False
+69.4383 	EXP 	unnamed Polygon: autoDraw = True
+69.6238 	DATA 	Keypress: 4
+69.6489 	EXP 	unnamed Polygon: autoDraw = False
+71.2662 	DATA 	EmulatedKey: equal
+71.4220 	EXP 	unnamed Polygon: autoDraw = False
+71.4220 	EXP 	Trial_FB: height = 0.07333333333333333
+71.4220 	EXP 	Trial_FB: height = 0.07333333333333333
+71.4220 	EXP 	Trial_FB: height = 0.07333333333333333
+71.4220 	EXP 	Trial_FB: text = 'Trial earnings: $0'
+71.4220 	EXP 	Exp_FB: text = 'Total earnings: $5'
+71.4220 	EXP 	Trial_FB: autoDraw = True
+71.4220 	EXP 	Exp_FB: autoDraw = True
+73.2662 	DATA 	EmulatedKey: equal
+73.4192 	EXP 	Trial_FB: autoDraw = False
+73.4192 	EXP 	Exp_FB: autoDraw = False
+73.4192 	EXP 	Trial_FB: autoDraw = False
+73.4192 	EXP 	Exp_FB: autoDraw = False
+73.4192 	EXP 	unnamed TextStim: autoDraw = True
+75.2662 	DATA 	EmulatedKey: equal
+75.4029 	EXP 	unnamed TextStim: autoDraw = False
+75.4029 	EXP 	unnamed TextStim: autoDraw = False
+75.4029 	EXP 	unnamed Polygon: edges = 128
+75.4029 	EXP 	unnamed TextStim: height = 0.04
+75.4029 	EXP 	unnamed TextStim: height = 0.04
+75.4029 	EXP 	unnamed TextStim: height = 0.04
+75.4029 	EXP 	unnamed TextStim: text = '+$5\n(20% accuracy)'
+75.4029 	EXP 	unnamed Polygon: autoDraw = True
+75.4029 	EXP 	unnamed TextStim: autoDraw = True
+77.2662 	DATA 	EmulatedKey: equal
+77.4029 	EXP 	unnamed Polygon: autoDraw = False
+77.4029 	EXP 	unnamed TextStim: autoDraw = False
+77.4029 	EXP 	unnamed Polygon: autoDraw = False
+77.4029 	EXP 	unnamed TextStim: autoDraw = False
+77.4029 	EXP 	unnamed TextStim: autoDraw = True
+79.2662 	DATA 	EmulatedKey: equal
+79.3986 	EXP 	unnamed TextStim: autoDraw = False
+79.3986 	EXP 	unnamed TextStim: autoDraw = False
+79.4516 	EXP 	unnamed Polygon: autoDraw = True
+79.6870 	EXP 	unnamed Polygon: autoDraw = False
+79.7074 	DATA 	Keypress: 4
+81.2662 	DATA 	EmulatedKey: equal
+81.4018 	EXP 	unnamed Polygon: autoDraw = False
+81.4018 	EXP 	Trial_FB: text = 'Trial earnings: $0'
+81.4018 	EXP 	Exp_FB: text = 'Total earnings: $5'
+81.4018 	EXP 	Trial_FB: autoDraw = True
+81.4018 	EXP 	Exp_FB: autoDraw = True
+83.2662 	DATA 	EmulatedKey: equal
+83.3979 	EXP 	Trial_FB: autoDraw = False
+83.3979 	EXP 	Exp_FB: autoDraw = False
+83.3979 	EXP 	Trial_FB: autoDraw = False
+83.3979 	EXP 	Exp_FB: autoDraw = False
+83.3979 	EXP 	unnamed TextStim: autoDraw = True
+85.2662 	DATA 	EmulatedKey: equal
+85.4090 	EXP 	unnamed TextStim: autoDraw = False
+85.4090 	EXP 	unnamed Polygon: edges = 6
+85.4090 	EXP 	unnamed TextStim: height = 0.04
+85.4090 	EXP 	unnamed TextStim: height = 0.04
+85.4090 	EXP 	unnamed TextStim: height = 0.04
+85.4090 	EXP 	unnamed TextStim: text = '$0\n(50% accuracy)'
+85.4090 	EXP 	unnamed Polygon: autoDraw = True
+85.4090 	EXP 	unnamed TextStim: autoDraw = True
+87.2662 	DATA 	EmulatedKey: equal
+87.3985 	EXP 	unnamed Polygon: autoDraw = False
+87.3985 	EXP 	unnamed TextStim: autoDraw = False
+87.3985 	EXP 	unnamed Polygon: autoDraw = False
+87.3985 	EXP 	unnamed TextStim: autoDraw = False
+87.3985 	EXP 	unnamed TextStim: autoDraw = True
+89.2662 	DATA 	EmulatedKey: equal
+89.3985 	EXP 	unnamed TextStim: autoDraw = False
+89.4370 	EXP 	unnamed Polygon: autoDraw = True
+89.6593 	EXP 	unnamed Polygon: autoDraw = False
+89.7115 	DATA 	Keypress: 4
+91.2662 	DATA 	EmulatedKey: equal
+91.4089 	EXP 	unnamed Polygon: autoDraw = False
+91.4089 	EXP 	Trial_FB: text = 'Trial earnings: $0'
+91.4089 	EXP 	Exp_FB: text = 'Total earnings: $5'
+91.4089 	EXP 	Trial_FB: autoDraw = True
+91.4089 	EXP 	Exp_FB: autoDraw = True
+93.2662 	DATA 	EmulatedKey: equal
+93.4024 	EXP 	Trial_FB: autoDraw = False
+93.4024 	EXP 	Exp_FB: autoDraw = False
+93.4024 	EXP 	Trial_FB: autoDraw = False
+93.4024 	EXP 	Exp_FB: autoDraw = False
+93.4024 	EXP 	unnamed TextStim: autoDraw = True
+95.2662 	DATA 	EmulatedKey: equal
+95.4088 	EXP 	unnamed TextStim: autoDraw = False
+95.4088 	EXP 	unnamed Polygon: edges = 4
+95.4088 	EXP 	unnamed TextStim: height = 0.04
+95.4088 	EXP 	unnamed TextStim: height = 0.04
+95.4088 	EXP 	unnamed TextStim: height = 0.04
+95.4088 	EXP 	unnamed TextStim: text = '-$5\n(50% accuracy)'
+95.4088 	EXP 	unnamed Polygon: autoDraw = True
+95.4088 	EXP 	unnamed TextStim: autoDraw = True
+97.2662 	DATA 	EmulatedKey: equal
+97.4007 	EXP 	unnamed Polygon: autoDraw = False
+97.4007 	EXP 	unnamed TextStim: autoDraw = False
+97.4007 	EXP 	unnamed Polygon: autoDraw = False
+97.4007 	EXP 	unnamed TextStim: autoDraw = False
+97.4007 	EXP 	unnamed TextStim: autoDraw = True
+99.2662 	DATA 	EmulatedKey: equal
+99.4012 	EXP 	unnamed TextStim: autoDraw = False
+99.4012 	EXP 	unnamed TextStim: autoDraw = False
+99.4388 	EXP 	unnamed Polygon: autoDraw = True
+99.6449 	DATA 	Keypress: 4
+99.6528 	EXP 	unnamed Polygon: autoDraw = False
+101.2662 	DATA 	EmulatedKey: equal
+101.3970 	EXP 	unnamed Polygon: autoDraw = False
+101.3970 	EXP 	Trial_FB: text = 'Trial earnings: $0'
+101.3970 	EXP 	Exp_FB: text = 'Total earnings: $5'
+101.3970 	EXP 	Trial_FB: autoDraw = True
+101.3970 	EXP 	Exp_FB: autoDraw = True
+103.2662 	DATA 	EmulatedKey: equal
+103.3848 	EXP 	Trial_FB: autoDraw = False
+103.3848 	EXP 	Exp_FB: autoDraw = False
+103.3848 	EXP 	Trial_FB: autoDraw = False
+103.3848 	EXP 	Exp_FB: autoDraw = False
+103.3848 	EXP 	unnamed TextStim: autoDraw = True
+105.2662 	DATA 	EmulatedKey: equal
+105.3974 	EXP 	unnamed TextStim: autoDraw = False
+105.3974 	EXP 	unnamed TextStim: autoDraw = False
+105.3974 	EXP 	unnamed Polygon: edges = 6
+105.3974 	EXP 	unnamed TextStim: height = 0.04
+105.3974 	EXP 	unnamed TextStim: height = 0.04
+105.3974 	EXP 	unnamed TextStim: height = 0.04
+105.3974 	EXP 	unnamed TextStim: text = '$0\n(20% accuracy)'
+105.3974 	EXP 	unnamed Polygon: autoDraw = True
+105.3974 	EXP 	unnamed TextStim: autoDraw = True
+107.2662 	DATA 	EmulatedKey: equal
+107.3938 	EXP 	unnamed Polygon: autoDraw = False
+107.3938 	EXP 	unnamed TextStim: autoDraw = False
+107.3938 	EXP 	unnamed Polygon: autoDraw = False
+107.3938 	EXP 	unnamed TextStim: autoDraw = False
+107.3938 	EXP 	unnamed TextStim: autoDraw = True
+109.2662 	DATA 	EmulatedKey: equal
+109.3842 	EXP 	unnamed TextStim: autoDraw = False
+109.3842 	EXP 	unnamed TextStim: autoDraw = False
+109.4014 	EXP 	unnamed Polygon: autoDraw = True
+109.6571 	DATA 	Keypress: 4
+109.6928 	EXP 	unnamed Polygon: autoDraw = False
+111.2662 	DATA 	EmulatedKey: equal
+111.3989 	EXP 	unnamed Polygon: autoDraw = False
+111.3989 	EXP 	Trial_FB: text = 'Trial earnings: $0'
+111.3989 	EXP 	Exp_FB: text = 'Total earnings: $5'
+111.3989 	EXP 	Trial_FB: autoDraw = True
+111.3989 	EXP 	Exp_FB: autoDraw = True
+113.2662 	DATA 	EmulatedKey: equal
+113.3889 	EXP 	Trial_FB: autoDraw = False
+113.3889 	EXP 	Exp_FB: autoDraw = False
+113.3889 	EXP 	Trial_FB: autoDraw = False
+113.3889 	EXP 	Exp_FB: autoDraw = False
+113.3889 	EXP 	unnamed TextStim: autoDraw = True
+115.2662 	DATA 	EmulatedKey: equal
+115.3971 	EXP 	unnamed TextStim: autoDraw = False
+115.3971 	EXP 	unnamed TextStim: autoDraw = False
+117.2662 	DATA 	EmulatedKey: equal
+119.2662 	DATA 	EmulatedKey: equal
+121.2662 	DATA 	EmulatedKey: equal
+122.5072 	DATA 	Keypress: 0
+122.5211 	EXP 	window1: mouseVisible = True
