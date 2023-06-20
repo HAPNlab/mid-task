@@ -45,7 +45,7 @@ data_dir = "data" # location of outputs to be generated; includes data for parti
 inst_dir = "text" # location of instructions directory
 inst_file = ["instructions_MID.txt"] # name of instructions files (needs to be .txt)
 study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, in seconds: cue, delay (additional random 0-0.5s duration added within trial), target (actualy display shorter; the value here is the total duration for the trial), feedback, lastfixation
-initial_fix_dur = 8 # added time to make sure homogenicity of magnetic field is reached
+initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
 closing_fix_dur = 4 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
 cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
@@ -56,7 +56,7 @@ MR_settings = {
     'TR': 2.000,     # duration (sec) per whole-brain volume
     'volumes': 110,    # number of whole-brain 3D volumes per scanning run
     'sync': 'equal', # character to use as the sync timing event; assumed to come at start of a volume
-    'skip': 2,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
+    'skip': 6,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
     'sound': False    # in test mode: play a tone as a reminder of scanner noise
     }
 # fmri = 0 # here only for QA purpose
