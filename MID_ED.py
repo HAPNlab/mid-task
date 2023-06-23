@@ -234,7 +234,7 @@ instructFinish = visual.TextStim(win, text="You have reached the end of the inst
                                      height=fontH, color=textCol, pos=[0, 0], wrapWidth=wrapW)    
 
 # Initialize components for task transitions
-wait = visual.TextStim(win, pos=[0, 0], text="The task will begin momentarily. Get ready...", height=fontH, color=textCol)
+wait = visual.TextStim(win, pos=[0, 0], text="The task will begin momentarily. Get ready...", height=fontH, color=textCol, wrapWidth=wrapW)
 wait_str = "The task will begin momentarily. Get ready..."
 endf = visual.TextStim(win, pos=[0, 0], text="Thank you. This part of the experiment is now complete. Please call the experimenter.",wrapWidth=wrapW, height=fontH, color=textCol)                                     
 
