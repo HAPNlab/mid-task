@@ -48,7 +48,7 @@ study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, 
 initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
 closing_fix_dur = 4 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
-cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
+cue_dict = {"+$5": 128, "-$5": 4, "$0": 6, "+$1": 128, "-$1": 4} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
 
 # settings for fMRI emulation:
@@ -542,19 +542,22 @@ while trial_counter < len(stimuli):
     nominalTime += study_times[3]
     
     # וupdate trial components
-    if ThisResp and CueType=='+$5': # if it was a rewarded trial and a response was given
-        Tot_Earn += 5
-        newText = 'Trial earnings: +$5'
-        trials.addOtherData('Trial.rewardType', '+5')
-    elif not ThisResp and CueType=='-$5':
-        Tot_Earn -= 5
-        newText = 'Trial loss: -$5'
-        trials.addOtherData('Trial.rewardType', '-5')
+    if ThisResp and CueType[0]=='+': # if it was a reward trial and hit response
+        Tot_Earn += int(CueType[-1])
+        newText = 'Trial earnings: ' + CueType
+        trials.addOtherData('Trial.rewardType', CueType)
+    elif not ThisResp and CueType[0]=='-': # if it was a loss trial and miss response
+        Tot_Earn -= int(CueType[-1])
+        newText = 'Trial loss: ' + CueType
+        trials.addOtherData('Trial.rewardType', CueType)
     else:    
         newText = 'Trial earnings: $0'
         trials.addOtherData('Trial.rewardType', '0')
     Trial_FB.setText(newText)
-    newText = 'Total earnings: $' + str(Tot_Earn)
+    if Tot_Earn < 0:
+        newText = 'Total earnings: -$' + str(abs(Tot_Earn))
+    else: 
+        newText = 'Total earnings: $' + str(Tot_Earn)
     Exp_FB.setText(newText)
         
     # add to be presented stimuli to output
