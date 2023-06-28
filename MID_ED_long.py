@@ -242,7 +242,7 @@ endf = visual.TextStim(win, pos=[0, 0], text="Thank you. This part of the experi
 Cue = visual.Polygon(win, radius=0.2, pos=(0, 0))
 CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
 CueClock = core.Clock()
-Cue_trials_template = _thisDir + os.sep + "MID" + task + "_trials.csv"
+Cue_trials_template = _thisDir + os.sep + "MID" + task + "_long_trials.csv"
 
 # Initialize components for Routine "Target"
 TargetClock = core.Clock()
