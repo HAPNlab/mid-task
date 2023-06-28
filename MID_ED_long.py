@@ -6,7 +6,7 @@ Monetary incentive delay task. Participants attend a circle (+$), diamond (-$) o
 Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance. 
 Responding in time for a reward cues yields a monetary gain; responding in time to a no-reward cue does nothing.
 
-Current version: two tasks (MID1 or MID2) each with 31-32 trials total.  
+Current version: two tasks (MID1 or MID2) each with 105 trials total.  
 WRITTEN FOR fMRI - affects the beginning and the end of the task.
 
 Originally written for PsychoPy v 1.84.2
@@ -40,7 +40,7 @@ import sys  # to get file system encoding
 
 ## setting up some user-defined variables
 
-expName = "MID"
+expName = "MID-long"
 data_dir = "data" # location of outputs to be generated; includes data for participants as well as trial selection and trial presentation sequence
 inst_dir = "text" # location of instructions directory
 inst_file = ["instructions_MID.txt"] # name of instructions files (needs to be .txt)
@@ -80,7 +80,7 @@ def initialization(expName):
     else:
         fmri = False
     task = expInfo['Task number (1/2/practice)']
-    expName = expName + task
+    expName = expName + '-' + task
     return(expInfo,expName,sn,fmri,task)
 
 

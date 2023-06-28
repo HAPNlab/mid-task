@@ -2,7 +2,7 @@
 """
 MID.py
 
-Monetary incentive delay task. Participants attend a circle (+$), diamond (-$) or hexagon ($0), and are required to respond to a subsequently presented white triangle while it is presented.
+Monetary incentive delay task. Participants attend a circle (+$5), diamond (-$5) or hexagon ($0), and are required to respond to a subsequently presented white triangle while it is presented.
 Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance. 
 Responding in time for a reward cues yields a monetary gain; responding in time to a no-reward cue does nothing.
 
@@ -48,7 +48,7 @@ study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, 
 initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
 closing_fix_dur = 4 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
-cue_dict = {"+$5": 128, "-$5": 4, "$0": 6, "+$1": 128, "-$1": 4} # assign cue shapes (circle, square, hexagon) to cue types
+cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
 
 # settings for fMRI emulation:
@@ -80,7 +80,7 @@ def initialization(expName):
     else:
         fmri = False
     task = expInfo['Task number (1/2/practice)']
-    expName = expName + task
+    expName = expName + '-' + task
     return(expInfo,expName,sn,fmri,task)
 
 
