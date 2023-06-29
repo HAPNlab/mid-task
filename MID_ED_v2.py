@@ -37,6 +37,9 @@ import pyglet
 import csv
 import os  # handy system and path functions
 import sys  # to get file system encoding
+from time import sleep
+from mcculw import ul
+from mcculw.device_info import DaqDeviceInfo
 
 ## setting up some user-defined variables
 
@@ -50,6 +53,7 @@ closing_fix_dur = 4 # added time to make sure haemodynamic responses of the last
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
 cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
+board_num = 0 # desired board number configured with Instacal
 
 # settings for fMRI emulation:
 MR_settings = {
@@ -279,7 +283,14 @@ event.clearEvents(eventType='keyboard')
 if fmri:
     wait.draw()
     win.flip()
-    event.waitKeys(keyList=['equal'])
+    #event.waitKeys(keyList=['equal'])
+    # get the current counter value
+    ctr_info = DaqDeviceInfo(board_num).get_ctr_info()
+    counter_num = ctr_info.chan_info[0].channel_num
+    curr_val = ul.c_in_32(board_num, counter_num)
+    # poll the counter and sleep while its the same as the previous poll
+    while curr_val == ul.c_in_32(board_num, counter_num):
+        sleep(0.001)
 else:
     # launch: operator selects Scan or Test (emulate); see API docuwmentation
     vol = launchScan(win, MR_settings, globalClock=globalClock, wait_msg=wait_str)
@@ -332,7 +343,8 @@ while trial_counter < len(stimuli):
         
     # update component parameters for each repeat
     Choice_Resp = event.BuilderKeyResponse()
-
+    CueType = stimuli.iloc[trial_counter][0] # get cue type from the externally imported stimuli list, based on trial_counter
+    CueAccuracy = stimuli.iloc[trial_counter][1]
     trials.addOtherData('trialtype', CueType) # add cue info to the data file
     trials.addOtherData('trialaccuracy', CueAccuracy)
 

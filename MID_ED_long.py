@@ -21,7 +21,7 @@ User-defined variables: see # setting up some user-defined variables
 
 Adapted from: nivreggev (reggevn@bgu.ac.il)
 
-Last updated: June 14 2023
+Last updated: June 28 2023
 Revised by: edenzdeng
 """
 from __future__ import division
@@ -66,13 +66,13 @@ MR_settings = {
 def initialization(expName):
     """Present initial dialog; initialize some parameters"""
     # Store info about the experiment session
-    expInfo = {u'participant': u'XXX000', u'fMRI? (yes/no)': u'no', u'Task number (1/2/practice)': u'practice', u'Show instructions? (yes/no)': u'yes'}
+    expInfo = {u'Subject ID': u'XXX000', u'fMRI? (yes/no)': u'no', u'Task number (1/2/practice)': u'practice', u'Show instructions? (yes/no)': u'yes'}
     dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
     if dlg.OK == False:
         core.quit()  # user pressed cancel
     expInfo['date'] = data.getDateStr()  # add a simple timestamp
     expInfo['expName'] = expName
-    sn = str(expInfo['participant'])
+    sn = str(expInfo['Subject ID'])
     
     # Check for various experimental handles
     if expInfo['fMRI? (yes/no)'].lower() == 'yes':
@@ -332,8 +332,7 @@ while trial_counter < len(stimuli):
         
     # update component parameters for each repeat
     Choice_Resp = event.BuilderKeyResponse()
-    CueType = stimuli.iloc[trial_counter][0] # get cue type from the externally imported stimuli list, based on trial_counter
-    CueAccuracy = stimuli.iloc[trial_counter][1]
+
     trials.addOtherData('trialtype', CueType) # add cue info to the data file
     trials.addOtherData('trialaccuracy', CueAccuracy)
 
@@ -547,12 +546,6 @@ while trial_counter < len(stimuli):
         Tot_Earn += int(CueType[-1])
         newText = 'Trial outcome: ' + CueType
         trials.addOtherData('rewardType', CueType)
-    elif not ThisResp and CueType[0]=='+': # if it was a reward trial and no hit
-        newText = 'Trial outcome: +$0'
-        trials.addOtherData('rewardType', '+$0')
-    elif ThisResp and CueType[0]=='-': # if it was a loss trial and hit response
-        newText = 'Trial outcome: -$0'
-        trials.addOtherData('rewardType', '-$0')
     elif not ThisResp and CueType[0]=='-': # if it was a loss trial and miss response
         Tot_Earn -= int(CueType[-1])
         newText = 'Trial outcome: ' + CueType
