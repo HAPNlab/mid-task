@@ -88,21 +88,17 @@ def display_inst(instr_part,task,forwardKey,backKey,instructFinish):
     inst = instr_part[task-1]
     while not endOfInstructions:
         if inst[instructLine] == "***AROUSAL SCALE***":
-            RatingScale.color = 'Green'
-            RatingScale.scale = 'AROUSAL'
-            RatingScale.labels = ["Very low", "Moderate", "Very high"]
-            while RatingScale.noResponse:
-                RatingScale.draw()
+            while ArousalScale.noResponse:
+                ArousalScale.draw()
                 RatingInstr.draw()
                 win.flip()
+            instructLine += 1
         elif inst[instructLine] == "***VALENCE SCALE***":
-            RatingScale.markerColor = 'DarkRed'
-            RatingScale.scale = 'VALENCE'
-            RatingScale.labels = ["Very Negative", "Neutral", "Very positive"]
-            while RatingScale.noResponse:
-                RatingScale.draw()
+            while ValenceScale.noResponse:
+                ValenceScale.draw()
                 RatingInstr.draw()
                 win.flip()
+            instructLine += 1
         else:    
             instructPrompt.setText(inst[instructLine])
             instructPrompt.draw()
@@ -173,8 +169,8 @@ expKeys = ["1", "2", "3", "4"]
 endKey = "l"
 
 # Initialize components for Routine "instructions"
-instructFirst = visual.TextStim(win, text="Press 2 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
-instructMove = visual.TextStim(win, text="Press 2 to continue, or 1 to go back.", height=fontH, color=textCol, pos=[0, -yScr/4])
+instructFirst = visual.TextStim(win, text="Press 2 to continue.", height=yScr/35, color=textCol, pos=[0, -yScr/4])
+instructMove = visual.TextStim(win, text="Press 2 to continue, or 1 to go back.", height=yScr/35, color=textCol, pos=[0, -yScr/4])
 
 #import instructions
 instr_part = [[],[],[]]
@@ -201,12 +197,15 @@ instructFinish = visual.TextStim(win, text="You have reached the end of the inst
 endf = visual.TextStim(win, pos=[0, 0], text="Thank you. This part of the experiment is now complete. Please call the experimenter.",wrapWidth=wrapW, height=fontH, color=textCol)                                     
 
 # Initialize cue components 
-Cue = visual.Polygon(win, radius=0.2, pos=(0, 0))
-CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
+Cue = visual.Polygon(win, radius=0.2, pos=(0, 0), fillColor="white")
+CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol, alignHoriz='center')
 
 # Initialize Likert scale components 
-RatingScale = visual.RatingScale(win, low=1, high=7, markerStart=4, leftKeys='1', rightKeys = '2', acceptKeys='3', marker='circle', textColor=textCol, textFont='Arial', noMouse=True)
-RatingInstr = visual.TextStim(win=win, font='Arial', pos=(0, -yScr/4), height=fontH, color=textCol, text="Move < > with FIRST and MIDDLE fingers, then press with RING finger to select")
+ArousalScale = visual.RatingScale(win, low=1, high=7, markerStart=1, leftKeys='1', rightKeys = '2', acceptKeys='3', marker='circle', markerColor='DarkGreen',
+                                  textColor=textCol, textFont='Arial', noMouse=True, showValue=False, scale='AROUSAL', labels=["Very low", "Moderate", "Very high"])
+ValenceScale = visual.RatingScale(win, low=1, high=7, markerStart=4, leftKeys='1', rightKeys = '2', acceptKeys='3', marker='circle', markerColor='DarkRed',
+                                  textColor=textCol, textFont='Arial', noMouse=True, showValue=False, scale='VALENCE', labels=["Very Negative", "Neutral", "Very positive"])
+RatingInstr = visual.TextStim(win=win, font='Arial', pos=(0, -yScr/6), height=fontH, color=textCol, text="Move < > with FIRST and MIDDLE fingers, then press with RING finger to select")
 globalClock = core.Clock()
 
 ## Displaying Instructions
