@@ -328,13 +328,14 @@ while trial_counter < len(stimuli):
     intensity = next(trials)
 
     trials.addOtherData('time.onset', globalClock.getTime()) # add trial onset time to the data file
-    trials.addOtherData('true_trialN', trial_counter)
+    trials.addOtherData('true_trialN', trial_counter+1)
         
     # update component parameters for each repeat
     Choice_Resp = event.BuilderKeyResponse()
 
-    trials.addOtherData('trialtype', CueType) # add cue info to the data file
-    trials.addOtherData('trialaccuracy', CueAccuracy)
+    # add cue info to the data file
+    trials.addOtherData('trialtype', cue_dict.keys().index(CueType)*len(accuracies) + accuracies.index(CueAccuracy)+1)
+    trials.addOtherData('cue', "{} ({}% accuracy)".format(CueType, CueAccuracy))
 
     Cue.edges = cue_dict[CueType]
     CueLabel.text = "{}\n({}% accuracy)".format(CueType, CueAccuracy)

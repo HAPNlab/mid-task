@@ -6,7 +6,7 @@ Monetary incentive delay task. Participants attend a circle (+$5), diamond (-$5)
 Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance. 
 Responding in time for a reward cues yields a monetary gain; responding in time to a no-reward cue does nothing.
 
-Current version: two tasks (MID1 or MID2) each with 31-32 trials total.  
+Current version: two tasks (MID1 or MID2) each with 63 trials.  
 WRITTEN FOR fMRI - affects the beginning and the end of the task.
 
 Originally written for PsychoPy v 1.84.2
@@ -63,7 +63,6 @@ MR_settings = {
     'skip': 6,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
     'sound': False    # in test mode: play a tone as a reminder of scanner noise
     }
-# fmri = 0 # here only for QA purpose
 
 ## defining some initialization functions
 
@@ -86,7 +85,6 @@ def initialization(expName):
     task = expInfo['Task number (1/2/practice)']
     expName = expName + '-' + task
     return(expInfo,expName,sn,fmri,task)
-
 
 def make_screen():
     """Generates screen variables"""
@@ -265,6 +263,11 @@ routineTimer = core.CountdownTimer()  # to track time remaining of each (non-sli
 # create content to be displayed
 stimuli = pd.read_csv(Cue_trials_template) # read template stimuli
 
+# generate vector to determine which trials have extra TR
+tr_vec = np.ones(len(stimuli)) # 31 trials
+tr_vec[:len(stimuli)//2] = 2 # 32 trials
+np.random.shuffle(tr_vec)
+
 ## Displaying Instructions
 
 # keyboard checking is just starting
@@ -302,6 +305,15 @@ else:
 trial_counter = 0
 Tot_Earn = 0
 
+# set up function to add TR info to csv
+def addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy):
+    trials.addOtherData('time.onset', time_start)
+    trials.addOtherData('time.trial', globalClock.getTime()-time_start)
+    trials.addOtherData('true_trialN', trial_counter)
+    trials.addOtherData('TR', curr_TR-TR_start)
+    trials.addOtherData('trialtype', trialtype)
+    trials.addOtherData('cue', "{} ({}% accuracy)".format(CueType, CueAccuracy))
+
 # create the staircase handler to adjust for individual threshold (stairs defined in units of screen frames; actual minimum presentation duration is determined by the min_target_dur parameter, the staircase procedure can only add frame rates to that minimum value)
 high = data.QuestHandler(startVal=8.1, startValSd=4, pThreshold=accuracies[0]/100, name='high', gamma=0.01,
                          nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[0]]), minVal=0, maxVal=22.2)
@@ -329,6 +341,7 @@ while trial_counter < len(stimuli):
     # Choose the correct staircase handler based on desired accuracy level
     CueType = stimuli.iloc[trial_counter][0] # get cue type from the externally imported stimuli list, based on trial_counter
     CueAccuracy = stimuli.iloc[trial_counter][1]
+    trialtype = list(cue_dict.keys()).index(CueType)*len(accuracies) + accuracies.index(CueAccuracy)+1
     if CueAccuracy == accuracies[0]:
         trials = high
     elif CueAccuracy == accuracies[1]:
@@ -338,15 +351,16 @@ while trial_counter < len(stimuli):
     currentLoop = trials
     intensity = next(trials)
 
-    trials.addOtherData('time.onset', globalClock.getTime()) # add trial onset time to the data file
-    trials.addOtherData('true_trialN', trial_counter)
-        
+    # get the starting TR
+    if fmri:
+        TR_start = ul.c_in_32(board_num, counter_num)
+    else:
+        TR_start = event.getKeys().count('equal')
+    curr_TR = TR_start
+    time_start = globalClock.getTime()
+
     # update component parameters for each repeat
     Choice_Resp = event.BuilderKeyResponse()
-    CueType = stimuli.iloc[trial_counter][0] # get cue type from the externally imported stimuli list, based on trial_counter
-    CueAccuracy = stimuli.iloc[trial_counter][1]
-    trials.addOtherData('trialtype', CueType) # add cue info to the data file
-    trials.addOtherData('trialaccuracy', CueAccuracy)
 
     Cue.edges = cue_dict[CueType]
     CueLabel.text = "{}\n({}% accuracy)".format(CueType, CueAccuracy)
@@ -368,6 +382,16 @@ while trial_counter < len(stimuli):
             thisComponent.status = NOT_STARTED
     
     # -------Start Routine "Cue"-------
+    # add new TR to data file
+    if fmri:
+        if ul.c_in_32(board_num, counter_num) != curr_TR:
+            curr_TR = ul.c_in_32(board_num, counter_num)
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    else:
+        if event.getKeys().count('equal') != curr_TR:
+            curr_TR = event.getKeys().count('equal')
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = CueClock.getTime()
@@ -421,6 +445,18 @@ while trial_counter < len(stimuli):
             thisComponent.status = NOT_STARTED
     
     # -------Start Routine "fix"-------
+    # add new TR to data file
+    if fmri:
+        if ul.c_in_32(board_num, counter_num) != curr_TR:
+            curr_TR = ul.c_in_32(board_num, counter_num)
+            thisExp.nextEntry()
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    else:
+        if event.getKeys().count('equal') != curr_TR:
+            curr_TR = event.getKeys().count('equal')
+            thisExp.nextEntry()
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+
     while continueRoutine and routineTimer.getTime() > 0:
         
         # get current time
@@ -481,6 +517,18 @@ while trial_counter < len(stimuli):
     trials.addOtherData('jitter', jitter)
 
     # -------Start Routine "Target"-------
+    # add new TR to data file
+    if fmri:
+        if ul.c_in_32(board_num, counter_num) != curr_TR:
+            curr_TR = ul.c_in_32(board_num, counter_num)
+            thisExp.nextEntry()
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    else:
+        if event.getKeys().count('equal') != curr_TR:
+            curr_TR = event.getKeys().count('equal')
+            thisExp.nextEntry()
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = TargetClock.getTime()
@@ -577,6 +625,18 @@ while trial_counter < len(stimuli):
             thisComponent.status = NOT_STARTED
 
     # -------Start Routine "Feedback"-------
+    # add new TR to data file
+    if fmri:
+        if ul.c_in_32(board_num, counter_num) != curr_TR:
+            curr_TR = ul.c_in_32(board_num, counter_num)
+            thisExp.nextEntry()
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    else:
+        if event.getKeys().count('equal') != curr_TR:
+            curr_TR = event.getKeys().count('equal')
+            thisExp.nextEntry()
+            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = FeedbackClock.getTime()
@@ -613,69 +673,80 @@ while trial_counter < len(stimuli):
             thisComponent.setAutoDraw(False)
 
     # ------Prepare to start Routine "fix"-------
-    t = 0
-    FixClock.reset()  # clock    
-    # reset the non-slip timer for next routine
-    routineTimer.reset()   
-    continueRoutine = True
-    
-    # set fixation time duration 
-    tend = globalClock.getTime() #CueClock.getTime() # actual ending time for trial presentation
-    tcor = tend-nominalTime # difference between actual elapsed time and pre-allocated time
-    fix_add = study_times[4]
-    fix_time = fix_add - tcor # calculate fix time to correct for time drifts
-    nominalTime += study_times[4]
-    routineTimer.add(fix_time)
-    
-    # keep track of which components have finished
-    fixComponents = [fix]
-    for thisComponent in fixComponents:
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    
-    # -------Start Routine "fix"-------
-    while continueRoutine and routineTimer.getTime() > 0:
+    for i in range(0, int(tr_vec[trial_counter-1])):
+        t = 0
+        FixClock.reset()  # clock    
+        # reset the non-slip timer for next routine
+        routineTimer.reset()   
+        continueRoutine = True
         
-        # get current time
-        t = FixClock.getTime()
-            
-        # fix updates
-        if t >= 0.0 and fix.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            fix.tStart = t
-            fix.setAutoDraw(True)
-        frameRemains = 0.0 + fix_time - win.monitorFramePeriod * 0.75  # most of one frame period left
-        if fix.status == STARTED and t >= frameRemains:
-            fix.setAutoDraw(False)
+        # set fixation time duration 
+        tend = globalClock.getTime() #CueClock.getTime() # actual ending time for trial presentation
+        tcor = tend-nominalTime # difference between actual elapsed time and pre-allocated time
+        fix_add = study_times[4]
+        fix_time = fix_add - tcor # calculate fix time to correct for time drifts
+        nominalTime += study_times[4]
+        routineTimer.add(fix_time)
         
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
+        # keep track of which components have finished
+        fixComponents = [fix]
         for thisComponent in fixComponents:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
         
-        # check for quit (the Esc key)
-        if endExpNow or event.getKeys(keyList=[endKey]):
-            core.quit()
+        # -------Start Routine "fix"-------
+        # add new TR to data file
+        if fmri:
+            if ul.c_in_32(board_num, counter_num) != curr_TR:
+                curr_TR = ul.c_in_32(board_num, counter_num)
+                thisExp.nextEntry()
+                addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        else:
+            if event.getKeys().count('equal') != curr_TR:
+                curr_TR = event.getKeys().count('equal')
+                thisExp.nextEntry()
+                addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+
+        while continueRoutine and routineTimer.getTime() > 0:
+            
+            # get current time
+            t = FixClock.getTime()
+                
+            # fix updates
+            if t >= 0.0 and fix.status == NOT_STARTED:
+                # keep track of start time/frame for later
+                fix.tStart = t
+                fix.setAutoDraw(True)
+            frameRemains = 0.0 + fix_time - win.monitorFramePeriod * 0.75  # most of one frame period left
+            if fix.status == STARTED and t >= frameRemains:
+                fix.setAutoDraw(False)
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in fixComponents:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # check for quit (the Esc key)
+            if endExpNow or event.getKeys(keyList=[endKey]):
+                core.quit()
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
         
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # -------Ending Routine "fix"-------
-    for thisComponent in fixComponents:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)    
+        # -------Ending Routine "fix"-------
+        for thisComponent in fixComponents:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)    
     
     # add data to log file
-    trials.addOtherData('time.global', globalClock.getTime())      
-    trials.addOtherData('time.nominal', nominalTime)      
-    trials.addOtherData('time.trial', CueClock.getTime())
-    trials.addOtherData('time.plannedfixlength', fix_time)
-    trials.addOtherData('time.actualfixlength', globalClock.getTime() - tend)
+    trials.addOtherData('time.end.global', globalClock.getTime())      
+    trials.addOtherData('time.end.nominal', nominalTime)      
+    trials.addOtherData('time.trial.total', CueClock.getTime())
                 
     # advance to next trial/line in logFile
     thisExp.nextEntry()

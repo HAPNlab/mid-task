@@ -79,7 +79,7 @@ def start_datafiles(_thisDir, expName, expInfo, data_dir, sn):
     filename = _thisDir + os.sep + data_dir + os.sep + fname
     return(filename)
     
-def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
+def display_inst(instr_part,task,forwardKey,backKey,instructFinish):
     """ display instructions for a specific experimental task; input includes: 
     instr_part: instructions extracted from text
     task: task serial number (in actual serial order, starting at 1; convetred to Python's representation, where 1 is 0, in the function"""
@@ -87,7 +87,7 @@ def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
     instructLine = 0
     inst = instr_part[task-1]
     while not endOfInstructions:
-        if inst[instructLine] == "AROUSAL RATING SCALE":
+        if inst[instructLine] == "***AROUSAL SCALE***":
             RatingScale.color = 'Green'
             RatingScale.scale = 'AROUSAL'
             RatingScale.labels = ["Very low", "Moderate", "Very high"]
@@ -95,7 +95,7 @@ def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
                 RatingScale.draw()
                 RatingInstr.draw()
                 win.flip()
-        elif inst[instructLine] == "VALENCE RATING SCALE":
+        elif inst[instructLine] == "***VALENCE SCALE***":
             RatingScale.markerColor = 'DarkRed'
             RatingScale.scale = 'VALENCE'
             RatingScale.labels = ["Very Negative", "Neutral", "Very positive"]
@@ -125,7 +125,7 @@ def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
         # check for quit:
     instructFinish.draw()
     win.flip()
-    event.waitKeys(keyList=[startKey])
+    event.waitKeys(keyList=[expKeys])
     
 ### START SET UP OF STUDY 
 
@@ -167,15 +167,14 @@ else:
 random.seed(sn)
 
 # determine accepted inputs 
-forwardKey = "9"
-backKey = "8"
-startKey = "0"
-expKeys = ["1", "2", "3", "4", "5", "6"] 
+forwardKey = "2"
+backKey = "1"
+expKeys = ["1", "2", "3", "4"] 
 endKey = "l"
 
 # Initialize components for Routine "instructions"
-instructFirst = visual.TextStim(win, text="Press 9 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
-instructMove = visual.TextStim(win, text="Press 9 to continue, or 8 to go back.", height=fontH, color=textCol, pos=[0, -yScr/4])
+instructFirst = visual.TextStim(win, text="Press 2 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
+instructMove = visual.TextStim(win, text="Press 2 to continue, or 1 to go back.", height=fontH, color=textCol, pos=[0, -yScr/4])
 
 #import instructions
 instr_part = [[],[],[]]
@@ -195,7 +194,7 @@ FixClock = core.Clock()
 
 # Initialize components for instructions
 instructPrompt = visual.TextStim(win=win, font='Arial', pos=(0, yScr/10), height=fontH, wrapWidth=wrapW, color=textCol);
-instructFinish = visual.TextStim(win, text="You have reached the end of the instructions. When you are ready to begin the task, place your fingers on the keys and notify the experimenter.",
+instructFinish = visual.TextStim(win, text="You have reached the end of the instructions. When you are ready to begin the task, press any key.",
                                      height=fontH, color=textCol, pos=[0, 0], wrapWidth=wrapW)    
 
 # Initialize components for task transitions
@@ -206,7 +205,7 @@ Cue = visual.Polygon(win, radius=0.2, pos=(0, 0))
 CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
 
 # Initialize Likert scale components 
-RatingScale = visual.RatingScale(win, low=1, high=7, markerStart=4, leftKeys='8', rightKeys = '9', acceptKeys='0', marker='circle', textColor=textCol, textFont='Arial', noMouse=True)
+RatingScale = visual.RatingScale(win, low=1, high=7, markerStart=4, leftKeys='1', rightKeys = '2', acceptKeys='3', marker='circle', textColor=textCol, textFont='Arial', noMouse=True)
 RatingInstr = visual.TextStim(win=win, font='Arial', pos=(0, -yScr/4), height=fontH, color=textCol, text="Move < > with FIRST and MIDDLE fingers, then press with RING finger to select")
 globalClock = core.Clock()
 
@@ -216,7 +215,7 @@ globalClock = core.Clock()
 event.clearEvents(eventType='keyboard')    
 event.Mouse(visible=False)  # hide mouse cursor
 if show_instr:
-    display_inst(instr_part,1,forwardKey,backKey,startKey,instructFinish)
+    display_inst(instr_part,1,forwardKey,backKey,instructFinish)
  
 ### START EXPERIMENTAL LOOP
 
