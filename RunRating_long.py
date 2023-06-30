@@ -18,11 +18,11 @@ import sys  # to get file system encoding
 
 ## setting up some user-defined variables
 
-expName = "RunRating"
+expName = "RunRating-long"
 data_dir = "data" # location of outputs to be generated; includes data for participants as well as trial selection and trial presentation sequence
 inst_dir = "text" # location of instructions directory
 inst_file = ["instr_rating.txt", "instr_valence.txt", "instr_arousal.txt", "instr_description.txt"] # name of instructions files (needs to be .txt)
-cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
+cue_dict = {"+$5": 128, "-$5": 4, "$0": 6, "+$1": 128, "-$1": 4} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
 inter_trial_time = 0.5 # time between cues
 

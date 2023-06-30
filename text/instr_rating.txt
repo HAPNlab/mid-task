@@ -1,0 +1,6 @@
+You will now see a selection of the cues from the task you just performed. Each cue will be accompanied by a rating scale.
+ 
+The title above each scale indicates which rating you are being asked to make.  Please pay attention as to which of the following 2 ratings you will be asked to make:
+ 
+The VALENCE scale
+The AROUSAL scale

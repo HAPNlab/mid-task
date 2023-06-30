@@ -1,0 +1,266 @@
+5.9225 	WARNING 	Monitor specification not found. Creating a temporary one...
+7.0348 	WARNING 	Couldn't measure a consistent frame rate!
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+7.0359 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0.2, 0.2, 0.2]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x7fccf235ba30>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x7fcc7130f1f0>, multiSample=False, name='window1', numSamples=2, pos=[378.0, 245.5], screen=0, size=array([3024, 1964]), stencilBits=0, stereo=False, units='height', useFBO=False, useRetina=True, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+7.0362 	EXP 	window1: mouseVisible = True
+7.0362 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+7.0363 	EXP 	window1: recordFrameIntervals = False
+7.1187 	EXP 	window1: recordFrameIntervals = True
+7.4149 	WARNING 	t of last frame was 21.37ms (=1/46)
+7.9514 	WARNING 	Couldn't measure a consistent frame rate!
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+8.0055 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.02857142857142857, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([ 0.        , -0.33333333]), rgb=UNKNOWN, text='Press any button to continue.', units='height', win=Window(...), wrapWidth=1)
+8.0098 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.06, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+8.0173 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0. , 0.1]), rgb=UNKNOWN, text='Hello World', units='height', win=Window(...), wrapWidth=1.0264765784114054)
+8.0311 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1.0264765784114054)
+8.0355 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1.0264765784114054)
+8.0396 	EXP 	Created unnamed Polygon = Polygon(__class__=<class 'psychopy.visual.polygon.Polygon'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=array([0, 0, 0]), lineWidth=1.5, name='unnamed Polygon', opacity=0.5, ori=0.0, pos=array([0.        , 0.16666667]), size=array([1., 1.]), units='height', vertices=ndarray(...), win=Window(...))
+8.0448 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([0.        , 0.16666667]), rgb=UNKNOWN, text='Hello World', units='height', win=Window(...), wrapWidth=1)
+8.0533 	EXP 	window1: mouseVisible = False
+8.0718 	EXP 	Created unnamed RatingScale = RatingScale(__class__=type(...), acceptKeys=['3'], acceptPreText=UNKNOWN, acceptSize=UNKNOWN, acceptText=UNKNOWN, autoLog=True, choices=False, colorSpace='rgb', depth=0, disappear=False, flipVert=False, high=7, kwargs=UNKNOWN, labels=list(...), leftKeys=['1'], lineColor='White', low=1, marker=Circle(...), markerColor='DarkGreen', markerExpansion=UNKNOWN, markerStart=1.0, maxTime=0.0, minTime=0.4, mouseOnly=False, name='unnamed RatingScale', noMouse=True, pos=[0.0, -0.2857142857142857], precision=1, respKeys=['1', '2', '3', '4', '5', '6', '7'], rightKeys=['2'], scale='AROUSAL', self=UNKNOWN, showAccept=False, showValue=False, singleClick=False, size=0.6, skipKeys=['tab'], stretch=1.0, textColor='black', textFont='Arial', textSize=0.12, tickHeight=1.0, tickMarks=6.0, win=Window(...))
+8.0719 	EXP 	window1: mouseVisible = False
+8.0860 	EXP 	Created unnamed RatingScale = RatingScale(__class__=type(...), acceptKeys=['3'], acceptPreText=UNKNOWN, acceptSize=UNKNOWN, acceptText=UNKNOWN, autoLog=True, choices=False, colorSpace='rgb', depth=0, disappear=False, flipVert=False, high=7, kwargs=UNKNOWN, labels=list(...), leftKeys=['1'], lineColor='White', low=1, marker=Circle(...), markerColor='DarkRed', markerExpansion=UNKNOWN, markerStart=4.0, maxTime=0.0, minTime=0.4, mouseOnly=False, name='unnamed RatingScale', noMouse=True, pos=[0.0, -0.2857142857142857], precision=1, respKeys=['1', '2', '3', '4', '5', '6', '7'], rightKeys=['2'], scale='VALENCE', self=UNKNOWN, showAccept=False, showValue=False, singleClick=False, size=0.6, skipKeys=['tab'], stretch=1.0, textColor='black', textFont='Arial', textSize=0.12, tickHeight=1.0, tickMarks=6.0, win=Window(...))
+8.0958 	EXP 	Created unnamed TextStim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1, -1, -1]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.03, italic=False, languageStyle='LTR', name='unnamed TextStim', opacity=1.0, ori=0.0, pos=array([ 0.        , -0.33333333]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+8.0960 	EXP 	window1: mouseVisible = False
+8.1162 	WARNING 	t of last frame was 165.25ms (=1/6)
+8.1162 	EXP 	unnamed RatingScale: flipVert = False
+8.1162 	EXP 	unnamed RatingScale: autoLog = True
+8.1162 	EXP 	unnamed RatingScale: flipVert = False
+8.1162 	EXP 	unnamed RatingScale: autoLog = True
+8.1162 	EXP 	unnamed TextStim: height = 0.03
+8.1162 	EXP 	unnamed TextStim: height = 0.03
+8.1162 	EXP 	unnamed TextStim: height = 0.03
+8.1162 	EXP 	unnamed TextStim: text = 'You will now see a selection of the cues from the task you just performed. Each cue will be accompanied by a rating scale.\n\nThe title above each scale indicates which rating you are being asked to make.  Please pay attention as to which of the following 2 ratings you will be asked to make:\n\nThe VALENCE scale\nThe AROUSAL scale\n'
+8.7242 	DATA 	Keypress: 4
+8.7473 	WARNING 	t of last frame was 631.04ms (=1/1)
+8.7473 	EXP 	unnamed TextStim: height = 0.03
+8.7473 	EXP 	unnamed TextStim: height = 0.03
+8.7473 	EXP 	unnamed TextStim: height = 0.03
+8.7473 	EXP 	unnamed TextStim: text = 'The VALENCE scale measures how positive or negative you are feeling.\n\nAt the far left you would be feeling very negative, that could be unhappy, upset, irritated, frustrated, angry, sad, depressed, or some other negative feeling.\n\nAt the far right you would be feeling very positive: That could be happy, pleased, satisfied, competent, proud, content, delighted, or some other positive feeling.\n\nIn the middle of this scale you would be feeling completely neutral, neither positive or negative.  From the neutral midpoint, the ratings get gradually more negative as you move left, and gradually more positive as you move right.\n\nUse your FIRST finger to move the indicator on the scale towards negative and your MIDDLE finger to move the indicator towards positive. Press the THIRD button to select your rating and advance to the next trial.\n'
+9.1493 	DATA 	Keypress: 4
+9.1545 	WARNING 	t of last frame was 407.27ms (=1/2)
+9.5826 	DATA 	Keypress: 4
+10.9741 	DATA 	Keypress: 3
+10.9747 	DATA 	RatingScale unnamed RatingScale: (key response) rating=4
+10.9749 	DATA 	RatingScale unnamed RatingScale: rating RT=1.825
+10.9749 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (4, 1.825)]
+11.0050 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+11.0050 	EXP 	unnamed TextStim: height = 0.03
+11.0050 	EXP 	unnamed TextStim: height = 0.03
+11.0050 	EXP 	unnamed TextStim: height = 0.03
+11.0050 	EXP 	unnamed TextStim: text = 'The AROUSAL scale measures how aroused you are feeling at a given time.\n\nAt the far right on this scale, you would be feeling very alert, aroused, activated, charged or energized, very physically or mentally aroused.\n\nAt the far left, you would be feeling completely unaroused, slow, still, de-energized, no physical or mental arousal at all.\n\nNotice that this AROUSAL scale is a continuum going from low to high arousal.  The point in the middle of the scale would represent being moderately aroused; a point in between the two extremes.  It does not mean neutral.\n\nUse your MIDDLE finger to move the indicator on the scale towards higher arousal. Press the THIRD button to select your rating and advance to the next trial.\n'
+12.0181 	DATA 	Keypress: 3
+13.0034 	DATA 	Keypress: 3
+13.0038 	DATA 	RatingScale unnamed RatingScale: (key response) rating=1
+13.0039 	DATA 	RatingScale unnamed RatingScale: rating RT=0.986
+13.0039 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (1, 0.986)]
+13.0347 	EXP 	unnamed TextStim: height = 0.03
+13.0347 	EXP 	unnamed TextStim: height = 0.03
+13.0347 	EXP 	unnamed TextStim: height = 0.03
+13.0347 	EXP 	unnamed TextStim: text = "Think about the scales as capturing separate aspects of your how you are feeling.\n\nSo, the arousal scale doesn't tell us whether you are feeling good or bad; it’s capturing more this idea of physical or mental activation.  So, for example you could be feeling very aroused and positive (suppose you were really excited because you had just won a prize) or very aroused and negative (suppose you were really angry because someone had just stolen your parking space).\n\nOn the other hand, you could be feeling really unaroused and positive (if you were relaxing and looking at a beautiful sunset) or really unaroused and negative (if you were feeling down and depressed).\n\nWe want you to report the negative or positive dimension of your feeling on the one scale, and the arousal aspect on the other.\n"
+13.6630 	DATA 	Keypress: 3
+14.4522 	DATA 	Keypress: 3
+14.4526 	EXP 	RatingScale unnamed RatingScale: reset()
+14.4526 	EXP 	RatingScale unnamed RatingScale: reset()
+14.4636 	EXP 	unnamed Polygon: edges = 128
+14.4636 	EXP 	unnamed TextStim: height = 0.04
+14.4636 	EXP 	unnamed TextStim: height = 0.04
+14.4636 	EXP 	unnamed TextStim: height = 0.04
+14.4636 	EXP 	unnamed TextStim: text = '+$5\n(80% accuracy)'
+15.8546 	DATA 	Keypress: 2
+16.2494 	DATA 	Keypress: 2
+16.4442 	DATA 	Keypress: 2
+17.0068 	DATA 	Keypress: 2
+17.5749 	DATA 	Keypress: 2
+17.8462 	DATA 	Keypress: 3
+17.8481 	DATA 	RatingScale unnamed RatingScale: (key response) rating=6
+17.8481 	DATA 	RatingScale unnamed RatingScale: rating RT=3.388
+17.8482 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 1.397), (3, 1.792), (4, 1.987), (5, 2.549), (6, 3.115), (6, 3.388)]
+18.7472 	DATA 	Keypress: 2
+18.9562 	DATA 	Keypress: 2
+19.1032 	DATA 	Keypress: 2
+19.4414 	DATA 	Keypress: 3
+19.4440 	DATA 	RatingScale unnamed RatingScale: (key response) rating=7
+19.4440 	DATA 	RatingScale unnamed RatingScale: rating RT=1.594
+19.4441 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (5, 0.899), (6, 1.106), (7, 1.265), (7, 1.594)]
+19.9558 	EXP 	RatingScale unnamed RatingScale: reset()
+19.9561 	EXP 	RatingScale unnamed RatingScale: reset()
+19.9690 	EXP 	unnamed Polygon: edges = 128
+19.9690 	EXP 	unnamed TextStim: height = 0.04
+19.9690 	EXP 	unnamed TextStim: height = 0.04
+19.9690 	EXP 	unnamed TextStim: height = 0.04
+19.9690 	EXP 	unnamed TextStim: text = '+$5\n(50% accuracy)'
+20.3366 	DATA 	Keypress: 2
+20.5540 	DATA 	Keypress: 2
+20.8560 	DATA 	Keypress: 2
+21.0400 	DATA 	Keypress: 2
+21.3510 	DATA 	Keypress: 2
+21.8850 	DATA 	Keypress: 2
+22.1735 	DATA 	Keypress: 3
+22.1760 	DATA 	RatingScale unnamed RatingScale: (key response) rating=6
+22.1760 	DATA 	RatingScale unnamed RatingScale: rating RT=2.212
+22.1760 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 0.592), (3, 0.895), (4, 1.078), (5, 1.39), (6, 1.924), (6, 2.212)]
+22.9413 	DATA 	Keypress: 2
+23.1991 	DATA 	Keypress: 2
+23.3759 	DATA 	Keypress: 2
+24.5729 	DATA 	Keypress: 3
+24.5753 	DATA 	RatingScale unnamed RatingScale: (key response) rating=7
+24.5753 	DATA 	RatingScale unnamed RatingScale: rating RT=2.397
+24.5753 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (5, 0.765), (6, 1.023), (7, 1.2), (7, 2.397)]
+25.0950 	EXP 	RatingScale unnamed RatingScale: reset()
+25.0953 	EXP 	RatingScale unnamed RatingScale: reset()
+25.1104 	EXP 	unnamed Polygon: edges = 128
+25.1104 	EXP 	unnamed TextStim: height = 0.04
+25.1104 	EXP 	unnamed TextStim: height = 0.04
+25.1104 	EXP 	unnamed TextStim: height = 0.04
+25.1104 	EXP 	unnamed TextStim: text = '+$5\n(20% accuracy)'
+25.5241 	DATA 	Keypress: 2
+25.6972 	DATA 	Keypress: 2
+25.8865 	DATA 	Keypress: 2
+26.0663 	DATA 	Keypress: 2
+26.8197 	DATA 	Keypress: 2
+27.6460 	DATA 	Keypress: 3
+27.6486 	DATA 	RatingScale unnamed RatingScale: (key response) rating=6
+27.6486 	DATA 	RatingScale unnamed RatingScale: rating RT=2.544
+27.6486 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 0.421), (3, 0.593), (4, 0.782), (5, 0.964), (6, 1.717), (6, 2.544)]
+28.2038 	DATA 	Keypress: 2
+30.6707 	DATA 	Keypress: 2
+30.9306 	DATA 	Keypress: 3
+30.9334 	DATA 	RatingScale unnamed RatingScale: (key response) rating=6
+30.9334 	DATA 	RatingScale unnamed RatingScale: rating RT=3.282
+30.9334 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (5, 0.553), (6, 3.02), (6, 3.282)]
+31.4480 	EXP 	RatingScale unnamed RatingScale: reset()
+31.4483 	EXP 	RatingScale unnamed RatingScale: reset()
+31.4616 	EXP 	unnamed Polygon: edges = 4
+31.4616 	EXP 	unnamed TextStim: height = 0.04
+31.4616 	EXP 	unnamed TextStim: height = 0.04
+31.4616 	EXP 	unnamed TextStim: height = 0.04
+31.4616 	EXP 	unnamed TextStim: text = '-$5\n(80% accuracy)'
+33.0946 	DATA 	Keypress: 2
+33.3167 	DATA 	Keypress: 2
+33.4835 	DATA 	Keypress: 2
+33.6645 	DATA 	Keypress: 2
+33.8305 	DATA 	Keypress: 2
+34.6302 	DATA 	Keypress: 3
+34.6330 	DATA 	RatingScale unnamed RatingScale: (key response) rating=6
+34.6330 	DATA 	RatingScale unnamed RatingScale: rating RT=3.177
+34.6330 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 1.639), (3, 1.864), (4, 2.029), (5, 2.21), (6, 2.376), (6, 3.177)]
+36.2921 	DATA 	Keypress: 1
+36.8628 	DATA 	Keypress: 1
+37.2792 	DATA 	Keypress: 3
+37.2797 	DATA 	RatingScale unnamed RatingScale: (key response) rating=2
+37.2798 	DATA 	RatingScale unnamed RatingScale: rating RT=2.644
+37.2798 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (3, 1.661), (2, 2.227), (2, 2.644)]
+37.7835 	EXP 	RatingScale unnamed RatingScale: reset()
+37.7838 	EXP 	RatingScale unnamed RatingScale: reset()
+37.7956 	EXP 	unnamed Polygon: edges = 4
+37.7956 	EXP 	unnamed TextStim: height = 0.04
+37.7956 	EXP 	unnamed TextStim: height = 0.04
+37.7956 	EXP 	unnamed TextStim: height = 0.04
+37.7956 	EXP 	unnamed TextStim: text = '-$5\n(50% accuracy)'
+38.0597 	DATA 	Keypress: 2
+38.2636 	DATA 	Keypress: 2
+38.4297 	DATA 	Keypress: 2
+38.6857 	DATA 	Keypress: 2
+38.8613 	DATA 	Keypress: 2
+39.0176 	DATA 	Keypress: 2
+39.2992 	DATA 	Keypress: 3
+39.3017 	DATA 	RatingScale unnamed RatingScale: (key response) rating=6
+39.3017 	DATA 	RatingScale unnamed RatingScale: rating RT=1.512
+39.3018 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 0.476), (3, 0.642), (4, 0.896), (5, 1.074), (6, 1.23), (6, 1.512)]
+39.7309 	DATA 	Keypress: 1
+40.0629 	DATA 	Keypress: 1
+40.4876 	DATA 	Keypress: 2
+41.1621 	DATA 	Keypress: 1
+41.4344 	DATA 	Keypress: 3
+41.4369 	DATA 	RatingScale unnamed RatingScale: (key response) rating=2
+41.4369 	DATA 	RatingScale unnamed RatingScale: rating RT=2.132
+41.4369 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (3, 0.429), (2, 0.761), (3, 1.183), (2, 1.858), (2, 2.132)]
+41.9429 	EXP 	RatingScale unnamed RatingScale: reset()
+41.9432 	EXP 	RatingScale unnamed RatingScale: reset()
+41.9560 	EXP 	unnamed Polygon: edges = 4
+41.9560 	EXP 	unnamed TextStim: height = 0.04
+41.9560 	EXP 	unnamed TextStim: height = 0.04
+41.9560 	EXP 	unnamed TextStim: height = 0.04
+41.9560 	EXP 	unnamed TextStim: text = '-$5\n(20% accuracy)'
+42.2539 	DATA 	Keypress: 2
+42.4891 	DATA 	Keypress: 2
+42.8658 	DATA 	Keypress: 2
+43.1516 	DATA 	Keypress: 2
+43.4797 	DATA 	Keypress: 2
+44.7662 	DATA 	Keypress: 2
+44.9719 	DATA 	Keypress: 2
+45.2179 	DATA 	Keypress: 3
+45.2200 	DATA 	RatingScale unnamed RatingScale: (key response) rating=7
+45.2200 	DATA 	RatingScale unnamed RatingScale: rating RT=3.270
+45.2200 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 0.541), (3, 0.918), (4, 1.203), (5, 1.532), (6, 2.818), (7, 3.024), (7, 3.27)]
+45.7530 	DATA 	Keypress: 1
+46.1836 	DATA 	Keypress: 1
+46.4505 	DATA 	Keypress: 1
+46.8304 	DATA 	Keypress: 3
+46.8326 	DATA 	RatingScale unnamed RatingScale: (key response) rating=1
+46.8327 	DATA 	RatingScale unnamed RatingScale: rating RT=1.609
+46.8327 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (3, 0.53), (2, 0.962), (1, 1.231), (1, 1.609)]
+47.3462 	EXP 	RatingScale unnamed RatingScale: reset()
+47.3466 	EXP 	RatingScale unnamed RatingScale: reset()
+47.3605 	EXP 	unnamed Polygon: edges = 6
+47.3605 	EXP 	unnamed TextStim: height = 0.04
+47.3605 	EXP 	unnamed TextStim: height = 0.04
+47.3605 	EXP 	unnamed TextStim: height = 0.04
+47.3605 	EXP 	unnamed TextStim: text = '$0\n(80% accuracy)'
+47.6849 	DATA 	Keypress: 2
+47.9630 	DATA 	Keypress: 2
+48.2569 	DATA 	Keypress: 2
+48.5382 	DATA 	Keypress: 2
+50.4669 	DATA 	Keypress: 1
+50.8196 	DATA 	Keypress: 1
+51.3707 	DATA 	Keypress: 2
+51.9001 	DATA 	Keypress: 1
+52.2871 	DATA 	Keypress: 3
+52.2876 	DATA 	RatingScale unnamed RatingScale: (key response) rating=2
+52.2876 	DATA 	RatingScale unnamed RatingScale: rating RT=4.933
+52.2877 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (2, 0.611), (3, 0.905), (4, 1.186), (3, 3.114), (2, 3.465), (3, 4.019), (2, 4.546), (2, 4.933)]
+52.7795 	DATA 	Keypress: 1
+53.0882 	DATA 	Keypress: 1
+53.8574 	DATA 	Keypress: 2
+54.0469 	DATA 	Keypress: 2
+54.4130 	DATA 	Keypress: 3
+54.4156 	DATA 	RatingScale unnamed RatingScale: (key response) rating=4
+54.4156 	DATA 	RatingScale unnamed RatingScale: rating RT=2.123
+54.4156 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (3, 0.488), (2, 0.796), (3, 1.567), (4, 1.757), (4, 2.123)]
+54.9229 	EXP 	RatingScale unnamed RatingScale: reset()
+54.9231 	EXP 	RatingScale unnamed RatingScale: reset()
+54.9323 	EXP 	unnamed Polygon: edges = 6
+54.9323 	EXP 	unnamed TextStim: height = 0.04
+54.9323 	EXP 	unnamed TextStim: height = 0.04
+54.9323 	EXP 	unnamed TextStim: height = 0.04
+54.9323 	EXP 	unnamed TextStim: text = '$0\n(50% accuracy)'
+55.2550 	DATA 	Keypress: 3
+56.5382 	DATA 	Keypress: 3
+56.5405 	DATA 	RatingScale unnamed RatingScale: (key response) rating=1
+56.5405 	DATA 	RatingScale unnamed RatingScale: rating RT=1.613
+56.5406 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (1, 1.613)]
+57.9455 	DATA 	Keypress: 3
+57.9460 	DATA 	RatingScale unnamed RatingScale: (key response) rating=4
+57.9460 	DATA 	RatingScale unnamed RatingScale: rating RT=1.402
+57.9460 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (4, 1.402)]
+58.4573 	EXP 	RatingScale unnamed RatingScale: reset()
+58.4576 	EXP 	RatingScale unnamed RatingScale: reset()
+58.4700 	EXP 	unnamed Polygon: edges = 6
+58.4700 	EXP 	unnamed TextStim: height = 0.04
+58.4700 	EXP 	unnamed TextStim: height = 0.04
+58.4700 	EXP 	unnamed TextStim: height = 0.04
+58.4700 	EXP 	unnamed TextStim: text = '$0\n(20% accuracy)'
+59.7905 	DATA 	Keypress: 3
+59.7933 	DATA 	RatingScale unnamed RatingScale: (key response) rating=1
+59.7933 	DATA 	RatingScale unnamed RatingScale: rating RT=1.329
+59.7933 	DATA 	RatingScale unnamed RatingScale: history=[(1.0, 0.0), (1, 1.329)]
+62.2465 	DATA 	Keypress: 3
+62.2471 	DATA 	RatingScale unnamed RatingScale: (key response) rating=4
+62.2471 	DATA 	RatingScale unnamed RatingScale: rating RT=2.451
+62.2471 	DATA 	RatingScale unnamed RatingScale: history=[(4.0, 0.0), (4, 2.451)]
+62.7906 	EXP 	window1: mouseVisible = True
