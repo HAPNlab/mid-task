@@ -312,6 +312,7 @@ def addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueTy
     trials.addOtherData('time.trial', globalClock.getTime()-time_start)
     trials.addOtherData('true_trialN', trial_counter)
     trials.addOtherData('TR', (curr_TR-TR_start)//scanner_pulse_rate + 1)
+    trials.addOtherData('pulse.ct', curr_TR-TR_start)
     trials.addOtherData('trialtype', trialtype)
     trials.addOtherData('cue', "{} ({}% accuracy)".format(CueType, CueAccuracy))
 
