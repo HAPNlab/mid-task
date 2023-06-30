@@ -49,7 +49,7 @@ inst_dir = "text" # location of instructions directory
 inst_file = ["instructions_MID.txt"] # name of instructions files (needs to be .txt)
 study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, in seconds: cue, delay (additional random 0-0.5s duration added within trial), target (actualy display shorter; the value here is the total duration for the trial), feedback, lastfixation
 initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
-closing_fix_dur = 4 # added time to make sure haemodynamic responses of the last trials are properly modeled 
+closing_fix_dur = 8 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
 cue_dict = {"+$5": 128, "-$5": 4, "$0": 6, "+$1": 128, "-$1": 4} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
@@ -58,9 +58,9 @@ board_num = 0 # desired board number configured with Instacal
 # settings for fMRI emulation:
 MR_settings = {
     'TR': 2.000,     # duration (sec) per whole-brain volume
-    'volumes': 110,    # number of whole-brain 3D volumes per scanning run
+    'volumes': 587,    # number of whole-brain 3D volumes per scanning run
     'sync': 'equal', # character to use as the sync timing event; assumed to come at start of a volume
-    'skip': 6,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
+    'skip': 0,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
     'sound': False    # in test mode: play a tone as a reminder of scanner noise
     }
 
@@ -241,7 +241,7 @@ wait_str = "The task will begin momentarily. Get ready..."
 endf = visual.TextStim(win, pos=[0, 0], text="Thank you. This part of the experiment is now complete. Please call the experimenter.",wrapWidth=wrapW, height=fontH, color=textCol)                                     
 
 # Initialize components for Routine "cue" 
-Cue = visual.Polygon(win, radius=0.2, pos=(0, 0))
+Cue = visual.Polygon(win, radius=0.2, pos=(0, 0), fillColor="white")
 CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
 CueClock = core.Clock()
 Cue_trials_template = _thisDir + os.sep + "MID" + task + "_long_trials.csv"
@@ -355,7 +355,7 @@ while trial_counter < len(stimuli):
     if fmri:
         TR_start = ul.c_in_32(board_num, counter_num)
     else:
-        TR_start = event.getKeys().count('equal')
+        TR_start = 0
     curr_TR = TR_start
     time_start = globalClock.getTime()
         
@@ -388,8 +388,8 @@ while trial_counter < len(stimuli):
             curr_TR = ul.c_in_32(board_num, counter_num)
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
     else:
-        if event.getKeys().count('equal') != curr_TR:
-            curr_TR = event.getKeys().count('equal')
+        if event.getKeys(keyList=['equal']):
+            curr_TR += 1
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
     while continueRoutine and routineTimer.getTime() > 0:
@@ -452,8 +452,8 @@ while trial_counter < len(stimuli):
             thisExp.nextEntry()
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
     else:
-        if event.getKeys().count('equal') != curr_TR:
-            curr_TR = event.getKeys().count('equal')
+        if event.getKeys(keyList=['equal']):
+            curr_TR += 1
             thisExp.nextEntry()
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
@@ -524,8 +524,8 @@ while trial_counter < len(stimuli):
             thisExp.nextEntry()
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
     else:
-        if event.getKeys().count('equal') != curr_TR:
-            curr_TR = event.getKeys().count('equal')
+        if event.getKeys(keyList=['equal']):
+            curr_TR += 1
             thisExp.nextEntry()
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
@@ -632,8 +632,8 @@ while trial_counter < len(stimuli):
             thisExp.nextEntry()
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
     else:
-        if event.getKeys().count('equal') != curr_TR:
-            curr_TR = event.getKeys().count('equal')
+        if event.getKeys(keyList=['equal']):
+            curr_TR += 1
             thisExp.nextEntry()
             addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
@@ -702,8 +702,8 @@ while trial_counter < len(stimuli):
                 thisExp.nextEntry()
                 addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
         else:
-            if event.getKeys().count('equal') != curr_TR:
-                curr_TR = event.getKeys().count('equal')
+            if event.getKeys(keyList=['equal']):
+                curr_TR += 1
                 thisExp.nextEntry()
                 addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
