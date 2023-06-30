@@ -54,13 +54,14 @@ min_target_dur = 0.13 # sets the minimum presentation time for target (in second
 cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
 board_num = 0 # desired board number configured with Instacal
+scanner_pulse_rate = 46 # number of pulses per TR
 
 # settings for fMRI emulation:
 MR_settings = {
     'TR': 2.000,     # duration (sec) per whole-brain volume
     'volumes': 356,    # number of whole-brain 3D volumes per scanning run
     'sync': 'equal', # character to use as the sync timing event; assumed to come at start of a volume
-    'skip': 0,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
+    'skip': 1,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
     'sound': False    # in test mode: play a tone as a reminder of scanner noise
     }
 
@@ -310,7 +311,7 @@ def addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueTy
     trials.addOtherData('time.onset', time_start)
     trials.addOtherData('time.trial', globalClock.getTime()-time_start)
     trials.addOtherData('true_trialN', trial_counter)
-    trials.addOtherData('TR', curr_TR-TR_start)
+    trials.addOtherData('TR', (curr_TR-TR_start)//scanner_pulse_rate + 1)
     trials.addOtherData('trialtype', trialtype)
     trials.addOtherData('cue', "{} ({}% accuracy)".format(CueType, CueAccuracy))
 
@@ -351,14 +352,6 @@ while trial_counter < len(stimuli):
     currentLoop = trials
     intensity = next(trials)
 
-    # get the starting TR
-    if fmri:
-        TR_start = ul.c_in_32(board_num, counter_num)
-    else:
-        TR_start = 0
-    curr_TR = TR_start
-    time_start = globalClock.getTime()
-
     # update component parameters for each repeat
     Choice_Resp = event.BuilderKeyResponse()
 
@@ -374,6 +367,7 @@ while trial_counter < len(stimuli):
     continueRoutine = True
     routineTimer.add(study_times[0]) # set time limit for current phase
     nominalTime += study_times[0] # update nominal time keeper
+    time_start = globalClock.getTime()
     
     # keep track of which components have finished
     CueComponents = [Cue, CueLabel]
@@ -384,13 +378,12 @@ while trial_counter < len(stimuli):
     # -------Start Routine "Cue"-------
     # add new TR to data file
     if fmri:
-        if ul.c_in_32(board_num, counter_num) != curr_TR:
-            curr_TR = ul.c_in_32(board_num, counter_num)
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        curr_TR = ul.c_in_32(board_num, counter_num)
     else:
-        if event.getKeys(keyList=['equal']):
-            curr_TR += 1
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        curr_TR = 0
+        scanner_pulse_rate = 1
+    TR_start = curr_TR
+    addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
     
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time

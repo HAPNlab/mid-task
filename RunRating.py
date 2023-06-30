@@ -169,11 +169,11 @@ expKeys = ["1", "2", "3", "4"]
 endKey = "l"
 
 # Initialize components for Routine "instructions"
-instructFirst = visual.TextStim(win, text="Press 2 to continue.", height=yScr/35, color=textCol, pos=[0, -yScr/4])
-instructMove = visual.TextStim(win, text="Press 2 to continue, or 1 to go back.", height=yScr/35, color=textCol, pos=[0, -yScr/4])
+instructFirst = visual.TextStim(win, text="Press 2 to continue.", height=yScr/35, color=textCol, pos=[0, -yScr/6])
+instructMove = visual.TextStim(win, text="Press 2 to continue, or 1 to go back.", height=yScr/35, color=textCol, pos=[0, -yScr/6])
 
 #import instructions
-instr_part = [[],[],[]]
+instr_part = []
 for inst in range (0,len(inst_file)):
     inname = _thisDir + os.sep + inst_dir + os.sep + inst_file[inst]
     infile = open(inname, 'r')
