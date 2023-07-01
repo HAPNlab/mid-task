@@ -136,6 +136,7 @@ endKey = "l"
 
 # Initialize components for Routine "instructions"
 instructMove = visual.TextStim(win, text="Press any button to continue.", height=yScr/35, color=textCol, pos=[0, -yScr/3])
+instructBegin = visual.TextStim(win, text="Press any button to begin the task.", height=yScr/35, color=textCol, pos=[0, -yScr/3])
 
 #import instructions
 instr_part = ["", "", "", ""]
@@ -154,7 +155,7 @@ FixClock = core.Clock()
 
 # Initialize components for instructions
 instructPrompt = visual.TextStim(win=win, font='Arial', pos=(0, yScr/10), height=fontH, wrapWidth=wrapW, color=textCol);
-instructFinish = visual.TextStim(win, text="Please make ratings individually for each particular cue.\nPlease make your ratings as accurately as possible.\n\nYou have reached the end of the instructions.",
+instructFinish = visual.TextStim(win, text="Please make ratings individually for each particular cue.\n\nPlease make your ratings as accurately as possible.\n\nPress the THIRD button to select your rating and advance to the next trial.",
                                      height=fontH, color=textCol, pos=[0, 0], wrapWidth=wrapW)    
 
 # Initialize components for task transitions
@@ -190,10 +191,10 @@ if show_instr:
         RatingInstr.draw()
         win.flip()
     display_inst(instr_part,4)
-    instructFinish.draw()
-    instructMove.draw()
-    win.flip()
-    event.waitKeys(keyList=None)
+instructFinish.draw()
+instructBegin.draw()
+win.flip()
+event.waitKeys(keyList=None)
  
 ### START EXPERIMENTAL LOOP
 
