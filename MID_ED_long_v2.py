@@ -443,7 +443,7 @@ while trial_counter < len(stimuli):
     if fmri:
         if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
             while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
-                sleep(0.001)
+                sleep(0.001); routineTimer.add(0.001)
         curr_TR = ul.c_in_32(board_num, counter_num)
     else:
         if event.getKeys(keyList=['equal']):
@@ -515,7 +515,7 @@ while trial_counter < len(stimuli):
     if fmri:
         if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
             while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
-                sleep(0.001)
+                sleep(0.001); routineTimer.add(0.001)
         curr_TR = ul.c_in_32(board_num, counter_num)
     else:
         if event.getKeys(keyList=['equal']):
@@ -623,7 +623,7 @@ while trial_counter < len(stimuli):
     if fmri:
         if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
             while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
-                sleep(0.001)
+                sleep(0.001); routineTimer.add(0.001)
         curr_TR = ul.c_in_32(board_num, counter_num)
     else:
         if event.getKeys(keyList=['equal']):
@@ -693,7 +693,7 @@ while trial_counter < len(stimuli):
         if fmri:
             if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
                 while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
-                    sleep(0.001)
+                    sleep(0.001); routineTimer.add(0.001)
             curr_TR = ul.c_in_32(board_num, counter_num)
         else:
             if event.getKeys(keyList=['equal']):
