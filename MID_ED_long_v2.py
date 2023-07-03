@@ -441,15 +441,15 @@ while trial_counter < len(stimuli):
     # -------Start Routine "fix"-------
     # add new TR to data file
     if fmri:
-        if ul.c_in_32(board_num, counter_num) != curr_TR:
-            curr_TR = ul.c_in_32(board_num, counter_num)
-            thisExp.nextEntry()
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
+            while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
+                sleep(0.001)
+        curr_TR = ul.c_in_32(board_num, counter_num)
     else:
         if event.getKeys(keyList=['equal']):
             curr_TR += 1
-            thisExp.nextEntry()
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    thisExp.nextEntry()
+    addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
     while continueRoutine and routineTimer.getTime() > 0:
         
@@ -513,15 +513,15 @@ while trial_counter < len(stimuli):
     # -------Start Routine "Target"-------
     # add new TR to data file
     if fmri:
-        if ul.c_in_32(board_num, counter_num) != curr_TR:
-            curr_TR = ul.c_in_32(board_num, counter_num)
-            thisExp.nextEntry()
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
+            while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
+                sleep(0.001)
+        curr_TR = ul.c_in_32(board_num, counter_num)
     else:
         if event.getKeys(keyList=['equal']):
             curr_TR += 1
-            thisExp.nextEntry()
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    thisExp.nextEntry()
+    addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
@@ -621,15 +621,15 @@ while trial_counter < len(stimuli):
     # -------Start Routine "Feedback"-------
     # add new TR to data file
     if fmri:
-        if ul.c_in_32(board_num, counter_num) != curr_TR:
-            curr_TR = ul.c_in_32(board_num, counter_num)
-            thisExp.nextEntry()
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
+            while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
+                sleep(0.001)
+        curr_TR = ul.c_in_32(board_num, counter_num)
     else:
         if event.getKeys(keyList=['equal']):
             curr_TR += 1
-            thisExp.nextEntry()
-            addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+    thisExp.nextEntry()
+    addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
@@ -691,15 +691,15 @@ while trial_counter < len(stimuli):
         # -------Start Routine "fix"-------
         # add new TR to data file
         if fmri:
-            if ul.c_in_32(board_num, counter_num) != curr_TR:
-                curr_TR = ul.c_in_32(board_num, counter_num)
-                thisExp.nextEntry()
-                addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+            if ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate:
+                while ul.c_in_32(board_num, counter_num) < curr_TR + scanner_pulse_rate: # wait for scanner to catch up
+                    sleep(0.001)
+            curr_TR = ul.c_in_32(board_num, counter_num)
         else:
             if event.getKeys(keyList=['equal']):
                 curr_TR += 1
-                thisExp.nextEntry()
-                addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
+        thisExp.nextEntry()
+        addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
         while continueRoutine and routineTimer.getTime() > 0:
             
