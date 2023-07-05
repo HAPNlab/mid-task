@@ -35,16 +35,12 @@ from numpy.random import random, shuffle
 import random
 import pyglet
 import csv
-
 import os  # handy system and path functions
 import sys  # to get file system encoding
-#add the current dir to search path
-sys.path.append(os.getcwd())
-
-#import the mcc stuff
 from time import sleep
 from mcculw import ul
 from mcculw.device_info import DaqDeviceInfo
+
 ## setting up some user-defined variables
 
 expName = "MID"
@@ -65,7 +61,7 @@ MR_settings = {
     'TR': 2.000,     # duration (sec) per whole-brain volume
     'volumes': 356,    # number of whole-brain 3D volumes per scanning run
     'sync': 'equal', # character to use as the sync timing event; assumed to come at start of a volume
-    'skip': 0,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
+    'skip': 1,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
     'sound': False    # in test mode: play a tone as a reminder of scanner noise
     }
 
@@ -200,7 +196,7 @@ if fmri:
     forwardKey = "7"
     backKey = "6"
     startKey = "0"
-    expKeys = ["1","2","3","4"] # including all response button keys to catch misaligned fingers/responses
+    expKeys = ["6","7","8","9","0","1","2","3","4"] # including all response button keys to catch misaligned fingers/responses
     endKey = "l"
     # Initialize components for Routine "instructions"
     instructFirst = visual.TextStim(win, text="Press 7 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
@@ -209,7 +205,7 @@ else:
     forwardKey = "4"
     backKey = "3"
     startKey = "0"
-    expKeys = ["1", "2", "3", "4"] 
+    expKeys = ["1", "2", "3", "4", "5", "6"] 
     endKey = "l"
     # Initialize components for Routine "instructions"
     instructFirst = visual.TextStim(win, text="Press 4 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
@@ -361,7 +357,7 @@ while trial_counter < len(stimuli):
     Choice_Resp = event.BuilderKeyResponse()
 
     Cue.edges = cue_dict[CueType]
-    CueLabel.text = "         {}\n({}% accuracy)".format(CueType, CueAccuracy)
+    CueLabel.text = "{}\n({}% accuracy)".format(CueType, CueAccuracy)
     trial_counter += 1
     
     # ------Prepare to start Routine "Cue"-------

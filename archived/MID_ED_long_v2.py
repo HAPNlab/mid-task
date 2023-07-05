@@ -2,11 +2,11 @@
 """
 MID.py
 
-Monetary incentive delay task. Participants attend a circle (+$5), diamond (-$5) or hexagon ($0), and are required to respond to a subsequently presented white triangle while it is presented.
+Monetary incentive delay task. Participants attend a circle (+$), diamond (-$) or hexagon ($0), and are required to respond to a subsequently presented white triangle while it is presented.
 Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance. 
 Responding in time for a reward cues yields a monetary gain; responding in time to a no-reward cue does nothing.
 
-Current version: two tasks (MID1 or MID2) each with 63 trials.  
+Current version: two tasks (MID1 or MID2) each with 105 trials total.  
 WRITTEN FOR fMRI - affects the beginning and the end of the task.
 
 Originally written for PsychoPy v 1.84.2
@@ -35,19 +35,15 @@ from numpy.random import random, shuffle
 import random
 import pyglet
 import csv
-
 import os  # handy system and path functions
 import sys  # to get file system encoding
-#add the current dir to search path
-sys.path.append(os.getcwd())
-
-#import the mcc stuff
 from time import sleep
 from mcculw import ul
 from mcculw.device_info import DaqDeviceInfo
+
 ## setting up some user-defined variables
 
-expName = "MID"
+expName = "MID-long"
 data_dir = "data" # location of outputs to be generated; includes data for participants as well as trial selection and trial presentation sequence
 inst_dir = "text" # location of instructions directory
 inst_file = ["instructions_MID.txt"] # name of instructions files (needs to be .txt)
@@ -55,7 +51,7 @@ study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, 
 initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
 closing_fix_dur = 8 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
-cue_dict = {"+$5": 128, "-$5": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types
+cue_dict = {"+$5": 128, "-$5": 4, "$0": 6, "+$1": 128, "-$1": 4} # assign cue shapes (circle, square, hexagon) to cue types
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low)
 board_num = 0 # desired board number configured with Instacal
 scanner_pulse_rate = 46 # number of pulses per TR
@@ -63,9 +59,9 @@ scanner_pulse_rate = 46 # number of pulses per TR
 # settings for fMRI emulation:
 MR_settings = {
     'TR': 2.000,     # duration (sec) per whole-brain volume
-    'volumes': 356,    # number of whole-brain 3D volumes per scanning run
+    'volumes': 587,    # number of whole-brain 3D volumes per scanning run
     'sync': 'equal', # character to use as the sync timing event; assumed to come at start of a volume
-    'skip': 0,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
+    'skip': 1,       # number of volumes lacking a sync pulse at start of scan (for T1 stabilization)
     'sound': False    # in test mode: play a tone as a reminder of scanner noise
     }
 
@@ -200,7 +196,7 @@ if fmri:
     forwardKey = "7"
     backKey = "6"
     startKey = "0"
-    expKeys = ["1","2","3","4"] # including all response button keys to catch misaligned fingers/responses
+    expKeys = ["6","7","8","9","0","1","2","3","4"] # including all response button keys to catch misaligned fingers/responses
     endKey = "l"
     # Initialize components for Routine "instructions"
     instructFirst = visual.TextStim(win, text="Press 7 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
@@ -209,7 +205,7 @@ else:
     forwardKey = "4"
     backKey = "3"
     startKey = "0"
-    expKeys = ["1", "2", "3", "4"] 
+    expKeys = ["1", "2", "3", "4", "5", "6"] 
     endKey = "l"
     # Initialize components for Routine "instructions"
     instructFirst = visual.TextStim(win, text="Press 4 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
@@ -249,7 +245,7 @@ endf = visual.TextStim(win, pos=[0, 0], text="Thank you. This part of the experi
 Cue = visual.Polygon(win, radius=0.2, pos=(0, 0), fillColor="white")
 CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
 CueClock = core.Clock()
-Cue_trials_template = _thisDir + os.sep + "MID" + task + "_trials.csv"
+Cue_trials_template = _thisDir + os.sep + "MID" + task + "_long_trials.csv"
 
 # Initialize components for Routine "Target"
 TargetClock = core.Clock()
@@ -361,7 +357,7 @@ while trial_counter < len(stimuli):
     Choice_Resp = event.BuilderKeyResponse()
 
     Cue.edges = cue_dict[CueType]
-    CueLabel.text = "         {}\n({}% accuracy)".format(CueType, CueAccuracy)
+    CueLabel.text = "{}\n({}% accuracy)".format(CueType, CueAccuracy)
     trial_counter += 1
     
     # ------Prepare to start Routine "Cue"-------
@@ -389,7 +385,7 @@ while trial_counter < len(stimuli):
         scanner_pulse_rate = 1
     TR_start = curr_TR
     addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
-    
+
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = CueClock.getTime()
