@@ -6,7 +6,7 @@
 - See text folder to edit task instructions.
 - Experimental output is stored in data folder.
 - When "practice" task is selected, a shorter version of the MID task will be presented. Otherwise, choose MID1 or MID2. 
-- If "fMRI" is selected, the experiment will not begin until the scanner sends TR signal.
+- If "fMRI" is selected, the experiment will not begin until the a pulse signal is received from the scanner, and each phase of the trial will be synced with the scanner pulses. Otherwise, the scanner emulator will run in the background to simulate TR pulses through key presses.
 
 ## Editing an existing MID task:
 - The trial order or contents can be edited by updating the contents of the trials csv.
