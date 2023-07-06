@@ -1,15 +1,27 @@
 # MID task
 
-## Usage
-- Run MID_ED.py for the MID task with only +$5, -$5, and $0 cues (short version).
-- Run MID_long_ED.py for the MID task with +$5, -$5, +$1, -$1, and $0 cues (long version).
-- See text/instructions_MID.txt to edit task instructions.
-- Experimental output stored in data folder.
+## Usage notes
+- Run MID_ED_v2.py for the MID task with only +$5, -$5, and $0 cues (short version).
+- Run MID_ED_long_v2.py for the MID task with +$5, -$5, +$1, -$1, and $0 cues (long version).
+- See text folder to edit task instructions.
+- Experimental output is stored in data folder.
 - When "practice" task is selected, a shorter version of the MID task will be presented. Otherwise, choose MID1 or MID2. 
 - If "fMRI" is selected, the experiment will not begin until the scanner sends TR signal.
 
-## Adding a new MID task:
-A new set of trials can be added be creating a csv file with cue type in 1st column and accuracy in 2nd column. Cue types can be any single-digit integer dollar amount. Cue accuracies should come in three types (low, medium, high) indicated by a number between 0 and 100 (also specify in line 52). The csv file should be stored in the main directory and named as MID[task]_trials.csv if short version and MID[task]_long_trials.csv if long version, where [task] is replaced by new task name. 
+## Editing an existing MID task:
+- The trial order or contents can be edited by updating the contents of the trials csv.
+- If stimuli amounts ($) need to be changed, the script will correctly handle any amounts as long as they are integers less than $10. 
+- If trial accuracies need to be changed, line 60 must also be updated to match the new percentages. Note that there must be three (low, medium, high) accuracy levels specified.
 
 ## Updating visuals and display parameters:
-Experimental design parameters (e.g., initial and closing fixation times, minimum target duration, cue shapes) can be updated in lines 43-52. 
+- Experimental design parameters (e.g., lead-in and closing times, minimum target duration, cue shapes) can be updated in lines 55-59. For cue shapes, see [Psychopy docs](https://psychopy.org/api/visual/polygon.html).
+- Window display size should be automatically detected. If the display is still not sized to the subject's monitor, try setting fullscr=False in line 104 or hard-coding the desired monitor resolution in line 100.
+
+## Adding a new MID task:
+A new set of trials can be added be creating a csv file with cue type in 1st column and accuracy in 2nd column. The csv file should be stored in the main directory and named as MID[task]_trials.csv if short version and MID[task]_long_trials.csv if long version, where [task] is replaced by new task name. 
+
+## Updating the adaptive psychometric function & parameters:
+- The target presentation time is iteratively calculated using the Quest algorithm, implemented in lines 325-332. See [PsychoPy docs](https://psychopy.org/_modules/psychopy/data/staircase.html#QuestHandler) for parameter details.
+- Note: target presentation times are given in number of frames (~16.67ms) added to the minimum target duration.
+  - E.g., for an initial presentation time of 250ms and min target dur of 130ms, set minVal = (250-130)/16.677 = 8.1
+  - E.g., for a maximum presentation time of 500ms, set maxVal = (500-130)/16.677 = 22.2
