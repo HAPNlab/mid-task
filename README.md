@@ -18,7 +18,7 @@
 - Window display size should be automatically detected. If the display is still not sized to the subject's monitor, try setting fullscr=False in line 104 or hard-coding the desired monitor resolution in line 100.
 
 ## Adding a new MID task:
-A new set of trials can be added be creating a csv file with cue type in 1st column and accuracy in 2nd column. The csv file should be stored in the main directory and named as MID[task]_trials.csv if short version and MID[task]_long_trials.csv if long version, where [task] is replaced by new task name. 
+A new set of trials can be added be creating a csv file with cue type in 1st column and accuracy in 2nd column. The csv file should be stored in the main directory and named as MID[task]_trials.csv if short version and MID[task]_long_trials.csv if long version, where [task] is replaced by new task name. Then, enter this task name in the opening prompts.
 
 ## Updating the adaptive psychometric function & parameters:
 - The target presentation time is iteratively calculated using the Quest algorithm, implemented in lines 325-332. See [PsychoPy docs](https://psychopy.org/_modules/psychopy/data/staircase.html#QuestHandler) for parameter details.
