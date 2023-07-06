@@ -45,6 +45,7 @@ sys.path.append(os.getcwd())
 from time import sleep
 from mcculw import ul
 from mcculw.device_info import DaqDeviceInfo
+
 ## setting up some user-defined variables
 
 expName = "MID"
