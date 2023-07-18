@@ -244,11 +244,12 @@ instructFinish = visual.TextStim(win, text="You have reached the end of the inst
 # Initialize components for task transitions
 wait = visual.TextStim(win, pos=[0, 0], text="The task will begin momentarily. Get ready...", height=fontH, color=textCol, wrapWidth=wrapW)
 wait_str = "The task will begin momentarily. Get ready..."
-endf = visual.TextStim(win, pos=[0, 0], text="Thank you. This part of the experiment is now complete. Please call the experimenter.",wrapWidth=wrapW, height=fontH, color=textCol)                                     
+endf = visual.TextStim(win, pos=[0, 0], text="Thank you!",wrapWidth=wrapW, height=fontH, color=textCol)                                     
 
 # Initialize components for Routine "cue" 
 Cue = visual.Polygon(win, radius=0.2, pos=(0, 0), fillColor="white")
 CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
+AccuracyLabel = visual.TextStim(win=win, font='Arial', pos=(0, -yScr/4), height=fontH, color=textCol)
 CueClock = core.Clock()
 Cue_trials_template = _thisDir + os.sep + "MID" + task + "_long_trials.csv"
 
@@ -258,8 +259,10 @@ Target = visual.Polygon(win, edges=3, radius=0.2, fillColor = "white", lineWidth
 
 # Initialize components for Routine "Feedback"
 FeedbackClock = core.Clock()
-Trial_FB = visual.TextStim(win=win, name='Trial_FB',text='Trial outcome:',font='Arial',pos=(0, 0), height=fontH+yScr/30, wrapWidth=None, ori=0, 
-    color=textCol, colorSpace='rgb', opacity=1);
+Trial_FB = visual.TextStim(win=win, name='Trial_FB',text='Trial outcome:',font='Arial',pos=(0, -yScr/20), height=fontH+yScr/30, wrapWidth=None, ori=0, 
+    color=textCol, colorSpace='rgb', opacity=1)
+Exp_FB = visual.TextStim(win=win, name='Exp_FB',text='You won!',font='Arial',pos=(0, yScr/6), height=fontH+yScr/30, wrapWidth=None, ori=0, 
+    color='Green', colorSpace='rgb', opacity=1)
 Blank_FB_Rectangle = visual.ImageStim(win=win, name='Blank_FB', mask=None,ori=0, pos=(0, 0), size=(xScr/8, xScr/8),texRes=128, interpolate=True)
 
 # Create some handy timers
@@ -362,7 +365,8 @@ while trial_counter < len(stimuli):
     Choice_Resp = event.BuilderKeyResponse()
 
     Cue.edges = cue_dict[CueType]
-    CueLabel.text = "         {}\n({}% accuracy)".format(CueType, CueAccuracy)
+    CueLabel.text = f"         {CueType}"
+    AccuracyLabel.text = f"         ({CueAccuracy}% chance of winning)"
     trial_counter += 1
     
     # ------Prepare to start Routine "Cue"-------
@@ -376,7 +380,7 @@ while trial_counter < len(stimuli):
     time_start = globalClock.getTime()
     
     # keep track of which components have finished
-    CueComponents = [Cue, CueLabel]
+    CueComponents = [Cue, CueLabel, AccuracyLabel]
     for thisComponent in CueComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
@@ -399,10 +403,14 @@ while trial_counter < len(stimuli):
         if t >= 0.0 and Cue.status == NOT_STARTED:
             # keep track of start time/frame for later
             Cue.tStart = t; CueLabel.tStart = t
-            Cue.setAutoDraw(True); CueLabel.setAutoDraw(True)
+            Cue.setAutoDraw(True)
+            CueLabel.setAutoDraw(True)
+            AccuracyLabel.setAutoDraw(True)
         frameRemains = 0.0 + study_times[0] - win.monitorFramePeriod * 0.75  # most of one frame period left
         if Cue.status == STARTED and t >= frameRemains:
-            Cue.setAutoDraw(False); CueLabel.setAutoDraw(False)
+            Cue.setAutoDraw(False)
+            CueLabel.setAutoDraw(False)
+            AccuracyLabel.setAutoDraw(False)
 
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
@@ -601,24 +609,39 @@ while trial_counter < len(stimuli):
     nominalTime += study_times[3]
     
     # וupdate trial components
-    if ThisResp and CueType[0]=='+': # if it was a reward trial and hit response
-        Tot_Earn += int(CueType[-1])
-        newText = 'Trial outcome: ' + CueType
-        trials.addOtherData('rewardType', CueType)
-    elif not ThisResp and CueType[0]=='-': # if it was a loss trial and miss response
-        Tot_Earn -= int(CueType[-1])
-        newText = 'Trial outcome: ' + CueType
-        trials.addOtherData('rewardType', CueType)
-    else:    
-        newText = 'Trial outcome: $0'
-        trials.addOtherData('rewardType', '$0')
+    if ThisResp:
+        Exp_FB.setText('You won!')
+        Exp_FB.setColor('Green')
+        if CueType=="$0": # if it was a neutral trial with hit response
+            newText = 'Trial outcome: +' + CueType
+            trials.addOtherData('rewardType', '$0')
+        elif CueType[0]=='+': # if it was a reward trial with hit response
+            Tot_Earn += int(CueType[-1])
+            newText = 'Trial outcome: ' + CueType
+            trials.addOtherData('rewardType', CueType)
+        else: # if it was a miss trial with hit response
+            newText = 'Trial outcome: $0'
+            trials.addOtherData('rewardType', '$0')
+    elif not ThisResp:
+        Exp_FB.setText('You missed!')
+        Exp_FB.setColor('Red')
+        if CueType=="$0": # if it was a neutral trial with miss response
+            newText = 'Trial outcome: -' + CueType
+            trials.addOtherData('rewardType', '$0')
+        elif CueType[0]=='-': # if it was a loss trial with miss response
+            Tot_Earn -= int(CueType[-1])
+            newText = 'Trial outcome: ' + CueType
+            trials.addOtherData('rewardType', CueType)
+        else: # if it was a reward trial with miss response
+            newText = 'Trial outcome: $0'
+            trials.addOtherData('rewardType', '$0')
     Trial_FB.setText(newText)
         
     # add to be presented stimuli to output
     trials.addOtherData('total_earned', Tot_Earn) 
              
     # keep track of which components have finished
-    FeedbackComponents = [Trial_FB]
+    FeedbackComponents = [Trial_FB, Exp_FB]
     for thisComponent in FeedbackComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
@@ -645,9 +668,11 @@ while trial_counter < len(stimuli):
             # keep track of start time/frame for later
             Trial_FB.tStart = t
             Trial_FB.setAutoDraw(True)
+            Exp_FB.setAutoDraw(True)
         frameRemains = 0.0 + study_times[3] - win.monitorFramePeriod * 0.75  # most of one frame period left
         if Trial_FB.status == STARTED and t >= frameRemains:
             Trial_FB.setAutoDraw(False)
+            Exp_FB.setAutoDraw(False)
 
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
