@@ -474,9 +474,17 @@ while trial_counter < len(stimuli):
             # keep track of start time/frame for later
             fix.tStart = t
             fix.setAutoDraw(True)
+            # start keyboard checking
+            event.clearEvents(eventType='keyboard')  
+            theseKeys = []
         frameRemains = 0.0 + study_times[1] - win.monitorFramePeriod * 0.75  # most of one frame period left
         if fix.status == STARTED and t >= frameRemains:
             fix.setAutoDraw(False)
+            # check for early response
+            theseKeys = event.getKeys(keyList=expKeys)
+            EarlyResp = 0
+            if len(theseKeys) > 0:  # at least one key was pressed
+                EarlyResp = 1
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
@@ -564,7 +572,7 @@ while trial_counter < len(stimuli):
             theseKeys = event.getKeys(keyList=expKeys)
             ThisResp = 0 # set response to no response - change only if response was given in the allowed time frame
             
-            if len(theseKeys) > 0:  # at least one key was pressed
+            if len(theseKeys) > 0 and EarlyResp == 0:  # at least one key was pressed
                 ThisResp = 1
                 Target_Resp.rt = Target_Resp.clock.getTime()
            
@@ -592,6 +600,7 @@ while trial_counter < len(stimuli):
     
     # add the data to the staircase so it can be used to calculate the next level
     trials.addResponse(ThisResp)
+    trials.addOtherData('early', EarlyResp)
     trials.addOtherData('hit', ThisResp)
     trials.addOtherData('target_ms', frameRemainsResp)
 
