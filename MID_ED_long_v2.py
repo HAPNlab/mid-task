@@ -51,6 +51,8 @@ study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, 
 initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
 closing_fix_dur = 8 # added time to make sure haemodynamic responses of the last trials are properly modeled 
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
+max_target_dur = 0.5 # sets the maximum presentation time for target (in seconds)
+initial_target_dur = 0.265 # sets the initial presentation time for target (in seconds)
 cue_dict = {"+$5": 128, "+$1": 128, "-$5": 4, "-$1": 4, "$0": 6} # assign cue shapes (circle, square, hexagon) to cue types. Note: the order here is meaningful; trialtypes 1-3 correspond to the first dict item, trialtypes 4-6 correspond to the 2nd dict item, etc.
 accuracies = [80, 50, 20] # desired accuracy levels (high, medium, low). Note: the order here is meaningful; e.g., the high accuracy level corresponds to trialtypes 1, 4, 7, etc.
 board_num = 0 # desired board number configured with Instacal
@@ -325,14 +327,16 @@ def addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueTy
     trials.addOtherData('cue', "{} ({}% accuracy)".format(CueType, CueAccuracy))
 
 # create the staircase handler to adjust for individual threshold (stairs defined in units of screen frames; actual minimum presentation duration is determined by the min_target_dur parameter, the staircase procedure can only add frame rates to that minimum value)
-high = data.QuestHandler(startVal=8.1, startValSd=4, pThreshold=accuracies[0]/100, name='high', gamma=0.01,
-                         nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[0]]), minVal=0, maxVal=22.2)
+initial_frames = (initial_target_dur-min_target_dur)/frameDur
+max_frames = (max_target_dur-min_target_dur)/frameDur
+high = data.QuestHandler(startVal=initial_frames, startValSd=4, pThreshold=accuracies[0]/100, name='high', gamma=0.01,
+                         nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[0]]), minVal=0, maxVal=max_frames)
 thisExp.addLoop(high)
-medium = data.QuestHandler(startVal=8.1, startValSd=4, pThreshold=accuracies[1]/100, name='medium', gamma=0.01,
-                         nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[1]]), minVal=0, maxVal=22.2)
+medium = data.QuestHandler(startVal=initial_frames, startValSd=4, pThreshold=accuracies[1]/100, name='medium', gamma=0.01,
+                         nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[1]]), minVal=0, maxVal=max_frames)
 thisExp.addLoop(medium)
-low = data.QuestHandler(startVal=8.1, startValSd=4, pThreshold=accuracies[2]/100, name='low', gamma=0.01, 
-                         nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[2]]), minVal=0, maxVal=22.2)
+low = data.QuestHandler(startVal=initial_frames, startValSd=4, pThreshold=accuracies[2]/100, name='low', gamma=0.01, 
+                         nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[2]]), minVal=0, maxVal=max_frames)
 thisExp.addLoop(low)
 
 nominalTime = 0 # set up virtual time keeper to align actual with a-priori time allocation
