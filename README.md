@@ -14,7 +14,7 @@
 - If trial accuracies need to be changed, line 60 must also be updated to match the new percentages. Note that there must be three (low, medium, high) accuracy levels specified.
 
 ## Updating visuals and task parameters:
-- Experimental design parameters (e.g., lead-in and closing times, target duration parameters, cue shapes) can be updated in lines 55-59. For cue shapes, the dictionary should specify the desired number of edges (see [Psychopy docs](https://psychopy.org/api/visual/polygon.html)).
+- Experimental design parameters (e.g., lead-in and closing times, target duration parameters, cue shapes) can be updated in lines 50-56. For cue shapes, the dictionary should specify the desired number of edges (see [Psychopy docs](https://psychopy.org/api/visual/polygon.html)).
 - Window display size should be automatically detected. If the display is still not sized to the subject's monitor, try setting fullscr=False in line 100 or hard-coding the desired monitor resolution in line 97.
 
 ## Adding a new MID task:
