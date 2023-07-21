@@ -24,4 +24,4 @@ A new set of trials can be added be creating a csv file with cue type in 1st col
 - The target presentation time is iteratively calculated using the Quest algorithm, implemented in lines 328-335. See [PsychoPy docs](https://psychopy.org/_modules/psychopy/data/staircase.html#QuestHandler) for parameter details.
 - Note: target presentation times are given in number of frames (~16.67ms) added to the minimum target duration.
   - E.g., for an initial presentation time of 250ms and min target dur of 130ms, set minVal = (250-130)/16.677 = 8.1
-  - E.g., for a maximum presentation time of 500ms, set maxVal = (500-130)/16.677 = 22.2
+  - E.g., for a maximum presentation time of 500ms, set maxVal = (500-130)/16.6667 = 22.2
