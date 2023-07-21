@@ -11,7 +11,7 @@
 ## Editing an existing MID task:
 - The trial order or contents can be edited by updating the contents of the trials csv.
 - If stimuli amounts ($) need to be changed, the script will correctly handle any amounts as long as they are integers less than $10. 
-- If trial accuracies need to be changed, line 60 must also be updated to match the new percentages. Note that there must be three (low, medium, high) accuracy levels specified.
+- If trial accuracies need to be changed, line 57 must also be updated to match the new percentages. Note that there must be three (low, medium, high) accuracy levels specified.
 
 ## Updating visuals and task parameters:
 - Experimental design parameters (e.g., lead-in and closing times, target duration parameters, cue shapes) can be updated in lines 50-56. For cue shapes, the dictionary should specify the desired number of edges (see [Psychopy docs](https://psychopy.org/api/visual/polygon.html)).
