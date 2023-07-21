@@ -41,11 +41,6 @@ import sys  # to get file system encoding
 #add the current dir to search path
 sys.path.append(os.getcwd())
 
-#import the mcc stuff
-from time import sleep
-from mcculw import ul
-from mcculw.device_info import DaqDeviceInfo
-
 ## setting up some user-defined variables
 
 expName = "MID-long"
@@ -165,6 +160,11 @@ os.chdir(_thisDir)
 
 # present initialization dialog
 [expInfo,expName,sn,fmri,task] = initialization(expName) 
+if fmri:
+    #import the mcc stuff
+    from time import sleep
+    from mcculw import ul
+    from mcculw.device_info import DaqDeviceInfo
 
 # Data file name creation; later add .psyexp, .csv, .log, etc
 filename = start_datafiles(_thisDir, expName, expInfo, data_dir, sn, fmri)
@@ -482,6 +482,7 @@ while trial_counter < len(stimuli):
             fix.setAutoDraw(False)
             # check for early response
             theseKeys = event.getKeys(keyList=expKeys)
+            global EarlyResp # (shouldn't be necessary, but added in case of NameError: name 'EarlyResp' is not defined)
             EarlyResp = 0
             if len(theseKeys) > 0:  # at least one key was pressed
                 EarlyResp = 1
