@@ -369,8 +369,8 @@ while trial_counter < len(stimuli):
     Choice_Resp = event.BuilderKeyResponse()
 
     Cue.edges = cue_dict[CueType]
-    CueLabel.text = f"         {CueType}"
-    AccuracyLabel.text = f"         ({CueAccuracy}% chance of winning)"
+    CueLabel.text = f" {CueType}"
+    AccuracyLabel.text = f" ({CueAccuracy}% chance of winning)"
     trial_counter += 1
     
     # ------Prepare to start Routine "Cue"-------
