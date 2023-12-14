@@ -274,10 +274,8 @@ routineTimer = core.CountdownTimer()  # to track time remaining of each (non-sli
 # create content to be displayed
 stimuli = pd.read_csv(Cue_trials_template) # read template stimuli
 
-# generate vector to determine which trials have extra TR
-tr_vec = np.ones(len(stimuli)) # 31 trials
-tr_vec[:len(stimuli)//2] = 2 # 32 trials
-np.random.shuffle(tr_vec)
+# vector to determine which trials have extra TR
+tr_vec = stimuli.ITI.to_list()
 
 ## Displaying Instructions
 
@@ -478,6 +476,7 @@ while trial_counter < len(stimuli):
             # keep track of start time/frame for later
             fix.tStart = t
             fix.setAutoDraw(True)
+            EarlyResp = 0
             # start keyboard checking
             event.clearEvents(eventType='keyboard')  
             theseKeys = []
@@ -486,8 +485,6 @@ while trial_counter < len(stimuli):
             fix.setAutoDraw(False)
             # check for early response
             theseKeys = event.getKeys(keyList=expKeys)
-            global EarlyResp # (shouldn't be necessary, but added in case of NameError: name 'EarlyResp' is not defined)
-            EarlyResp = 0
             if len(theseKeys) > 0:  # at least one key was pressed
                 EarlyResp = 1
         
