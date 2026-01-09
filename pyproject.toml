@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mid-task"
+version = "2.0.0"
+description = "Monetary Incentive Delay Task - PsychoPy implementation for fMRI"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Eden Z. Deng" }]
+dependencies = [
+    "psychopy>=2020.2.4",
+    "scipy>=1.10",
+    "pandas",
+    "pyglet",
+    "numpy>=2.0",
+    "psychopy-mri-emulator>=0.0.2",
+    "psychopy-legacy>=1.1.1",
+]
+
+[project.optional-dependencies]
+
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+exclude = ["data", "text"]

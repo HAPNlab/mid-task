@@ -3,10 +3,10 @@
 MID.py
 
 Monetary incentive delay task. Participants attend a circle (+$5), diamond (-$5) or hexagon ($0), and are required to respond to a subsequently presented white triangle while it is presented.
-Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance. 
+Triangle presentation times vary based on a stepwise procedure calibrated to reach low, medium, and high performance.
 Responding in time for a reward cues yields a monetary gain; responding in time to a no-reward cue does nothing.
 
-Current version: two tasks (MID1 or MID2) each with 63 trials.  
+Current version: two tasks (MID1 or MID2) each with 63 trials.
 WRITTEN FOR fMRI - affects the beginning and the end of the task.
 
 Originally written for PsychoPy v 1.84.2
@@ -28,6 +28,27 @@ from __future__ import division
 from psychopy import gui, visual, core, data, event, logging, monitors
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
+
+# Patch for psychopy-mri-emulator plugin detection
+try:
+    import psychopy_mri_emulator.emulator
+    import psychopy.hardware.emulator
+    psychopy.hardware.emulator.launchScan = psychopy_mri_emulator.emulator.launchScan
+    psychopy.hardware.emulator.SyncGenerator = psychopy_mri_emulator.emulator.SyncGenerator
+    psychopy.hardware.emulator.ResponseEmulator = psychopy_mri_emulator.emulator.ResponseEmulator
+except ImportError:
+    pass
+
+# Patch for psychopy-legacy RatingScale
+try:
+    import psychopy_legacy.visual.ratingscale
+    visual.RatingScale = psychopy_legacy.visual.ratingscale.RatingScale
+except ImportError:
+    pass
+
+# Disable pyglet event checking in background threads (prevents macOS main thread crash)
+core.checkPygletDuringWait = False
+
 from psychopy.hardware.emulator import launchScan
 import numpy as np  # whole numpy lib is available, prepend 'np.'
 import pandas as pd
@@ -49,7 +70,7 @@ inst_dir = "text" # location of instructions directory
 inst_file = ["instructions_MID.txt"] # name of instructions files (needs to be .txt)
 study_times = [2, 2, 2, 2, 2] # duration of different parts of the task trials, in seconds: cue, delay (additional random 0-0.5s duration added within trial), target (actualy display shorter; the value here is the total duration for the trial), feedback, lastfixation
 initial_fix_dur = 12 # added time to make sure homogenicity of magnetic field is reached
-closing_fix_dur = 8 # added time to make sure haemodynamic responses of the last trials are properly modeled 
+closing_fix_dur = 8 # added time to make sure haemodynamic responses of the last trials are properly modeled
 min_target_dur = 0.13 # sets the minimum presentation time for target (in seconds)
 max_target_dur = 0.5 # sets the maximum presentation time for target (in seconds)
 initial_target_dur = 0.265 # sets the initial presentation time for target (in seconds)
@@ -79,7 +100,7 @@ def initialization(expName):
     expInfo['date'] = data.getDateStr()  # add a simple timestamp
     expInfo['expName'] = expName
     sn = str(expInfo['Subject ID'])
-    
+
     # Check for various experimental handles
     if expInfo['fMRI? (yes/no)'].lower() == 'yes':
         fmri = True
@@ -105,7 +126,11 @@ def make_screen():
 def start_datafiles(_thisDir, expName, expInfo, data_dir, sn, fmri):
     """Creates name for datafile (after checking for old one)"""
     fname = expName + '_' + ['behavioral', 'fmri'][fmri] + '_' + sn
-    curdirlist = os.listdir(_thisDir + os.sep + data_dir)
+    data_path = os.path.join(_thisDir, data_dir)
+    if not os.path.exists(data_path):
+        os.makedirs(data_path)
+    curdirlist = os.listdir(data_path)
+    dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
     for i in curdirlist:
             if i == fname + '.csv':
                 warndlg = gui.Dlg(title='Warning!')
@@ -113,7 +138,7 @@ def start_datafiles(_thisDir, expName, expInfo, data_dir, sn, fmri):
                 warndlg.addField('Overwrite?\t\t', initial="no")
                 warndlg.addField('If no, new ID:\t', initial='0')
                 warndlg.show()
-                if gui.OK:
+                if dlg.OK:
                     over = warndlg.data[0].lower() == 'no'
                 else:
                     core.quit()
@@ -122,9 +147,9 @@ def start_datafiles(_thisDir, expName, expInfo, data_dir, sn, fmri):
                     fname = expName + '_'  + ['behavioral', 'fmri'][fmri] + '_' + sn
     filename = _thisDir + os.sep + data_dir + os.sep + fname
     return(filename)
-    
+
 def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
-    """ display instructions for a specific experimental task; input includes: 
+    """ display instructions for a specific experimental task; input includes:
     instr_part: instructions extracted from text
     task: task serial number (in actual serial order, starting at 1; convetred to Python's representation, where 1 is 0, in the function"""
     endOfInstructions = False
@@ -142,7 +167,7 @@ def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
             win.flip()
             instructRep = event.waitKeys(keyList=[forwardKey, backKey])
         if event.getKeys(keyList=[endKey]):
-            core.quit()       
+            core.quit()
         if instructRep[0] == backKey:
             instructLine -= 1
         elif instructRep[0] == forwardKey:
@@ -153,15 +178,15 @@ def display_inst(instr_part,task,forwardKey,backKey,startKey,instructFinish):
     instructFinish.draw()
     win.flip()
     event.waitKeys(keyList=[startKey])
-    
-### START SET UP OF STUDY 
+
+### START SET UP OF STUDY
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))#.decode(sys.getfilesystemencoding())
 os.chdir(_thisDir)
 
 # present initialization dialog
-[expInfo,expName,sn,fmri,task] = initialization(expName) 
+[expInfo,expName,sn,fmri,task] = initialization(expName)
 if fmri:
     #import the mcc stuff
     from time import sleep
@@ -198,12 +223,12 @@ else:
 # set random seed - participant dependent
 random.seed(sn)
 
-# determine accepted inputs 
+# determine accepted inputs
 if fmri:
     forwardKey = "7"
     backKey = "6"
     startKey = "0"
-    expKeys = ["1","2","3","4"] # including all response button keys to catch misaligned fingers/responses
+    expKeys = ["1","2","3","4","5","6","7","8","9","10"] # including all response button keys to catch misaligned fingers/responses
     endKey = "l"
     # Initialize components for Routine "instructions"
     instructFirst = visual.TextStim(win, text="Press 7 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
@@ -212,7 +237,7 @@ else:
     forwardKey = "4"
     backKey = "3"
     startKey = "0"
-    expKeys = ["1", "2", "3", "4"] 
+    expKeys = ["1","2","3","4","5","6","7","8","9","10"]
     endKey = "l"
     # Initialize components for Routine "instructions"
     instructFirst = visual.TextStim(win, text="Press 4 to continue.", height=fontH, color=textCol, pos=[0, -yScr/4])
@@ -241,14 +266,14 @@ FixClock = core.Clock()
 # Initialize components for Routine "instructions"
 instructPrompt = visual.TextStim(win=win, font='Arial', pos=(0, yScr/10), height=fontH, wrapWidth=wrapW, color=textCol);
 instructFinish = visual.TextStim(win, text="You have reached the end of the instructions. When you are ready to begin the task, place your fingers on the keys and notify the experimenter.",
-                                     height=fontH, color=textCol, pos=[0, 0], wrapWidth=wrapW)    
+                                     height=fontH, color=textCol, pos=[0, 0], wrapWidth=wrapW)
 
 # Initialize components for task transitions
 wait = visual.TextStim(win, pos=[0, 0], text="The task will begin momentarily. Get ready...", height=fontH, color=textCol, wrapWidth=wrapW)
 wait_str = "The task will begin momentarily. Get ready..."
-endf = visual.TextStim(win, pos=[0, 0], text="Thank you!",wrapWidth=wrapW, height=fontH, color=textCol)                                     
+endf = visual.TextStim(win, pos=[0, 0], text="Thank you!",wrapWidth=wrapW, height=fontH, color=textCol)
 
-# Initialize components for Routine "cue" 
+# Initialize components for Routine "cue"
 Cue = visual.Polygon(win, radius=0.2, pos=(0, 0), fillColor="white")
 CueLabel = visual.TextStim(win=win, font='Arial', pos=(0, 0), height=fontH, color=textCol)
 AccuracyLabel = visual.TextStim(win=win, font='Arial', pos=(0, -yScr/4), height=fontH, color=textCol)
@@ -257,38 +282,40 @@ Cue_trials_template = _thisDir + os.sep + "MID" + task + "_trials.csv"
 
 # Initialize components for Routine "Target"
 TargetClock = core.Clock()
-Target = visual.Polygon(win, edges=3, radius=0.2, fillColor = "white", lineWidth=0, pos=(0,0)) 
+Target = visual.Polygon(win, edges=3, radius=0.2, fillColor = "white", lineWidth=0, pos=(0,0))
 
 # Initialize components for Routine "Feedback"
 FeedbackClock = core.Clock()
-Trial_FB = visual.TextStim(win=win, name='Trial_FB',text='Trial outcome:',font='Arial',pos=(0, -yScr/20), height=fontH+yScr/30, wrapWidth=None, ori=0, 
+Trial_FB = visual.TextStim(win=win, name='Trial_FB',text='Trial outcome:',font='Arial',pos=(0, -yScr/20), height=fontH+yScr/30, wrapWidth=None, ori=0,
     color=textCol, colorSpace='rgb', opacity=1)
-Exp_FB = visual.TextStim(win=win, name='Exp_FB',text='You won!',font='Arial',pos=(0, yScr/6), height=fontH+yScr/30, wrapWidth=None, ori=0, 
+Exp_FB = visual.TextStim(win=win, name='Exp_FB',text='You won!',font='Arial',pos=(0, yScr/6), height=fontH+yScr/30, wrapWidth=None, ori=0,
     color='Green', colorSpace='rgb', opacity=1)
 Blank_FB_Rectangle = visual.ImageStim(win=win, name='Blank_FB', mask=None,ori=0, pos=(0, 0), size=(xScr/8, xScr/8),texRes=128, interpolate=True)
 
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
-routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
+routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine
 
 # create content to be displayed
 stimuli = pd.read_csv(Cue_trials_template) # read template stimuli
 
-# vector to determine which trials have extra TR
-tr_vec = stimuli.ITI.to_list()
+# generate vector to determine which trials have extra TR
+tr_vec = np.ones(len(stimuli)) # 31 trials
+tr_vec[:len(stimuli)//2] = 2 # 32 trials
+np.random.shuffle(tr_vec)
 
 ## Displaying Instructions
 
 # keyboard checking is just starting
-event.clearEvents(eventType='keyboard')    
+event.clearEvents(eventType='keyboard')
 event.Mouse(visible=False)  # hide mouse cursor
 if expInfo['Show instructions? (yes/no)'].lower() == 'yes':
     display_inst(instr_part,1,forwardKey,backKey,startKey,instructFinish)
 
 # reset the non-slip timer for next routine
 routineTimer.reset()
-event.clearEvents(eventType='keyboard')    
- 
+event.clearEvents(eventType='keyboard')
+
 ### START EXPERIMENTAL LOOP
 
 # wait for TR signal if in scanner
@@ -309,7 +336,7 @@ else:
     #wait.draw()
     win.flip()
     event.waitKeys(keyList=['equal'])
-    
+
 # set up counters for trials (to determine cue color and for total earnings
 trial_counter = 0
 Tot_Earn = 0
@@ -333,20 +360,20 @@ thisExp.addLoop(high)
 medium = data.QuestHandler(startVal=initial_frames, startValSd=4, pThreshold=accuracies[1]/100, name='medium', gamma=0.01,
                          nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[1]]), minVal=0, maxVal=max_frames)
 thisExp.addLoop(medium)
-low = data.QuestHandler(startVal=initial_frames, startValSd=4, pThreshold=accuracies[2]/100, name='low', gamma=0.01, 
+low = data.QuestHandler(startVal=initial_frames, startValSd=4, pThreshold=accuracies[2]/100, name='low', gamma=0.01,
                          nTrials=len(stimuli[stimuli["Accuracy"]==accuracies[2]]), minVal=0, maxVal=max_frames)
 thisExp.addLoop(low)
 
 nominalTime = 0 # set up virtual time keeper to align actual with a-priori time allocation
 globalClock.reset() # to align actual time with virtual time keeper
-    
+
 # present initial fixation
 t_start = globalClock.getTime()
 t = t_start
 while t < t_start + initial_fix_dur:
     t = globalClock.getTime()
     fix.draw()
-    win.flip()              
+    win.flip()
 nominalTime = t # set up virtual time keeper to align actual with a-priori time allocation
 
 while trial_counter < len(stimuli):
@@ -370,23 +397,23 @@ while trial_counter < len(stimuli):
     CueLabel.text = f" {CueType}"
     AccuracyLabel.text = f" ({CueAccuracy}% chance of winning)"
     trial_counter += 1
-    
+
     # ------Prepare to start Routine "Cue"-------
     t = 0
     CueClock.reset()  # clock
     # reset the non-slip timer for next routine
-    routineTimer.reset()                
+    routineTimer.reset()
     continueRoutine = True
     routineTimer.add(study_times[0]) # set time limit for current phase
     nominalTime += study_times[0] # update nominal time keeper
     time_start = globalClock.getTime()
-    
+
     # keep track of which components have finished
     CueComponents = [Cue, CueLabel, AccuracyLabel]
     for thisComponent in CueComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
-    
+
     # -------Start Routine "Cue"-------
     # add new TR to data file
     if fmri:
@@ -396,11 +423,11 @@ while trial_counter < len(stimuli):
         scanner_pulse_rate = 1
     TR_start = curr_TR
     addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
-    
+
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = CueClock.getTime()
-        
+
         # first screen updates
         if t >= 0.0 and Cue.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -422,15 +449,15 @@ while trial_counter < len(stimuli):
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
-        
+
         # check for quit (the Esc key)
         if endExpNow or event.getKeys(keyList=[endKey]):
             core.quit()
-        
+
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-    
+
     # -------Ending Routine "Choice"-------
     for thisComponent in CueComponents:
         if hasattr(thisComponent, "setAutoDraw"):
@@ -438,21 +465,21 @@ while trial_counter < len(stimuli):
 
     # ------Prepare to start Routine "fix"-------
     t = 0
-    FixClock.reset()  # clock    
+    FixClock.reset()  # clock
     # reset the non-slip timer for next routine
-    routineTimer.reset()   
+    routineTimer.reset()
     continueRoutine = True
-    
-    # set fixation time duration 
+
+    # set fixation time duration
     nominalTime += study_times[1]
     routineTimer.add(study_times[1])
-    
+
     # keep track of which components have finished
     fixComponents = [fix]
     for thisComponent in fixComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
-    
+
     # -------Start Routine "fix"-------
     # add new TR to data file
     if fmri:
@@ -467,27 +494,28 @@ while trial_counter < len(stimuli):
     addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
     while continueRoutine and routineTimer.getTime() > 0:
-        
+
         # get current time
         t = FixClock.getTime()
-                
+
         # fix updates
         if t >= 0 and fix.status == NOT_STARTED:
             # keep track of start time/frame for later
             fix.tStart = t
             fix.setAutoDraw(True)
-            EarlyResp = 0
             # start keyboard checking
-            event.clearEvents(eventType='keyboard')  
+            event.clearEvents(eventType='keyboard')
             theseKeys = []
         frameRemains = 0.0 + study_times[1] - win.monitorFramePeriod * 0.75  # most of one frame period left
         if fix.status == STARTED and t >= frameRemains:
             fix.setAutoDraw(False)
             # check for early response
             theseKeys = event.getKeys(keyList=expKeys)
+            global EarlyResp # (shouldn't be necessary, but added in case of NameError: name 'EarlyResp' is not defined)
+            EarlyResp = 0
             if len(theseKeys) > 0:  # at least one key was pressed
                 EarlyResp = 1
-        
+
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
             break
@@ -496,39 +524,39 @@ while trial_counter < len(stimuli):
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
-        
+
         # check for quit (the Esc key)
         if endExpNow or event.getKeys(keyList=[endKey]):
             core.quit()
-        
+
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-    
+
     # -------Ending Routine "fix"-------
     for thisComponent in fixComponents:
         if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)    
-    
+            thisComponent.setAutoDraw(False)
+
     # ------Prepare to start Routine "Target"-------
     t = 0
     TargetClock.reset()  # clock
-    
+
     # reset the non-slip timer for next routine
-    routineTimer.reset()                   
+    routineTimer.reset()
     continueRoutine = True
     routineTimer.add(study_times[2])
     nominalTime += study_times[2]
 
     # update component parameters for each repeat
     Target_Resp = event.BuilderKeyResponse()
-    
+
     # keep track of which components have finished
     TargetComponents = [Target, Target_Resp]
     for thisComponent in TargetComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
-    
+
     # set a random delay before target appears
     jitter = random.uniform(0, 0.05)
     trials.addOtherData('jitter', jitter)
@@ -549,19 +577,19 @@ while trial_counter < len(stimuli):
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = TargetClock.getTime()
-        
+
         # selection screen updates
         if t >= jitter and Target.status == NOT_STARTED:
             # keep track of start time/frame for later
             Target.tStart = t
-            # display target 
+            # display target
             Target.setAutoDraw(True)
             # open response options
             Target_Resp.tStart = t
             Target_Resp.status = STARTED
             # keyboard checking is just starting
             win.callOnFlip(Target_Resp.clock.reset)  # t=0 on next screen flip
-            event.clearEvents(eventType='keyboard')  
+            event.clearEvents(eventType='keyboard')
             theseKeys = []
 
         frameRemainsResp = min_target_dur + frameDur*intensity # range: min_target_dur (130ms) + one frame (~17ms, depends on refresh rate) * 22.2
@@ -569,15 +597,15 @@ while trial_counter < len(stimuli):
             print('thisTrial:',intensity) # print for QA purpose
             print('frameDur:',frameDur) # print for QA purpose
             print('frameRemainsResp:',frameRemainsResp) # print for QA purpose
-            
+
             Target.setAutoDraw(False)
             theseKeys = event.getKeys(keyList=expKeys)
             ThisResp = 0 # set response to no response - change only if response was given in the allowed time frame
-            
+
             if len(theseKeys) > 0 and EarlyResp == 0:  # at least one key was pressed, and no early response
                 ThisResp = 1
                 Target_Resp.rt = Target_Resp.clock.getTime()
-           
+
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
             break
@@ -586,20 +614,20 @@ while trial_counter < len(stimuli):
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
-        
+
         # check for quit (the Esc key)
         if endExpNow or event.getKeys(keyList=[endKey]):
             core.quit()
-        
+
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-    
+
     # -------Ending Routine "Target"-------
     for thisComponent in TargetComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    
+
     # add the data to the staircase so it can be used to calculate the next level
     trials.addResponse(ThisResp)
     trials.addOtherData('early', EarlyResp)
@@ -609,16 +637,16 @@ while trial_counter < len(stimuli):
     # check responses to add RT
     if ThisResp:  # we had a response
         trials.addOtherData('rt', Target_Resp.rt)
-    
+
     # ------Prepare to start Routine "Feedback"-------
     t = 0
     FeedbackClock.reset()  # clock
     # reset the non-slip timer for next routine
-    routineTimer.reset()                   
+    routineTimer.reset()
     continueRoutine = True
     routineTimer.add(study_times[3])
     nominalTime += study_times[3]
-    
+
     # וupdate trial components
     if ThisResp:
         Exp_FB.setText('You won!')
@@ -647,10 +675,10 @@ while trial_counter < len(stimuli):
             newText = 'Trial outcome: $0'
             trials.addOtherData('rewardType', '$0')
     Trial_FB.setText(newText)
-        
+
     # add to be presented stimuli to output
-    trials.addOtherData('total_earned', Tot_Earn) 
-             
+    trials.addOtherData('total_earned', Tot_Earn)
+
     # keep track of which components have finished
     FeedbackComponents = [Trial_FB, Exp_FB]
     for thisComponent in FeedbackComponents:
@@ -673,7 +701,7 @@ while trial_counter < len(stimuli):
     while continueRoutine and routineTimer.getTime() > 0:
         # get current time
         t = FeedbackClock.getTime()
-        
+
         # feedback screen updates
         if t >= 0.0 and Trial_FB.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -693,15 +721,15 @@ while trial_counter < len(stimuli):
             if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                 continueRoutine = True
                 break  # at least one component has not yet finished
-        
+
         # check for quit (the Esc key)
         if endExpNow or event.getKeys(keyList=[endKey]):
             core.quit()
-        
+
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-    
+
     # -------Ending Routine "Feedback"-------
     for thisComponent in FeedbackComponents:
         if hasattr(thisComponent, "setAutoDraw"):
@@ -710,25 +738,25 @@ while trial_counter < len(stimuli):
     # ------Prepare to start Routine "fix"-------
     for i in range(0, int(tr_vec[trial_counter-1])):
         t = 0
-        FixClock.reset()  # clock    
+        FixClock.reset()  # clock
         # reset the non-slip timer for next routine
-        routineTimer.reset()   
+        routineTimer.reset()
         continueRoutine = True
-        
-        # set fixation time duration 
+
+        # set fixation time duration
         tend = globalClock.getTime() #CueClock.getTime() # actual ending time for trial presentation
         tcor = tend-nominalTime # difference between actual elapsed time and pre-allocated time
         fix_add = study_times[4]
         fix_time = fix_add - tcor # calculate fix time to correct for time drifts
         nominalTime += study_times[4]
         routineTimer.add(fix_time)
-        
+
         # keep track of which components have finished
         fixComponents = [fix]
         for thisComponent in fixComponents:
             if hasattr(thisComponent, 'status'):
                 thisComponent.status = NOT_STARTED
-        
+
         # -------Start Routine "fix"-------
         # add new TR to data file
         if fmri:
@@ -743,10 +771,10 @@ while trial_counter < len(stimuli):
         addTR(trials, time_start, trial_counter, curr_TR, TR_start, trialtype, CueType, CueAccuracy)
 
         while continueRoutine and routineTimer.getTime() > 0:
-            
+
             # get current time
             t = FixClock.getTime()
-                
+
             # fix updates
             if t >= 0.0 and fix.status == NOT_STARTED:
                 # keep track of start time/frame for later
@@ -755,7 +783,7 @@ while trial_counter < len(stimuli):
             frameRemains = 0.0 + fix_time - win.monitorFramePeriod * 0.75  # most of one frame period left
             if fix.status == STARTED and t >= frameRemains:
                 fix.setAutoDraw(False)
-            
+
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
                 break
@@ -764,25 +792,25 @@ while trial_counter < len(stimuli):
                 if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                     continueRoutine = True
                     break  # at least one component has not yet finished
-            
+
             # check for quit (the Esc key)
             if endExpNow or event.getKeys(keyList=[endKey]):
                 core.quit()
-            
+
             # refresh the screen
             if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
                 win.flip()
-        
+
         # -------Ending Routine "fix"-------
         for thisComponent in fixComponents:
             if hasattr(thisComponent, "setAutoDraw"):
-                thisComponent.setAutoDraw(False)    
-    
+                thisComponent.setAutoDraw(False)
+
     # add data to log file
-    trials.addOtherData('time.end.global', globalClock.getTime())      
-    trials.addOtherData('time.end.nominal', nominalTime)      
+    trials.addOtherData('time.end.global', globalClock.getTime())
+    trials.addOtherData('time.end.nominal', nominalTime)
     trials.addOtherData('time.trial.total', CueClock.getTime())
-                
+
     # advance to next trial/line in logFile
     thisExp.nextEntry()
 
@@ -793,7 +821,7 @@ t = t_end
 while t < t_end + closing_fix_dur:
     t = globalClock.getTime()
     fix.draw()
-    win.flip()      
+    win.flip()
 
 # completed experimental phase
 
