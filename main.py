@@ -550,6 +550,7 @@ while trial_counter < len(stimuli):
 
     # update component parameters for each repeat
     Target_Resp = event.BuilderKeyResponse()
+    Target_Resp.rt = ''  # default: no response (blank cell in CSV)
 
     # keep track of which components have finished
     TargetComponents = [Target, Target_Resp]
@@ -560,6 +561,9 @@ while trial_counter < len(stimuli):
     # set a random delay before target appears
     jitter = random.uniform(0, 0.05)
     trials.addOtherData('jitter', jitter)
+
+    # Initialize response tracking for this trial
+    target_removed = False
 
     # -------Start Routine "Target"-------
     # add new TR to data file
@@ -592,18 +596,25 @@ while trial_counter < len(stimuli):
             event.clearEvents(eventType='keyboard')
             theseKeys = []
 
-        frameRemainsResp = min_target_dur + frameDur*intensity # range: min_target_dur (130ms) + one frame (~17ms, depends on refresh rate) * 22.2
-        if Target.status == STARTED and t >= frameRemainsResp:
+        frameRemainsResp = min_target_dur + frameDur*intensity # intended target display duration: min_target_dur (130ms) + one frame (~17ms, depends on refresh rate) * staircase intensity
+        if Target.status == STARTED and t >= jitter + frameRemainsResp:
             print('thisTrial:',intensity) # print for QA purpose
             print('frameDur:',frameDur) # print for QA purpose
             print('frameRemainsResp:',frameRemainsResp) # print for QA purpose
 
             Target.setAutoDraw(False)
+            target_removed = True
             theseKeys = event.getKeys(keyList=expKeys)
             ThisResp = 0 # set response to no response - change only if response was given in the allowed time frame
 
             if len(theseKeys) > 0 and EarlyResp == 0:  # at least one key was pressed, and no early response
                 ThisResp = 1
+                Target_Resp.rt = Target_Resp.clock.getTime()
+
+        # After target is removed, keep listening for late responses
+        if target_removed and Target_Resp.rt == '':
+            theseKeys = event.getKeys(keyList=expKeys)
+            if len(theseKeys) > 0:
                 Target_Resp.rt = Target_Resp.clock.getTime()
 
         # check if all components have finished
@@ -634,9 +645,8 @@ while trial_counter < len(stimuli):
     trials.addOtherData('hit', ThisResp)
     trials.addOtherData('target_ms', frameRemainsResp)
 
-    # check responses to add RT
-    if ThisResp:  # we had a response
-        trials.addOtherData('rt', Target_Resp.rt)
+    # always record RT: actual RT if any response was given (in-window or late), -1 if no response
+    trials.addOtherData('rt', Target_Resp.rt)
 
     # ------Prepare to start Routine "Feedback"-------
     t = 0
