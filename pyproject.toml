@@ -7,21 +7,20 @@ name = "mid-task"
 version = "2.0.0"
 description = "Monetary Incentive Delay Task - PsychoPy implementation for fMRI"
 readme = "README.md"
-requires-python = ">=3.10"
-authors = [{ name = "Eden Z. Deng" }]
+requires-python = ">=3.11"
+authors = [{ name = "Eden Z. Deng" }, { name = "Eric Wang" }]
 dependencies = [
-    "psychopy>=2020.2.4",
-    "scipy>=1.10",
-    "pandas",
-    "pyglet",
-    "numpy>=2.0",
+    "psychopy>=2025.1",
     "psychopy-mri-emulator>=0.0.2",
-    "psychopy-legacy>=1.1.1",
+    "numpy>=1.26",
+    "pandas>=2.0",
 ]
 
 [project.optional-dependencies]
-
 dev = ["pytest"]
 
+[project.scripts]
+mid-task = "mid.__main__:run"
+
 [tool.setuptools.packages.find]
-exclude = ["data", "text"]
+where = ["src"]

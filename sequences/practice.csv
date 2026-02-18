@@ -1,0 +1,10 @@
+cue_type,target_accuracy
+loss,20
+gain,50
+neutral,80
+gain,80
+loss,80
+gain,20
+neutral,50
+loss,50
+neutral,20
