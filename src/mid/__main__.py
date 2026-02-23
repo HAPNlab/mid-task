@@ -80,14 +80,15 @@ def run() -> None:
     if session_info.show_instructions:
         session.display_instructions(win, stimuli_obj, session_info)
 
+    # ── PULSE COUNTER ─────────────────────────────────────────────────────────
+    pulse_counter = trial.PulseCounter(session_info.fmri)
+
     # ── WAIT FOR SCAN START ───────────────────────────────────────────────────
     stimuli_obj.wait.draw()
     win.flip()
 
     if session_info.fmri:
-        from psychopy.hardware.emulator import launchScan
-        launchScan(win, config.MR_SETTINGS, globalClock=None)
-        kb.waitKeys(keyList=["equal"])   # wait for first TR pulse
+        pulse_counter.wait_for_start()   # block until first hardware TR pulse
     else:
         keys_map = config.KEYS_BEHAVIORAL
         psy_event.waitKeys(keyList=[keys_map["start"]])
@@ -130,7 +131,7 @@ def run() -> None:
             subject_id=session_info.subject_id,
             run_n=session_info.run_n,
             pulse_ct=pulse_ct,
-            fmri=session_info.fmri,
+            pulse_counter=pulse_counter,
         )
 
         # Update cumulative pulse count from the last scan phase recorded

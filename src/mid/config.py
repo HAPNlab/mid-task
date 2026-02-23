@@ -42,6 +42,7 @@ JITTER_MAX_S: float = 0.05
 
 # Scanner settings
 SCANNER_PULSE_RATE: int = 46  # hardware pulses per TR (MCC counter; unused in emulator mode)
+BOARD_NUM: int = 0             # MCC DAQ board number (configured with Instacal)
 MR_SETTINGS: dict = {
     "TR": 2.0,
     "volumes": 356,

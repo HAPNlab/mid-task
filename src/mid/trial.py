@@ -166,12 +166,48 @@ def _check_quit(kb: keyboard.Keyboard) -> None:
         core.quit()
 
 
-def drain_pulses(kb: keyboard.Keyboard, fmri: bool) -> int:
-    """Return the number of TR pulse ('equal') events accumulated since last drain."""
-    if not fmri:
-        return 0
-    keys = kb.getKeys(["equal"], clear=True)
-    return len(keys)
+class PulseCounter:
+    """
+    Counts TR pulses from the MCC hardware counter (fMRI) or returns 0 (behavioral).
+
+    In real fMRI mode the scanner sends electrical pulses to the MCC DAQ board;
+    ul.c_in_32 reads the absolute hardware counter.  Each drain() call returns
+    how many raw pulses have arrived since the previous call.
+
+    In behavioral mode there is no scanner, so drain() always returns 0.
+    """
+
+    def __init__(self, fmri: bool) -> None:
+        self._fmri = fmri
+        self._board_num: int = config.BOARD_NUM
+        self._counter_num: int = 0
+        self._last: int = 0
+        if fmri:
+            from mcculw import ul
+            from mcculw.device_info import DaqDeviceInfo
+            ctr_info = DaqDeviceInfo(self._board_num).get_ctr_info()
+            self._counter_num = ctr_info.chan_info[0].channel_num
+            self._last = ul.c_in_32(self._board_num, self._counter_num)
+
+    def wait_for_start(self) -> None:
+        """Block until the first hardware TR pulse is detected (fMRI only)."""
+        if not self._fmri:
+            return
+        from time import sleep
+        from mcculw import ul
+        while ul.c_in_32(self._board_num, self._counter_num) == self._last:
+            sleep(0.001)
+        self._last = ul.c_in_32(self._board_num, self._counter_num)
+
+    def drain(self) -> int:
+        """Return hardware pulses since last call; always 0 in behavioral mode."""
+        if not self._fmri:
+            return 0
+        from mcculw import ul
+        curr = ul.c_in_32(self._board_num, self._counter_num)
+        delta = max(0, curr - self._last)
+        self._last = curr
+        return delta
 
 
 def run_trial(
@@ -190,7 +226,7 @@ def run_trial(
     subject_id: str,
     run_n: str,
     pulse_ct: int,
-    fmri: bool,
+    pulse_counter: PulseCounter,
 ) -> tuple[TrialRecord, list[ScanPhase], float, int]:
     """
     Run one complete trial (cue → fixation → response → outcome → ITI).
@@ -212,7 +248,7 @@ def run_trial(
     tr_within = 0
 
     # ── CUE ─────────────────────────────────────────────────────────────────
-    pulse_ct += drain_pulses(kb, fmri)
+    pulse_ct += pulse_counter.drain()
     time_onset = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -225,7 +261,7 @@ def run_trial(
     nominal_time += config.STUDY_TIMES_S["cue"]
 
     # ── FIXATION ──────────────────────────────────────────────────────────────
-    pulse_ct += drain_pulses(kb, fmri)
+    pulse_ct += pulse_counter.drain()
     fixation_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -238,7 +274,7 @@ def run_trial(
     nominal_time += config.STUDY_TIMES_S["fixation"]
 
     # ── RESPONSE ─────────────────────────────────────────────────────────────
-    pulse_ct += drain_pulses(kb, fmri)
+    pulse_ct += pulse_counter.drain()
     response_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -257,7 +293,7 @@ def run_trial(
     nominal_time += config.STUDY_TIMES_S["response"]
 
     # ── OUTCOME ──────────────────────────────────────────────────────────────
-    pulse_ct += drain_pulses(kb, fmri)
+    pulse_ct += pulse_counter.drain()
     outcome_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -273,7 +309,7 @@ def run_trial(
 
     # ── ITI ──────────────────────────────────────────────────────────────────
     for _ in range(n_iti_trs):
-        pulse_ct += drain_pulses(kb, fmri)
+        pulse_ct += pulse_counter.drain()
         iti_start = global_clock.getTime()
         tr_within += 1
         scan_phases.append(ScanPhase(
