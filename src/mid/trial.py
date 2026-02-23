@@ -8,7 +8,7 @@ from __future__ import annotations
 import random
 
 import pandas as pd
-from psychopy import core, visual
+from psychopy import core, event as psy_event, visual
 from psychopy.hardware import keyboard
 
 from mid import config
@@ -48,7 +48,7 @@ def run_delay(
         win.flip()
         _check_quit(kb)
     # Sample accumulated events at delay end to detect early press
-    keys = kb.getKeys(config.EXP_KEYS, clear=True)
+    keys = psy_event.getKeys(keyList=config.EXP_KEYS)
     return len(keys) > 0
 
 
@@ -94,10 +94,10 @@ def run_target(
 
         # Check for response after target is shown
         if target_shown and not hit and not early_press:
-            keys = kb.getKeys(config.EXP_KEYS, clear=True)
+            keys = psy_event.getKeys(keyList=config.EXP_KEYS, timeStamped=kb.clock)
             if keys:
                 hit = True
-                rt_s = keys[0].rt
+                rt_s = keys[0][-1]  # [key_name, rt] list from event backend
 
         _check_quit(kb)
 
@@ -161,7 +161,7 @@ def run_iti(
 
 def _check_quit(kb: keyboard.Keyboard) -> None:
     """Quit if escape or end-key is pressed."""
-    keys = kb.getKeys(["escape", "l"], clear=True)
+    keys = psy_event.getKeys(keyList=["escape", "l"])
     if keys:
         core.quit()
 

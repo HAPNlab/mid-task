@@ -28,7 +28,7 @@ def run() -> None:
     from pathlib import Path
 
     import numpy as np
-    from psychopy import logging
+    from psychopy import event as psy_event, logging
     from psychopy.hardware import keyboard
 
     from mid import config, display, recorder, session, staircase, trial
@@ -78,7 +78,7 @@ def run() -> None:
 
     # ── INSTRUCTIONS ─────────────────────────────────────────────────────────
     if session_info.show_instructions:
-        session.display_instructions(win, stimuli_obj, session_info, kb)
+        session.display_instructions(win, stimuli_obj, session_info)
 
     # ── WAIT FOR SCAN START ───────────────────────────────────────────────────
     stimuli_obj.wait.draw()
@@ -90,7 +90,7 @@ def run() -> None:
         kb.waitKeys(keyList=["equal"])   # wait for first TR pulse
     else:
         keys_map = config.KEYS_BEHAVIORAL
-        kb.waitKeys(keyList=[keys_map["start"]])
+        psy_event.waitKeys(keyList=[keys_map["start"]])
 
     # ── GLOBAL CLOCK & INITIAL FIXATION ──────────────────────────────────────
     global_clock = core.Clock()
@@ -150,7 +150,7 @@ def run() -> None:
     # ── END SCREEN ───────────────────────────────────────────────────────────
     stimuli_obj.end.draw()
     win.flip()
-    kb.waitKeys(keyList=["0"])
+    psy_event.waitKeys(keyList=["0"])
 
     # ── WRITE MANIFEST ───────────────────────────────────────────────────────
     recorder.write_manifest(

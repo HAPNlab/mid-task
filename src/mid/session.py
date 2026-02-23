@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pandas as pd
 import pyglet
-from psychopy import core, gui, monitors, visual
+from psychopy import core, event as psy_event, gui, monitors, visual
 
 from mid import config
 
@@ -97,7 +97,6 @@ def display_instructions(
     win: visual.Window,
     stimuli,              # Stimuli dataclass from display.py; avoid circular import
     session_info: SessionInfo,
-    kb,                   # psychopy.hardware.keyboard.Keyboard passed from caller
 ) -> None:
     """Display instructions from text/instructions_MID.txt one page at a time."""
     keys_map = config.KEYS_FMRI if session_info.fmri else config.KEYS_BEHAVIORAL
@@ -117,6 +116,7 @@ def display_instructions(
     if not pages:
         return
 
+    psy_event.clearEvents()
     page_idx = 0
 
     while True:
@@ -128,16 +128,24 @@ def display_instructions(
             stimuli.instr_move.draw()
         win.flip()
 
-        keys = kb.waitKeys(keyList=[forward_key, back_key, end_key])
-        if keys[0].name == end_key:
+        # Use psychopy.event.getKeys (not keyboard.Keyboard) because the event
+        # backend (active when psychtoolbox is absent) is the only reliable path.
+        # event.getKeys returns plain strings; it also pumps the pyglet event queue.
+        pressed = psy_event.getKeys(keyList=[forward_key, back_key, end_key])
+        if not pressed:
+            continue
+        key_name = pressed[0]
+        if key_name == end_key:
             core.quit()
-        elif keys[0].name == back_key and page_idx > 0:
+        elif key_name == back_key and page_idx > 0:
             page_idx -= 1
-        elif keys[0].name == forward_key:
+        elif key_name == forward_key:
             page_idx += 1
             if page_idx >= len(pages):
                 break
 
-    stimuli.instr_finish.draw()
-    win.flip()
-    kb.waitKeys(keyList=[start_key])
+    while True:
+        stimuli.instr_finish.draw()
+        win.flip()
+        if psy_event.getKeys(keyList=[start_key]):
+            break
