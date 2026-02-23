@@ -32,27 +32,27 @@ def run_cue(
         _check_quit(kb)
 
 
-def run_delay(
+def run_fixation(
     win: visual.Window,
     stimuli: Stimuli,
     kb: keyboard.Keyboard,
 ) -> bool:
     """
     Display fixation for STUDY_TIMES_S['delay'] seconds.
-    Returns True if a response key was pressed during the delay (early press).
+    Returns True if a response key was pressed during the fixation (early press).
     """
     kb.clearEvents()
-    timer = core.CountdownTimer(config.STUDY_TIMES_S["delay"])
+    timer = core.CountdownTimer(config.STUDY_TIMES_S["fixation"])
     while timer.getTime() > 0:
         draw_fixation(stimuli)
         win.flip()
         _check_quit(kb)
-    # Sample accumulated events at delay end to detect early press
+    # Sample accumulated events at fixation end to detect early press
     keys = psy_event.getKeys(keyList=config.EXP_KEYS)
     return len(keys) > 0
 
 
-def run_target(
+def run_response(
     win: visual.Window,
     stimuli: Stimuli,
     kb: keyboard.Keyboard,
@@ -61,7 +61,7 @@ def run_target(
     early_press: bool,
 ) -> tuple[bool, float | None]:
     """
-    Display target phase (STUDY_TIMES_S['target'] seconds total).
+    Display response phase (STUDY_TIMES_S['target'] seconds total).
     Target appears after jitter_s and is shown for MIN_TARGET_DUR_S + intensity_s.
     Returns (hit, rt_s) where rt_s is seconds from target onset, or None if no press.
     """
@@ -75,7 +75,7 @@ def run_target(
 
     kb.clearEvents()
 
-    while phase_clock.getTime() < config.STUDY_TIMES_S["target"]:
+    while phase_clock.getTime() < config.STUDY_TIMES_S["response"]:
         t = phase_clock.getTime()
 
         # Schedule RT clock reset and event clear on the flip that shows the target
@@ -122,7 +122,7 @@ def _compute_reward(
         return "$0", total_earned
 
 
-def run_feedback(
+def run_outcome(
     win: visual.Window,
     stimuli: Stimuli,
     kb: keyboard.Keyboard,
@@ -131,11 +131,11 @@ def run_feedback(
     total_earned: int,
 ) -> tuple[str, int]:
     """
-    Display feedback for STUDY_TIMES_S['feedback'] seconds.
+    Display outcome for STUDY_TIMES_S['feedback'] seconds.
     Returns (reward_outcome, new_total_earned).
     """
     reward_outcome, new_total_earned = _compute_reward(hit, cue_type, total_earned)
-    timer = core.CountdownTimer(config.STUDY_TIMES_S["feedback"])
+    timer = core.CountdownTimer(config.STUDY_TIMES_S["outcome"])
     while timer.getTime() > 0:
         draw_feedback(stimuli, hit, cue_type, reward_outcome)
         win.flip()
@@ -193,7 +193,7 @@ def run_trial(
     fmri: bool,
 ) -> tuple[TrialRecord, list[ScanPhase], float, int]:
     """
-    Run one complete trial (cue → delay → target → feedback → ITI).
+    Run one complete trial (cue → fixation → response → outcome → ITI).
 
     Returns:
         record         – TrialRecord for behavioral.csv
@@ -224,52 +224,52 @@ def run_trial(
     run_cue(win, stimuli, cue_type, target_accuracy, kb)
     nominal_time += config.STUDY_TIMES_S["cue"]
 
-    # ── DELAY ────────────────────────────────────────────────────────────────
+    # ── FIXATION ──────────────────────────────────────────────────────────────
     pulse_ct += drain_pulses(kb, fmri)
-    delay_start = global_clock.getTime()
+    fixation_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
-        trial_n=trial_n, phase="delay", tr_n=tr_within,
-        phase_global_time=delay_start,
-        phase_trial_time=delay_start - time_onset,
+        trial_n=trial_n, phase="fixation", tr_n=tr_within,
+        phase_global_time=fixation_start,
+        phase_trial_time=fixation_start - time_onset,
         pulse_ct=pulse_ct,
     ))
-    early_press = run_delay(win, stimuli, kb)
-    nominal_time += config.STUDY_TIMES_S["delay"]
+    early_press = run_fixation(win, stimuli, kb)
+    nominal_time += config.STUDY_TIMES_S["fixation"]
 
-    # ── TARGET ───────────────────────────────────────────────────────────────
+    # ── RESPONSE ─────────────────────────────────────────────────────────────
     pulse_ct += drain_pulses(kb, fmri)
-    target_start = global_clock.getTime()
+    response_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
-        trial_n=trial_n, phase="target", tr_n=tr_within,
-        phase_global_time=target_start,
-        phase_trial_time=target_start - time_onset,
+        trial_n=trial_n, phase="response", tr_n=tr_within,
+        phase_global_time=response_start,
+        phase_trial_time=response_start - time_onset,
         pulse_ct=pulse_ct,
     ))
-    hit, rt_s = run_target(win, stimuli, kb, jitter_s, intensity, early_press)
+    hit, rt_s = run_response(win, stimuli, kb, jitter_s, intensity, early_press)
 
     # Update staircase
     handler.addResponse(int(hit))
     stair_n = handler.thisTrialN + 1     # 1-indexed
     step_size = stair_sd(handler)
     target_dur_s = config.MIN_TARGET_DUR_S + intensity
-    nominal_time += config.STUDY_TIMES_S["target"]
+    nominal_time += config.STUDY_TIMES_S["response"]
 
-    # ── FEEDBACK ─────────────────────────────────────────────────────────────
+    # ── OUTCOME ──────────────────────────────────────────────────────────────
     pulse_ct += drain_pulses(kb, fmri)
-    feedback_start = global_clock.getTime()
+    outcome_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
-        trial_n=trial_n, phase="feedback", tr_n=tr_within,
-        phase_global_time=feedback_start,
-        phase_trial_time=feedback_start - time_onset,
+        trial_n=trial_n, phase="outcome", tr_n=tr_within,
+        phase_global_time=outcome_start,
+        phase_trial_time=outcome_start - time_onset,
         pulse_ct=pulse_ct,
     ))
-    reward_outcome, total_earned = run_feedback(
+    reward_outcome, total_earned = run_outcome(
         win, stimuli, kb, hit, cue_type, total_earned
     )
-    nominal_time += config.STUDY_TIMES_S["feedback"]
+    nominal_time += config.STUDY_TIMES_S["outcome"]
 
     # ── ITI ──────────────────────────────────────────────────────────────────
     for _ in range(n_iti_trs):
@@ -277,7 +277,7 @@ def run_trial(
         iti_start = global_clock.getTime()
         tr_within += 1
         scan_phases.append(ScanPhase(
-            trial_n=trial_n, phase="iti", tr_n=tr_within,
+            trial_n=trial_n, phase="post-outcome-fixation", tr_n=tr_within,
             phase_global_time=iti_start,
             phase_trial_time=iti_start - time_onset,
             pulse_ct=pulse_ct,

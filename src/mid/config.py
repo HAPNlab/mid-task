@@ -6,9 +6,9 @@ All time values are in seconds unless the name includes a unit suffix.
 # Phase durations (seconds)
 STUDY_TIMES_S: dict[str, float] = {
     "cue": 2.0,
-    "delay": 2.0,
-    "target": 2.0,
-    "feedback": 2.0,
+    "fixation": 2.0,
+    "response": 2.0,
+    "outcome": 2.0,
     "iti": 2.0,
 }
 
