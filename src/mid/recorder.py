@@ -113,7 +113,6 @@ def write_manifest(
         CLOSING_FIX_DUR_S,
         MIN_TARGET_DUR_S,
         MAX_TARGET_DUR_S,
-        INITIAL_TARGET_DUR_S,
         TARGET_ACCURACIES,
         JITTER_MAX_S,
     )
@@ -133,7 +132,7 @@ def write_manifest(
             "closing_fix_dur_s": CLOSING_FIX_DUR_S,
             "min_target_dur_s": MIN_TARGET_DUR_S,
             "max_target_dur_s": MAX_TARGET_DUR_S,
-            "initial_target_dur_s": INITIAL_TARGET_DUR_S,
+            "initial_target_dur_s": session_info.initial_target_dur_s,
             "target_accuracies_pct": TARGET_ACCURACIES,
             "jitter_max_s": JITTER_MAX_S,
         },

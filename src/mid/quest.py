@@ -11,7 +11,10 @@ from psychopy import data
 from mid import config
 
 
-def build_quest_handlers(sequence_df: pd.DataFrame) -> dict[str, data.QuestHandler]:
+def build_quest_handlers(
+    sequence_df: pd.DataFrame,
+    initial_target_dur_s: float = config.INITIAL_TARGET_DUR_S,
+) -> dict[str, data.QuestHandler]:
     """
     Build one QuestHandler per accuracy level.
 
@@ -19,7 +22,7 @@ def build_quest_handlers(sequence_df: pd.DataFrame) -> dict[str, data.QuestHandl
     Actual target duration = MIN_TARGET_DUR_S + intensity.
     """
     max_intensity = config.MAX_TARGET_DUR_S - config.MIN_TARGET_DUR_S
-    initial_intensity = config.INITIAL_TARGET_DUR_S - config.MIN_TARGET_DUR_S
+    initial_intensity = initial_target_dur_s - config.MIN_TARGET_DUR_S
 
     handlers: dict[str, data.QuestHandler] = {}
     for acc, name in zip(config.TARGET_ACCURACIES, ["high", "medium", "low"]):

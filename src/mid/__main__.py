@@ -58,11 +58,12 @@ def run() -> None:
     n_trials = len(sequence)
 
     # ── BUILD QUEST HANDLERS ─────────────────────────────────────────────────
-    quest_handlers = quest.build_quest_handlers(sequence)
+    quest_handlers = quest.build_quest_handlers(sequence, session_info.initial_target_dur_s)
 
     # ── SETUP OUTPUT FILES ───────────────────────────────────────────────────
-    behavioral_writer = recorder.BehavioralCsvWriter(run_dir / "behavioral.csv")
-    scan_log_writer = recorder.ScanLogWriter(run_dir / "scan_log.csv")
+    file_stem = f"{session_info.subject_id}_run{session_info.run_n}"
+    behavioral_writer = recorder.BehavioralCsvWriter(run_dir / f"behavioral_{file_stem}.csv")
+    scan_log_writer = recorder.ScanLogWriter(run_dir / f"scan_log_{file_stem}.csv")
     recorder.write_manifest(
         run_dir=run_dir,
         session_info=session_info,

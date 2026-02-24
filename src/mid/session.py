@@ -27,6 +27,7 @@ class SessionInfo:
     fmri: bool
     run_n: str                 # "1" | "2" | "practice"
     show_instructions: bool
+    initial_target_dur_s: float
 
 
 def show_dialog() -> SessionInfo:
@@ -36,16 +37,24 @@ def show_dialog() -> SessionInfo:
         "fMRI? (yes/no)": "no",
         "Task number (1/2/practice)": "practice",
         "Show instructions? (yes/no)": "yes",
+        f"Initial target duration (s) [default {config.INITIAL_TARGET_DUR_S}]": str(config.INITIAL_TARGET_DUR_S),
     }
     dlg = gui.DlgFromDict(dictionary=fields, title="MID Task")
     if not dlg.OK:
         core.quit()
+
+    dur_key = f"Initial target duration (s) [default {config.INITIAL_TARGET_DUR_S}]"
+    try:
+        initial_dur = float(fields[dur_key])
+    except ValueError:
+        initial_dur = config.INITIAL_TARGET_DUR_S
 
     return SessionInfo(
         subject_id=str(fields["Subject ID"]),
         fmri=fields["fMRI? (yes/no)"].strip().lower() == "yes",
         run_n=str(fields["Task number (1/2/practice)"]).strip(),
         show_instructions=fields["Show instructions? (yes/no)"].strip().lower() == "yes",
+        initial_target_dur_s=initial_dur,
     )
 
 
