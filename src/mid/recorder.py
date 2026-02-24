@@ -22,10 +22,10 @@ class TrialRecord:
     reward: int
     difficulty: str
     target_accuracy: int
-    stair: str
-    stair_n: int
-    stair_step: float
-    stair_intensity: float
+    quest: str
+    quest_n: int
+    quest_step: float
+    quest_intensity: float
     time_onset: float
     jitter_ms: int
     target_dur_ms: int
@@ -56,7 +56,7 @@ class ScanPhase:
 
 BEHAVIORAL_COLUMNS: list[str] = [
     "trial_n", "trial_type", "cue_type", "reward", "difficulty", "target_accuracy",
-    "stair", "stair_n", "stair_step", "stair_intensity", "time_onset", "jitter_ms",
+    "quest", "quest_n", "quest_step", "quest_intensity", "time_onset", "jitter_ms",
     "target_dur_ms", "early_press", "hit", "rt_ms", "reward_outcome", "total_earned",
     "time_trial_end", "trial_dur_ms", "time_sched_end", "timing_drift_ms", "total_trs",
     "subject_id", "run_n", "pulse_ct",

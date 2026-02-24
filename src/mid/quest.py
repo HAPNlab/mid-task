@@ -1,6 +1,6 @@
 """
 QuestHandler construction and management.
-All staircase intensities are in seconds (not frames).
+All QUEST intensities are in seconds (not frames).
 """
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from psychopy import data
 from mid import config
 
 
-def build_staircases(sequence_df: pd.DataFrame) -> dict[str, data.QuestHandler]:
+def build_quest_handlers(sequence_df: pd.DataFrame) -> dict[str, data.QuestHandler]:
     """
     Build one QuestHandler per accuracy level.
 
@@ -26,7 +26,7 @@ def build_staircases(sequence_df: pd.DataFrame) -> dict[str, data.QuestHandler]:
         n_trials = int((sequence_df["target_accuracy"] == acc).sum())
         handlers[name] = data.QuestHandler(
             startVal=initial_intensity,
-            startValSd=config.INITIAL_STAIR_SD_S,
+            startValSd=config.INITIAL_QUEST_SD_S,
             pThreshold=acc / 100,
             gamma=0.01,
             nTrials=n_trials,
@@ -37,13 +37,13 @@ def build_staircases(sequence_df: pd.DataFrame) -> dict[str, data.QuestHandler]:
     return handlers
 
 
-def get_active_staircase(
-    row: pd.Series, staircases: dict[str, data.QuestHandler]
+def get_active_quest(
+    row: pd.Series, quest_handlers: dict[str, data.QuestHandler]
 ) -> tuple[str, data.QuestHandler]:
-    """Return (stair_name, handler) for the given trial row."""
+    """Return (quest_name, handler) for the given trial row."""
     acc = int(row["target_accuracy"])
-    name = config.STAIR_NAME[acc]
-    return name, staircases[name]
+    name = config.QUEST_NAME[acc]
+    return name, quest_handlers[name]
 
 
 def next_intensity(handler: data.QuestHandler) -> float:
@@ -53,7 +53,7 @@ def next_intensity(handler: data.QuestHandler) -> float:
     return float(np.clip(raw, 0.0, max_intensity))
 
 
-def stair_sd(handler: data.QuestHandler) -> float:
+def quest_sd(handler: data.QuestHandler) -> float:
     """Return SD of the posterior distribution as a step-size proxy."""
     try:
         return float(handler.sd())

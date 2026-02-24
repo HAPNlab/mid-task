@@ -14,7 +14,7 @@ from psychopy.hardware import keyboard
 from mid import config
 from mid.display import Stimuli, draw_cue, draw_feedback, draw_fixation, draw_target
 from mid.recorder import ScanPhase, TrialRecord
-from mid.staircase import stair_sd
+from mid.quest import quest_sd
 
 
 def run_cue(
@@ -217,7 +217,7 @@ def run_trial(
     global_clock: core.Clock,
     row: pd.Series,
     trial_n: int,
-    stair_name: str,
+    quest_name: str,
     handler,                   # data.QuestHandler
     intensity: float,          # seconds above MIN_TARGET_DUR_S
     n_iti_trs: int,
@@ -285,10 +285,10 @@ def run_trial(
     ))
     hit, rt_s = run_response(win, stimuli, kb, jitter_s, intensity, early_press)
 
-    # Update staircase
+    # Update QUEST
     handler.addResponse(int(hit))
-    stair_n = handler.thisTrialN + 1     # 1-indexed
-    step_size = stair_sd(handler)
+    quest_n = handler.thisTrialN + 1     # 1-indexed
+    step_size = quest_sd(handler)
     target_dur_s = config.MIN_TARGET_DUR_S + intensity
     nominal_time += config.STUDY_TIMES_S["response"]
 
@@ -335,10 +335,10 @@ def run_trial(
         reward=reward,
         difficulty=difficulty,
         target_accuracy=target_accuracy,
-        stair=stair_name,
-        stair_n=stair_n,
-        stair_step=round(step_size, 6),
-        stair_intensity=round(intensity, 6),
+        quest=quest_name,
+        quest_n=quest_n,
+        quest_step=round(step_size, 6),
+        quest_intensity=round(intensity, 6),
         time_onset=round(time_onset, 6),
         jitter_ms=int(round(jitter_s * 1000)),
         target_dur_ms=int(round(target_dur_s * 1000)),

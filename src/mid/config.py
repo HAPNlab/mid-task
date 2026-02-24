@@ -17,10 +17,10 @@ CUE_SHAPES: dict[str, int] = {"gain": 128, "loss": 4, "neutral": 6}  # polygon e
 CUE_LABELS: dict[str, str] = {"gain": "+$5", "loss": "-$5", "neutral": "$0"}
 REWARD_DOLLARS: dict[str, int] = {"gain": 5, "loss": -5, "neutral": 0}
 
-# Staircase target accuracy levels (%)
+# QUEST target accuracy levels (%)
 TARGET_ACCURACIES: list[int] = [80, 50, 20]
 DIFFICULTY: dict[int, str] = {80: "high", 50: "medium", 20: "low"}
-STAIR_NAME: dict[int, str] = {80: "high", 50: "medium", 20: "low"}
+QUEST_NAME: dict[int, str] = {80: "high", 50: "medium", 20: "low"}
 
 # Trial type lookup: (cue_type, target_accuracy) -> trial_type 1-9
 TRIAL_TYPE_MAP: dict[tuple[str, int], int] = {
@@ -33,7 +33,7 @@ TRIAL_TYPE_MAP: dict[tuple[str, int], int] = {
 MIN_TARGET_DUR_S: float = 0.130
 MAX_TARGET_DUR_S: float = 0.500
 INITIAL_TARGET_DUR_S: float = 0.265
-INITIAL_STAIR_SD_S: float = 0.067   # ≈ 4 frames at 60 Hz
+INITIAL_QUEST_SD_S: float = 0.067   # ≈ 4 frames at 60 Hz
 
 # Run structure
 INITIAL_FIX_DUR_S: float = 12.0

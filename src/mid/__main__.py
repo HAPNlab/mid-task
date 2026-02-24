@@ -31,7 +31,7 @@ def run() -> None:
     from psychopy import event as psy_event, logging
     from psychopy.hardware import keyboard
 
-    from mid import config, display, recorder, session, staircase, trial
+    from mid import config, display, recorder, session, quest, trial
 
     # ── INITIALISE SESSION ───────────────────────────────────────────────────
     session_info = session.show_dialog()
@@ -57,8 +57,8 @@ def run() -> None:
     sequence = session.load_sequence(session_info.run_n)
     n_trials = len(sequence)
 
-    # ── BUILD STAIRCASES ─────────────────────────────────────────────────────
-    staircases = staircase.build_staircases(sequence)
+    # ── BUILD QUEST HANDLERS ─────────────────────────────────────────────────
+    quest_handlers = quest.build_quest_handlers(sequence)
 
     # ── SETUP OUTPUT FILES ───────────────────────────────────────────────────
     behavioral_writer = recorder.BehavioralCsvWriter(run_dir / "behavioral.csv")
@@ -111,8 +111,8 @@ def run() -> None:
 
     for trial_idx, row in sequence.iterrows():
         trial_n = int(trial_idx) + 1
-        stair_name, handler = staircase.get_active_staircase(row, staircases)
-        intensity = staircase.next_intensity(handler)
+        quest_name, handler = quest.get_active_quest(row, quest_handlers)
+        intensity = quest.next_intensity(handler)
         n_iti = int(tr_vec[trial_n - 1])
 
         rec, scan_phases, nominal_time, total_earned = trial.run_trial(
@@ -122,7 +122,7 @@ def run() -> None:
             global_clock=global_clock,
             row=row,
             trial_n=trial_n,
-            stair_name=stair_name,
+            quest_name=quest_name,
             handler=handler,
             intensity=intensity,
             n_iti_trs=n_iti,
