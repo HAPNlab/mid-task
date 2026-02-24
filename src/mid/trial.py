@@ -41,7 +41,7 @@ def run_fixation(
     Display fixation for STUDY_TIMES_S['delay'] seconds.
     Returns True if a response key was pressed during the fixation (early press).
     """
-    kb.clearEvents()
+    psy_event.clearEvents()
     timer = core.CountdownTimer(config.STUDY_TIMES_S["fixation"])
     while timer.getTime() > 0:
         draw_fixation(stimuli)
@@ -73,7 +73,7 @@ def run_response(
     hit = False
     rt_s: float | None = None
 
-    kb.clearEvents()
+    psy_event.clearEvents()
 
     while phase_clock.getTime() < config.STUDY_TIMES_S["response"]:
         t = phase_clock.getTime()
@@ -81,7 +81,7 @@ def run_response(
         # Schedule RT clock reset and event clear on the flip that shows the target
         if not clock_reset_scheduled and t >= jitter_s:
             win.callOnFlip(kb.clock.reset)
-            win.callOnFlip(kb.clearEvents)
+            win.callOnFlip(psy_event.clearEvents)
             clock_reset_scheduled = True
             target_shown = True
 
@@ -96,8 +96,9 @@ def run_response(
         if target_shown and not hit and not early_press:
             keys = psy_event.getKeys(keyList=config.EXP_KEYS, timeStamped=kb.clock)
             if keys:
-                hit = True
                 rt_s = keys[0][-1]  # [key_name, rt] list from event backend
+                if not target_removed:
+                    hit = True
 
         _check_quit(kb)
 
@@ -200,12 +201,27 @@ class PulseCounter:
         self._last = ul.c_in_32(self._board_num, self._counter_num)
 
     def drain(self) -> int:
-        """Return hardware pulses since last call; always 0 in behavioral mode."""
+        """Snapshot hardware pulses since last call without blocking; always 0 in behavioral mode."""
         if not self._fmri:
             return 0
         from mcculw import ul
         curr = ul.c_in_32(self._board_num, self._counter_num)
         delta = max(0, curr - self._last)
+        self._last = curr
+        return delta
+
+    def wait_for_tr(self) -> int:
+        """Block until SCANNER_PULSE_RATE more pulses have arrived (one TR), then return
+        the pulse delta. Returns immediately in behavioral mode."""
+        if not self._fmri:
+            return 0
+        from time import sleep
+        from mcculw import ul
+        target = self._last + config.SCANNER_PULSE_RATE
+        while ul.c_in_32(self._board_num, self._counter_num) < target:
+            sleep(0.001)
+        curr = ul.c_in_32(self._board_num, self._counter_num)
+        delta = curr - self._last
         self._last = curr
         return delta
 
@@ -261,7 +277,7 @@ def run_trial(
     nominal_time += config.STUDY_TIMES_S["cue"]
 
     # ── FIXATION ──────────────────────────────────────────────────────────────
-    pulse_ct += pulse_counter.drain()
+    pulse_ct += pulse_counter.wait_for_tr()
     fixation_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -274,7 +290,7 @@ def run_trial(
     nominal_time += config.STUDY_TIMES_S["fixation"]
 
     # ── RESPONSE ─────────────────────────────────────────────────────────────
-    pulse_ct += pulse_counter.drain()
+    pulse_ct += pulse_counter.wait_for_tr()
     response_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -293,7 +309,7 @@ def run_trial(
     nominal_time += config.STUDY_TIMES_S["response"]
 
     # ── OUTCOME ──────────────────────────────────────────────────────────────
-    pulse_ct += pulse_counter.drain()
+    pulse_ct += pulse_counter.wait_for_tr()
     outcome_start = global_clock.getTime()
     tr_within += 1
     scan_phases.append(ScanPhase(
@@ -309,7 +325,7 @@ def run_trial(
 
     # ── ITI ──────────────────────────────────────────────────────────────────
     for _ in range(n_iti_trs):
-        pulse_ct += pulse_counter.drain()
+        pulse_ct += pulse_counter.wait_for_tr()
         iti_start = global_clock.getTime()
         tr_within += 1
         scan_phases.append(ScanPhase(
