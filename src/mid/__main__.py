@@ -63,6 +63,13 @@ def run() -> None:
     # ── SETUP OUTPUT FILES ───────────────────────────────────────────────────
     behavioral_writer = recorder.BehavioralCsvWriter(run_dir / "behavioral.csv")
     scan_log_writer = recorder.ScanLogWriter(run_dir / "scan_log.csv")
+    recorder.write_manifest(
+        run_dir=run_dir,
+        session_info=session_info,
+        session_time=session_time,
+        frame_rate=frame_rate,
+        n_trials=n_trials,
+    )
 
     # ── KEYBOARD ─────────────────────────────────────────────────────────────
     kb = keyboard.Keyboard()
@@ -152,15 +159,6 @@ def run() -> None:
     stimuli_obj.end.draw()
     win.flip()
     psy_event.waitKeys(keyList=["0"])
-
-    # ── WRITE MANIFEST ───────────────────────────────────────────────────────
-    recorder.write_manifest(
-        run_dir=run_dir,
-        session_info=session_info,
-        session_time=session_time,
-        frame_rate=frame_rate,
-        n_trials=n_trials,
-    )
 
     # ── CLEANUP ──────────────────────────────────────────────────────────────
     behavioral_writer.close()
