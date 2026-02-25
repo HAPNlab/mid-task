@@ -59,7 +59,7 @@ def run_response(
     jitter_s: float,
     intensity_s: float,
     early_press: bool,
-) -> tuple[bool, float | None]:
+) -> tuple[bool, float | None, bool]:
     """
     Display response phase (STUDY_TIMES_S['target'] seconds total).
     Target appears after jitter_s and is shown for MIN_TARGET_DUR_S + intensity_s.
@@ -92,6 +92,11 @@ def run_response(
             draw_target(stimuli)
         win.flip()
 
+        # Check for early press during jitter window
+        if not target_shown and not early_press:
+            if psy_event.getKeys(keyList=config.EXP_KEYS):
+                early_press = True
+
         # Check for response after target is shown
         if target_shown and not hit and not early_press:
             keys = psy_event.getKeys(keyList=config.EXP_KEYS, timeStamped=kb.clock)
@@ -102,7 +107,7 @@ def run_response(
 
         _check_quit(kb)
 
-    return hit, rt_s
+    return hit, rt_s, early_press
 
 
 def _compute_reward(
@@ -299,7 +304,7 @@ def run_trial(
         phase_trial_time=response_start - time_onset,
         pulse_ct=pulse_ct,
     ))
-    hit, rt_s = run_response(win, stimuli, kb, jitter_s, intensity, early_press)
+    hit, rt_s, early_press = run_response(win, stimuli, kb, jitter_s, intensity, early_press)
 
     # Update QUEST
     handler.addResponse(int(hit))
