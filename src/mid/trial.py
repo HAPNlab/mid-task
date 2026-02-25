@@ -98,7 +98,7 @@ def run_response(
                 early_press = True
 
         # Check for response after target is shown
-        if target_shown and not hit and not early_press:
+        if target_shown and not hit and rt_s is None and not early_press:
             keys = psy_event.getKeys(keyList=config.EXP_KEYS, timeStamped=kb.clock)
             if keys:
                 rt_s = keys[0][-1]  # [key_name, rt] list from event backend
