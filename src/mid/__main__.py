@@ -27,7 +27,6 @@ def run() -> None:
     from datetime import datetime
     from pathlib import Path
 
-    import numpy as np
     from psychopy import event as psy_event, logging
     from psychopy.hardware import keyboard
 
@@ -75,12 +74,6 @@ def run() -> None:
     # ── KEYBOARD ─────────────────────────────────────────────────────────────
     kb = keyboard.Keyboard()
 
-    # ── ITI TR VECTOR ────────────────────────────────────────────────────────
-    # Half the trials get 2 ITI TRs, half get 1
-    tr_vec = np.ones(n_trials, dtype=int)
-    tr_vec[: n_trials // 2] = 2
-    np.random.shuffle(tr_vec)
-
     # ── HIDE MOUSE ───────────────────────────────────────────────────────────
     win.mouseVisible = False
 
@@ -121,7 +114,7 @@ def run() -> None:
         trial_n = int(trial_idx) + 1
         quest_name, handler = quest.get_active_quest(row, quest_handlers)
         intensity = quest.next_intensity(handler)
-        n_iti = int(tr_vec[trial_n - 1])
+        n_iti = int(row["n_iti"])
 
         rec, scan_phases, nominal_time, total_earned = trial.run_trial(
             win=win,
