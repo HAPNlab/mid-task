@@ -11,9 +11,10 @@ requires-python = ">=3.11"
 authors = [{ name = "Eden Z. Deng" }, { name = "Eric Wang" }]
 dependencies = [
     "psychopy>=2025.1",
-    "psychopy-mri-emulator>=0.0.2",
     "numpy>=1.26",
     "pandas>=2.0",
+    "rich>=14.3.3",
+    "mcculw>=1.0.0",
 ]
 
 [project.optional-dependencies]

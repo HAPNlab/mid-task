@@ -8,13 +8,14 @@ from __future__ import annotations
 import random
 
 import pandas as pd
-from psychopy import core, event as psy_event, visual
+from psychopy import core, event as psy_event, logging, visual
 from psychopy.hardware import keyboard
 
 from mid import config
 from mid.display import Stimuli, draw_cue, draw_feedback, draw_fixation, draw_target
 from mid.recorder import ScanPhase, TrialRecord
 from mid.quest import quest_sd
+from mid.scanner import PulseCounter
 
 
 def run_cue(
@@ -172,64 +173,6 @@ def _check_quit(kb: keyboard.Keyboard) -> None:
         core.quit()
 
 
-class PulseCounter:
-    """
-    Counts TR pulses from the MCC hardware counter (fMRI) or returns 0 (behavioral).
-
-    In real fMRI mode the scanner sends electrical pulses to the MCC DAQ board;
-    ul.c_in_32 reads the absolute hardware counter.  Each drain() call returns
-    how many raw pulses have arrived since the previous call.
-
-    In behavioral mode there is no scanner, so drain() always returns 0.
-    """
-
-    def __init__(self, fmri: bool) -> None:
-        self._fmri = fmri
-        self._board_num: int = config.BOARD_NUM
-        self._counter_num: int = 0
-        self._last: int = 0
-        if fmri:
-            from mcculw import ul
-            from mcculw.device_info import DaqDeviceInfo
-            ctr_info = DaqDeviceInfo(self._board_num).get_ctr_info()
-            self._counter_num = ctr_info.chan_info[0].channel_num
-            self._last = ul.c_in_32(self._board_num, self._counter_num)
-
-    def wait_for_start(self) -> None:
-        """Block until the first hardware TR pulse is detected (fMRI only)."""
-        if not self._fmri:
-            return
-        from time import sleep
-        from mcculw import ul
-        while ul.c_in_32(self._board_num, self._counter_num) == self._last:
-            sleep(0.001)
-        self._last = ul.c_in_32(self._board_num, self._counter_num)
-
-    def drain(self) -> int:
-        """Snapshot hardware pulses since last call without blocking; always 0 in behavioral mode."""
-        if not self._fmri:
-            return 0
-        from mcculw import ul
-        curr = ul.c_in_32(self._board_num, self._counter_num)
-        delta = max(0, curr - self._last)
-        self._last = curr
-        return delta
-
-    def wait_for_tr(self) -> int:
-        """Block until SCANNER_PULSE_RATE more pulses have arrived (one TR), then return
-        the pulse delta. Returns immediately in behavioral mode."""
-        if not self._fmri:
-            return 0
-        from time import sleep
-        from mcculw import ul
-        target = self._last + config.SCANNER_PULSE_RATE
-        while ul.c_in_32(self._board_num, self._counter_num) < target:
-            sleep(0.001)
-        curr = ul.c_in_32(self._board_num, self._counter_num)
-        delta = curr - self._last
-        self._last = curr
-        return delta
-
 
 def run_trial(
     win: visual.Window,
@@ -264,6 +207,12 @@ def run_trial(
     trial_type = config.TRIAL_TYPE_MAP[(cue_type, target_accuracy)]
     reward = config.REWARD_DOLLARS[cue_type]
     jitter_s = random.uniform(0, config.JITTER_MAX_S)
+
+    target_dur_ms = int(round((config.MIN_TARGET_DUR_S + intensity) * 1000))
+    logging.exp(
+        f"  -> cue={cue_type}  accuracy={target_accuracy}%  quest={quest_name}  "
+        f"target_dur={target_dur_ms} ms  jitter={int(jitter_s * 1000)} ms"
+    )
 
     scan_phases: list[ScanPhase] = []
     tr_within = 0

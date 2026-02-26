@@ -891,6 +891,15 @@ wheels = [
 ]
 
 [[package]]
+name = "mcculw"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/b6/6660584a8b05f9325114949eae71778dc4abcee1b544e147cf1a3a64ec82/mcculw-1.0.0.tar.gz", hash = "sha256:233e0146798c184c02250ed2a9518642c924c09da4b826ba0014244e76198665", size = 85981, upload-time = "2020-08-25T20:06:02.31Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b9/d6/f296a574d444a28038db26b4b30c130412ccfb7cb32c39e2b5dc7819fe22/mcculw-1.0.0-py2.py3-none-any.whl", hash = "sha256:2c7f97b6f5a498c1543f784b0a6813fcd762d3de253a98b7eedf931a8b7af6cd", size = 89369, upload-time = "2020-08-25T20:05:59.498Z" },
+]
+
+[[package]]
 name = "mdurl"
 version = "0.1.2"
 source = { registry = "https://pypi.org/simple" }
@@ -933,10 +942,11 @@ name = "mid-task"
 version = "2.0.0"
 source = { editable = "." }
 dependencies = [
+    { name = "mcculw" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "psychopy" },
-    { name = "psychopy-mri-emulator" },
+    { name = "rich" },
 ]
 
 [package.optional-dependencies]
@@ -946,11 +956,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "mcculw", specifier = ">=1.0.0" },
     { name = "numpy", specifier = ">=1.26" },
     { name = "pandas", specifier = ">=2.0" },
     { name = "psychopy", specifier = ">=2025.1" },
-    { name = "psychopy-mri-emulator", specifier = ">=0.0.2" },
     { name = "pytest", marker = "extra == 'dev'" },
+    { name = "rich", specifier = ">=14.3.3" },
 ]
 provides-extras = ["dev"]
 
@@ -1513,15 +1524,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ca/aa/8ff09295d942fc681113f7fdd24850bb9e207180a215c4ad9c3e8e3dc82e/psychopy-2025.2.3.tar.gz", hash = "sha256:5a095fa2a493d27280fdf30dda3aba80e7c3c5519f36324821e7f132b59e5cd9", size = 45711887, upload-time = "2025-12-01T21:47:44.777Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ea/c7/d4bc3e2a0abbe93ffc038647c21d99303af27d90c1b91d03a2f5fc12f4b9/psychopy-2025.2.3-py3-none-any.whl", hash = "sha256:7aaaf88624bee72e8c8581aa85cf0c639ab00c9a58e4c9f1270eff4f9de4d53d", size = 47362862, upload-time = "2025-12-01T21:47:41.372Z" },
-]
-
-[[package]]
-name = "psychopy-mri-emulator"
-version = "0.0.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f0/ab/2ce3a960b1d134a7a390b37e625d6e2463840e13cfc5ceafa7af12ccf537/psychopy_mri_emulator-0.0.2.tar.gz", hash = "sha256:a10b59552ecf0157567512917bcad709feabc12fc5b4dbe2e518a98fcaef5a50", size = 18842, upload-time = "2024-08-05T15:52:05.811Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fc/67/ae156650179d2684d583a713cd8dc3ba9f2ae30ea2ff5a6ac20ca276186c/psychopy_mri_emulator-0.0.2-py3-none-any.whl", hash = "sha256:eeef1bea164abc0b7795ce1254a8193772cd3bfa7b031f03c096ade7c1280463", size = 19414, upload-time = "2024-08-05T15:52:04.859Z" },
 ]
 
 [[package]]
@@ -4879,6 +4881,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f3/61/d7545dafb7ac2230c70d38d31cbfe4cc64f7144dc41f6e4e4b78ecd9f5bb/requests-toolbelt-1.0.0.tar.gz", hash = "sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6", size = 206888, upload-time = "2023-05-01T04:11:33.229Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl", hash = "sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06", size = 54481, upload-time = "2023-05-01T04:11:28.427Z" },
+]
+
+[[package]]
+name = "rich"
+version = "14.3.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "markdown-it-py" },
+    { name = "pygments" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b3/c6/f3b320c27991c46f43ee9d856302c70dc2d0fb2dba4842ff739d5f46b393/rich-14.3.3.tar.gz", hash = "sha256:b8daa0b9e4eef54dd8cf7c86c03713f53241884e814f4e2f5fb342fe520f639b", size = 230582, upload-time = "2026-02-19T17:23:12.474Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/25/b208c5683343959b670dc001595f2f3737e051da617f66c31f7c4fa93abc/rich-14.3.3-py3-none-any.whl", hash = "sha256:793431c1f8619afa7d3b52b2cdec859562b950ea0d4b6b505397612db8d5362d", size = 310458, upload-time = "2026-02-19T17:23:13.732Z" },
 ]
 
 [[package]]

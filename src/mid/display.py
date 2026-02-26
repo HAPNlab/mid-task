@@ -39,66 +39,80 @@ def build_stimuli(win: visual.Window) -> Stimuli:
     text_col = "black"
 
     fix = visual.TextStim(
-        win, pos=(0, 0), text="+", height=font_h * 2, color=text_col,
+        win, name="fix", pos=(0, 0), text="+", height=font_h * 2, color=text_col,
+        autoLog=False,
     )
 
-    cue = visual.Polygon(win, radius=0.2, pos=(0, 0), fillColor="white")
+    cue = visual.Polygon(win, name="cue", radius=0.2, pos=(0, 0), fillColor="white",
+        autoLog=False,
+    )
 
     cue_label = visual.TextStim(
-        win, font="Arial", pos=(0, 0), height=font_h, color=text_col,
+        win, name="cue_label", font="Arial", pos=(0, 0), height=font_h, color=text_col,
+        autoLog=False,
     )
 
     accuracy_label = visual.TextStim(
-        win, font="Arial", pos=(0, -y_scr / 4), height=font_h, color=text_col,
+        win, name="accuracy_label", font="Arial", pos=(0, -y_scr / 4), height=font_h, color=text_col,
+        autoLog=False,
     )
 
     target = visual.Polygon(
-        win, edges=3, radius=0.2, fillColor="white", lineWidth=0, pos=(0, 0),
+        win, name="target", edges=3, radius=0.2, fillColor="white", lineWidth=0, pos=(0, 0),
+        autoLog=False,
     )
 
     feedback_trial = visual.TextStim(
-        win, font="Arial", pos=(0, -y_scr / 20),
+        win, name="feedback_trial", font="Arial", pos=(0, -y_scr / 20),
         height=font_h + y_scr / 30, wrapWidth=None, color=text_col,
+        autoLog=False,
     )
 
     feedback_exp = visual.TextStim(
-        win, font="Arial", pos=(0, y_scr / 6),
+        win, name="feedback_exp", font="Arial", pos=(0, y_scr / 6),
         height=font_h + y_scr / 30, wrapWidth=None, color="Green",
+        autoLog=False,
     )
 
     instr_prompt = visual.TextStim(
-        win, font="Arial", pos=(0, y_scr / 10),
+        win, name="instr_prompt", font="Arial", pos=(0, y_scr / 10),
         height=font_h, wrapWidth=wrap_w, color=text_col,
+        autoLog=False,
     )
 
     keys_map = config.KEYS_BEHAVIORAL  # updated per session in display_instructions
     instr_first = visual.TextStim(
-        win, text=f"Press {keys_map['forward']} to continue.",
+        win, name="instr_first", text=f"Press {keys_map['forward']} to continue.",
         height=font_h, color=text_col, pos=(0, -y_scr / 4),
+        autoLog=False,
     )
     instr_move = visual.TextStim(
-        win, text=f"Press {keys_map['forward']} to continue, or {keys_map['back']} to go back.",
+        win, name="instr_move",
+        text=f"Press {keys_map['forward']} to continue, or {keys_map['back']} to go back.",
         height=font_h, color=text_col, pos=(0, -y_scr / 4),
+        autoLog=False,
     )
     instr_finish = visual.TextStim(
-        win,
+        win, name="instr_finish",
         text=(
             "You have reached the end of the instructions. "
             "When you are ready to begin the task, place your fingers on the "
             "keys and notify the experimenter."
         ),
         height=font_h, color=text_col, pos=(0, 0), wrapWidth=wrap_w,
+        autoLog=False,
     )
 
     wait = visual.TextStim(
-        win, pos=(0, 0),
+        win, name="wait", pos=(0, 0),
         text="The task will begin momentarily. Get ready...",
         height=font_h, color=text_col, wrapWidth=wrap_w,
+        autoLog=False,
     )
 
     end = visual.TextStim(
-        win, pos=(0, 0), text="Thank you!", height=font_h, color=text_col,
-        wrapWidth=wrap_w,
+        win, name="end", pos=(0, 0), text="Thank you!", height=font_h, color=text_col,
+        wrapWidth=wrap_w, autoLog=False,
     )
 
     return Stimuli(
