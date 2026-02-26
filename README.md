@@ -1,7 +1,17 @@
-# MacOS Prerequisites
+# mid-task
 
-Before running `uv sync`, you must install these dependencies. I recommend using Homebrew to install them.
+A PsychoPy implementation of the Monetary Incentive Delay (MID) task for fMRI. Participants respond to a briefly displayed target to earn money on gain trials and avoid losing money on loss trials. Target duration adapts trial-by-trial via a QUEST staircase to maintain individual target hit rates.
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Usage Guide](docs/usage.md) | Running the task, startup dialog, keyboard controls, and output files |
+| [Development Guide](docs/development.md) | Developer setup, project structure, and key constants |
+
+## Quick Start
 
 ```bash
-brew install hdf5 openblas lapack
+uv venv && uv sync
+mid-task
 ```
